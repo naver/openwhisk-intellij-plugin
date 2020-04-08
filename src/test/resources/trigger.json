@@ -1,0 +1,24 @@
+{
+  "annotations": [
+    {
+      "key": "feed",
+      "value": "/whisk.system/alarms/alarm"
+    }
+  ],
+  "limits": {},
+  "name": "trigger1",
+  "namespace": "test",
+  "parameters": [],
+  "publish": false,
+  "rules": {
+    "test/rule1": {
+      "action": {
+        "name": "action1",
+        "path": "test"
+      },
+      "status": "active"
+    }
+  },
+  "updated": 1586315245020,
+  "version": "0.0.2"
+}

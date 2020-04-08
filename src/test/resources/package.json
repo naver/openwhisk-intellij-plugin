@@ -1,0 +1,57 @@
+{
+  "namespace": "testns",
+  "name": "test",
+  "version": "0.0.6",
+  "updated": 1583828352890,
+  "publish": true,
+  "annotations": [
+    {
+      "key": "description",
+      "value": "test"
+    }
+  ],
+  "parameters": [
+    {
+      "key": "test",
+      "value": "test"
+    },
+    {
+      "key": "test1",
+      "value": "test1"
+    }
+  ],
+  "binding": {},
+  "feeds": [],
+  "actions": [
+    {
+      "name": "action1",
+      "version": "0.0.2",
+      "annotations": [
+        {
+          "key": "exec",
+          "value": "nodejs:10"
+        }
+      ]
+    },
+    {
+      "name": "action2",
+      "version": "0.0.2",
+      "annotations": [
+        {
+          "key": "exec",
+          "value": "nodejs:10"
+        }
+      ]
+    },
+    {
+      "name": "action3",
+      "version": "0.0.2",
+      "annotations": [
+        {
+          "key": "exec",
+          "value": "nodejs:10"
+        }
+      ]
+    }
+  ]
+}

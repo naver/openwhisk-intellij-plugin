@@ -1,0 +1,77 @@
+<idea-plugin>
+    <id>com.navercorp.openwhisk.intellij</id>
+    <name>DevTools for Apache Openwhisk</name>
+    <vendor email="dl_lambda_op@navercorp.com" url="https://github.com/naver">NAVER</vendor>
+
+    <description>DevTools for Apache OpenWhisk</description>
+
+    <depends>com.intellij.modules.lang</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow id="Whisk Explorer" icon="/objectBrowser/flattenPackages.svg" anchor="right"
+                    factoryClass="com.navercorp.openwhisk.intellij.explorer.toolwindow.WhiskExplorerWindowFactory"/>
+        <toolWindow id="Whisk Run" icon="/icons/ssh.svg" anchor="bottom"
+                    factoryClass="com.navercorp.openwhisk.intellij.run.toolwindow.WhiskRunWindowFactory"/>
+        <toolWindow id="WskDeploy" icon="/actions/upload.svg" anchor="left" secondary="true"
+                    factoryClass="com.navercorp.openwhisk.intellij.wskdeploy.toolwindow.WskDeployWindowFactory"/>
+        <projectService serviceImplementation="com.navercorp.openwhisk.intellij.common.service.WhiskService"/>
+        <projectService serviceImplementation="com.navercorp.openwhisk.intellij.common.service.WskDeployService"/>
+        <virtualFileSystem
+                implementationClass="com.navercorp.openwhisk.intellij.explorer.editor.ActivationViewVirtualFileSystem"
+                key="activation-view"/>
+        <fileEditorProvider
+                implementation="com.navercorp.openwhisk.intellij.explorer.editor.ActivationViewEditorProvider"/>
+    </extensions>
+
+    <actions>
+        <group id="WhiskExplorer.Actions.Controls" text="Explorer whisk tree">
+            <action id="WhiskExplorer.Actions.Controls.AddEndpoint"
+                    class="com.navercorp.openwhisk.intellij.explorer.toolwindow.action.AddEndpointAction"
+                    text="Add Endpoint"
+                    description="Add Endpoint">
+            </action>
+            <separator/>
+            <action id="WhiskExplorer.Actions.Controls.Refresh"
+                    class="com.navercorp.openwhisk.intellij.explorer.toolwindow.action.RefreshTreeAction"
+                    text="Refresh"
+                    description="Reload whisk data from remote">
+            </action>
+        </group>
+        <group id="WhiskRunWindow.Actions.Controls">
+            <action id="WhiskRunWindow.Actions.Controls.RunAction"
+                    class="com.navercorp.openwhisk.intellij.run.toolwindow.action.RunActionAction"
+                    text="Run"
+                    description="Run action">
+            </action>
+            <action id="WhiskRunWindow.Actions.Controls.Refresh"
+                    class="com.navercorp.openwhisk.intellij.run.toolwindow.action.RefreshMetaDataAction"
+                    text="Refresh"
+                    description="Refresh">
+            </action>
+            <action id="WhiskRunWindow.Actions.Controls.Edit"
+                    class="com.navercorp.openwhisk.intellij.run.toolwindow.action.OpenActionManagerDialogAction"
+                    text="Edit"
+                    description="Edit action metadata">
+            </action>
+        </group>
+        <group id="WskDeployWindow.Actions.Controls" text="Manage wskdeploy">
+            <action id="WskDeployWindow.Actions.Controls.Refresh"
+                    class="com.navercorp.openwhisk.intellij.wskdeploy.toolwindow.action.RefreshWskDeployAction"
+                    text="WskDeploy"
+                    description="Refresh wskdeploy">
+            </action>
+            <action id="WskDeployWindow.Actions.Controls.CreateTemplate"
+                    class="com.navercorp.openwhisk.intellij.wskdeploy.toolwindow.action.CreateManifestTemplateAction"
+                    text="Create Manifest Template"
+                    description="Create Manifest Template">
+            </action>
+
+            <action id="WskDeployWindow.Actions.Controls.ChooseWskDeployBin"
+                    class="com.navercorp.openwhisk.intellij.wskdeploy.toolwindow.action.ChooseWskDeployBinAction"
+                    text="Find WskDeploy binary"
+                    description="Find WskDeploy binary">
+            </action>
+        </group>
+    </actions>
+
+</idea-plugin>

@@ -1,0 +1,86 @@
+[
+  {
+    "activationId": "969c2bf59e3b40199c2bf59e3b901940",
+    "annotations": [
+      {
+        "key": "path",
+        "value": "ns1/action1"
+      },
+      {
+        "key": "waitTime",
+        "value": 56
+      },
+      {
+        "key": "kind",
+        "value": "nodejs:10"
+      },
+      {
+        "key": "timeout",
+        "value": false
+      },
+      {
+        "key": "limits",
+        "value": {
+          "concurrency": 1,
+          "logs": 1,
+          "memory": 256,
+          "timeout": 50000
+        }
+      },
+      {
+        "key": "initTime",
+        "value": 37
+      }
+    ],
+    "duration": 44,
+    "end": 1592555196153,
+    "name": "action1",
+    "namespace": "ns1",
+    "publish": false,
+    "start": 1592555196109,
+    "statusCode": 0,
+    "version": "0.0.8"
+  },
+  {
+    "activationId": "51adf3c0f8754f3eadf3c0f875ef3eb9",
+    "annotations": [
+      {
+        "key": "path",
+        "value": "ns1/action1"
+      },
+      {
+        "key": "waitTime",
+        "value": 61
+      },
+      {
+        "key": "kind",
+        "value": "nodejs:10"
+      },
+      {
+        "key": "timeout",
+        "value": false
+      },
+      {
+        "key": "limits",
+        "value": {
+          "concurrency": 1,
+          "logs": 1,
+          "memory": 256,
+          "timeout": 50000
+        }
+      },
+      {
+        "key": "initTime",
+        "value": 23
+      }
+    ],
+    "duration": 28,
+    "end": 1592555184779,
+    "name": "action1",
+    "namespace": "ns1",
+    "publish": false,
+    "start": 1592555184751,
+    "statusCode": 0,
+    "version": "0.0.7"
+  }
+]
