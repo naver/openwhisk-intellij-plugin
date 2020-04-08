@@ -1,0 +1,36 @@
+[
+  {
+    "annotations": [
+      {
+        "key": "feed",
+        "value": "/whisk.system/alarms/alarm"
+      }
+    ],
+    "name": "trigger1",
+    "namespace": "test",
+    "publish": false,
+    "updated": 1586315510331,
+    "version": "0.0.2"
+  },
+  {
+    "annotations": [
+      {
+        "key": "feed",
+        "value": "/whisk.system/alarms/alarm"
+      }
+    ],
+    "name": "trigger2",
+    "namespace": "test",
+    "publish": false,
+    "updated": 1586315245020,
+    "version": "0.0.2"
+  },
+  {
+    "annotations": [],
+    "name": "trigger3",
+    "namespace": "test",
+    "publish": false,
+    "updated": 1582612773239,
+    "version": "0.0.2"
+  }
+]

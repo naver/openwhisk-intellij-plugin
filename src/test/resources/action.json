@@ -1,0 +1,34 @@
+{
+  "annotations": [
+    {
+      "key": "exec",
+      "value": "nodejs:10"
+    }
+  ],
+  "exec": {
+    "kind": "nodejs:10",
+    "code": "function main(params) {}",
+    "binary": false
+  },
+  "limits": {
+    "concurrency": 1,
+    "logs": 1,
+    "memory": 256,
+    "timeout": 60000
+  },
+  "name": "testAct",
+  "namespace": "testNs/testPkg",
+  "parameters": [
+    {
+      "key": "name",
+      "value": "test"
+    },
+    {
+      "key": "count",
+      "value": 1
+    }
+  ],
+  "publish": false,
+  "updated": 1581316522182,
+  "version": "0.0.2"
+}

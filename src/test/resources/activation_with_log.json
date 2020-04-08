@@ -1,0 +1,55 @@
+{
+  "activationId": "26760d5e868f4223b60d5e868f02233c",
+  "annotations": [
+    {
+      "key": "path",
+      "value": "ns1/action1"
+    },
+    {
+      "key": "waitTime",
+      "value": 468
+    },
+    {
+      "key": "kind",
+      "value": "nodejs:6"
+    },
+    {
+      "key": "timeout",
+      "value": false
+    },
+    {
+      "key": "limits",
+      "value": {
+        "concurrency": 1,
+        "logs": 1,
+        "memory": 256,
+        "timeout": 60000
+      }
+    },
+    {
+      "key": "initTime",
+      "value": 241
+    }
+  ],
+  "duration": 253,
+  "end": 1591082866561,
+  "logs": [],
+  "name": "action1",
+  "namespace": "ns1",
+  "publish": false,
+  "response": {
+    "result": {
+      "payload": "Hello",
+      "test": {
+        "test1": "test1",
+        "test2": "test2"
+      }
+    },
+    "size": 72,
+    "status": "success",
+    "success": true
+  },
+  "start": 1591082866308,
+  "subject": "ns1",
+  "version": "0.0.10"
+}
