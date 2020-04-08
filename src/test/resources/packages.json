@@ -1,0 +1,54 @@
+[
+  {
+    "annotations": [
+      {
+        "key": "description",
+        "value": "test"
+      }
+    ],
+    "binding": false,
+    "name": "pkg1",
+    "namespace": "ns",
+    "publish": false,
+    "updated": 1586513535028,
+    "version": "0.0.1"
+  },
+  {
+    "annotations": [
+      {
+        "key": "description",
+        "value": "test"
+      }
+    ],
+    "binding": false,
+    "name": "pkg2",
+    "namespace": "ns",
+    "publish": false,
+    "updated": 1586513513922,
+    "version": "0.0.1"
+  },
+  {
+    "annotations": [
+      {
+        "key": "description",
+        "value": "test"
+      },
+      {
+        "key": "binding",
+        "value": {
+          "name": "sharedpackage",
+          "namespace": "whisk.system"
+        }
+      }
+    ],
+    "binding": {
+      "name": "sharedpackage",
+      "namespace": "whisk.system"
+    },
+    "name": "pkg3",
+    "namespace": "ns",
+    "publish": false,
+    "updated": 1557380799999,
+    "version": "0.0.1"
+  }
+]
