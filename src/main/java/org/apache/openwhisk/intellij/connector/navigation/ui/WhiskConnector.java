@@ -369,11 +369,13 @@ public class WhiskConnector {
         try {
             final String tmpFilePath = project.getBasePath() + "/.idea/openwhisk";
 
-            /**
-             * Open Editor
-             */
-            VirtualFile actionFile = FileUtils.writeActionToFile(tmpFilePath, executableWhiskAction);
-            fileEditorManager.openFile(actionFile, true);
+            if (!executableWhiskAction.isSequenceAction()) {
+                /**
+                 * Open Editor
+                 */
+                VirtualFile actionFile = FileUtils.writeActionToFile(tmpFilePath, executableWhiskAction);
+                fileEditorManager.openFile(actionFile, true);
+            }
 
             /**
              * Open Whisk Run Window

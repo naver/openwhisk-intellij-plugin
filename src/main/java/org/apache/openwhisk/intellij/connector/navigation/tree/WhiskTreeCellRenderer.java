@@ -56,14 +56,12 @@ public class WhiskTreeCellRenderer extends ColoredTreeCellRenderer {
             append(whiskPackage.getName() + boundMark);
         } else if (userObject instanceof WhiskAction) {
             WhiskAction whiskAction = (WhiskAction) userObject;
-            String extension = whiskAction.getKindExtension();
-            setIcon(Icons.getKindIcon(extension));
-            append(whiskAction.getName() + extension);
+            setIcon(whiskAction.getKindIcon());
+            append(whiskAction.getName() + whiskAction.getKindExtension());
         } else if (userObject instanceof CompactWhiskAction) {
             CompactWhiskAction compactWhiskAction = (CompactWhiskAction) userObject;
-            String extension = compactWhiskAction.getKindExtension();
-            setIcon(Icons.getKindIcon(extension));
-            append(compactWhiskAction.getName() + extension);
+            setIcon(compactWhiskAction.getKindIcon());
+            append(compactWhiskAction.getName() + compactWhiskAction.getKindExtension());
         } else if (userObject instanceof WhiskTriggerRoot) {
             append("Triggers");
             setIcon(ENTITY_TRIGGER_ROOT);
