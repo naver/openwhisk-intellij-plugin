@@ -112,6 +112,8 @@ public class ActionManagerDialogForm {
                         return GO_1_11;
                     case 11:
                         return RUBY_2_5;
+                    case 12:
+                        return SEQUENCE;
                     default:
                         return DOCKER;
                 }

@@ -29,7 +29,8 @@ public enum Runtime {
     PHP_7_2("php", ".php", "7.3"),
     GO_1_11("go", ".go", "1.11"),
     RUBY_2_5("ruby", ".rb", "2.5"),
-    DOCKER("docker", "", "default");
+    SEQUENCE("sequence", "", ""),
+    DOCKER("docker", "", "");
 
     private String name;
     private String extension;
@@ -45,6 +46,7 @@ public enum Runtime {
         if (name.equals("java")) {
             return name;
         }
+
         return name + ":" + version;
     }
 
@@ -60,11 +62,15 @@ public enum Runtime {
                         return name + ":" + version + " (Deprecated)";
                 }
         }
-        return name + ":" + version;
+        if (version.length() > 0) {
+            return name + ":" + version;
+        } else {
+            return name;
+        }
     }
 
-    public static Runtime toRuntime(String name) {
-        switch (name) {
+    public static Runtime toRuntime(String kind) {
+        switch (kind) {
             case "nodejs:6":
                 return NODE_6;
             case "nodejs:8":
@@ -89,6 +95,8 @@ public enum Runtime {
                 return GO_1_11;
             case "ruby:2.5":
                 return RUBY_2_5;
+            case "sequence":
+                return SEQUENCE;
             default:
                 return DOCKER;
         }

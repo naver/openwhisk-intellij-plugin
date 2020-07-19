@@ -16,9 +16,12 @@
 
 package org.apache.openwhisk.intellij.common.whisk.model.action;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static org.apache.openwhisk.intellij.common.Icons.*;
 
 public class CompactWhiskAction {
     private String name;
@@ -34,7 +37,7 @@ public class CompactWhiskAction {
         this.annotations = annotations;
     }
 
-    private String getKind() {
+    public String getKind() {
         for (Map<String, Object> a : this.annotations) {
             if ("exec".equals(a.get("key"))) {
                 return (String) a.get("value");
@@ -61,6 +64,29 @@ public class CompactWhiskAction {
             return ".rb";
         } else {
             return "";
+        }
+    }
+
+    public Icon getKindIcon() {
+        String kind = getKind();
+        if (kind.contains("java")) {
+            return KIND_JAVA;
+        } else if (kind.contains("nodejs")) {
+            return KIND_JS;
+        } else if (kind.contains("python")) {
+            return KIND_PYTHON;
+        } else if (kind.contains("swift")) {
+            return KIND_SWIFT;
+        } else if (kind.contains("php")) {
+            return KIND_PHP;
+        } else if (kind.contains("go")) {
+            return KIND_GO;
+        } else if (kind.contains("ruby")) {
+            return KIND_RUBY;
+        } else if (kind.contains("sequence")) {
+            return KIND_SEQUENCE;
+        } else {
+            return KIND_DOCKER;
         }
     }
 
