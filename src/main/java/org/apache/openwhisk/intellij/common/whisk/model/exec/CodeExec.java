@@ -26,8 +26,8 @@ public class CodeExec extends Exec {
     @Nullable
     private String main;
     private String code;
-    private String image;
-    private List<String> components = new ArrayList<>();
+    private String image; // for docker image
+    private List<String> components = new ArrayList<>(); // for sequence action
 
     public CodeExec() {
     }
