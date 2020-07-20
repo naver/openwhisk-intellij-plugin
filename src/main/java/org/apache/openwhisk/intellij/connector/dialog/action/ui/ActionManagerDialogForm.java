@@ -237,7 +237,7 @@ public class ActionManagerDialogForm {
 
     private CodeExec createExec(ExecutableWhiskAction action, Runtime runtime) {
         CodeExec codeExec = action.getExec();
-        codeExec.setKind(runtime.asString());
+        codeExec.setKind(runtime.toString());
         return codeExec;
     }
 

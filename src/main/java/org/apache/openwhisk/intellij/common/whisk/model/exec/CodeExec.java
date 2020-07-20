@@ -73,10 +73,6 @@ public class CodeExec extends Exec {
         this.main = main;
     }
 
-    public ExecMetaData toExecMetaData() {
-        return new ExecMetaData(isBinary());
-    }
-
     public String getImage() {
         return image;
     }
@@ -91,6 +87,10 @@ public class CodeExec extends Exec {
 
     public void setComponents(List<String> components) {
         this.components = components;
+    }
+
+    public ExecMetaData toExecMetaData() {
+        return new ExecMetaData(isBinary());
     }
 
     @Override

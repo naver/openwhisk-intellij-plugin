@@ -30,7 +30,7 @@ public enum Runtime {
     GO_1_11("go", ".go", "1.11"),
     RUBY_2_5("ruby", ".rb", "2.5"),
     SEQUENCE("sequence", "", ""),
-    DOCKER("docker", "", "");
+    DOCKER("blackbox", "", "");
 
     private String name;
     private String extension;
@@ -40,14 +40,6 @@ public enum Runtime {
         this.name = name;
         this.extension = extension;
         this.version = version;
-    }
-
-    public String asString() {
-        if (name.equals("java")) {
-            return name;
-        }
-
-        return name + ":" + version;
     }
 
     @Override
