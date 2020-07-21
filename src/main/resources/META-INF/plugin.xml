@@ -10,66 +10,66 @@
     <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow id="Whisk Connector" icon="/objectBrowser/flattenPackages.svg" anchor="right"
-                    factoryClass="org.apache.openwhisk.intellij.connector.navigation.WhiskConnectorWindowFactory"/>
+        <toolWindow id="Whisk Explorer" icon="/objectBrowser/flattenPackages.svg" anchor="right"
+                    factoryClass="org.apache.openwhisk.intellij.explorer.toolwindow.WhiskExplorerWindowFactory"/>
         <toolWindow id="Whisk Run" icon="/icons/ssh.svg" anchor="bottom"
-                    factoryClass="org.apache.openwhisk.intellij.run.navigation.WhiskRunWindowFactory"/>
+                    factoryClass="org.apache.openwhisk.intellij.run.toolwindow.WhiskRunWindowFactory"/>
         <toolWindow id="WskDeploy" icon="/actions/upload.svg" anchor="left" secondary="true"
-                    factoryClass="org.apache.openwhisk.intellij.wskdeploy.navigation.WskDeployWindowFactory"/>
+                    factoryClass="org.apache.openwhisk.intellij.wskdeploy.toolwindow.WskDeployWindowFactory"/>
         <projectService serviceImplementation="org.apache.openwhisk.intellij.common.service.WhiskService"/>
         <projectService serviceImplementation="org.apache.openwhisk.intellij.common.service.WskDeployService"/>
         <virtualFileSystem
-                implementationClass="org.apache.openwhisk.intellij.connector.editor.ActivationViewVirtualFileSystem"
+                implementationClass="org.apache.openwhisk.intellij.explorer.editor.ActivationViewVirtualFileSystem"
                 key="activation-view"/>
         <fileEditorProvider
-                implementation="org.apache.openwhisk.intellij.connector.editor.ActivationViewEditorProvider"/>
+                implementation="org.apache.openwhisk.intellij.explorer.editor.ActivationViewEditorProvider"/>
     </extensions>
 
     <actions>
-        <group id="WhiskNavigator.Actions.Navigation.Controls" text="Manage whisk tree">
-            <action id="WhiskNavigator.Actions.Navigation.Controls.AddEndpoint"
-                    class="org.apache.openwhisk.intellij.connector.navigation.action.AddEndpointAction"
+        <group id="WhiskExplorer.Actions.Controls" text="Explorer whisk tree">
+            <action id="WhiskExplorer.Actions.Controls.AddEndpoint"
+                    class="org.apache.openwhisk.intellij.explorer.toolwindow.action.AddEndpointAction"
                     text="Add Endpoint"
                     description="Add Endpoint">
             </action>
             <separator/>
-            <action id="WhiskNavigator.Actions.Navigation.Controls.Refresh"
-                    class="org.apache.openwhisk.intellij.connector.navigation.action.RefreshTreeAction"
+            <action id="WhiskExplorer.Actions.Controls.Refresh"
+                    class="org.apache.openwhisk.intellij.explorer.toolwindow.action.RefreshTreeAction"
                     text="Refresh"
                     description="Reload whisk data from remote">
             </action>
         </group>
-        <group id="WhiskRunWindow.Action.Actions.Controls">
-            <action id="WhiskRunWindow.Action.Actions.Controls.RunAction"
-                    class="org.apache.openwhisk.intellij.run.navigation.action.RunActionAction"
+        <group id="WhiskRunWindow.Actions.Controls">
+            <action id="WhiskRunWindow.Actions.Controls.RunAction"
+                    class="org.apache.openwhisk.intellij.run.toolwindow.action.RunActionAction"
                     text="Run"
                     description="Run action">
             </action>
-            <action id="WhiskRunWindow.Action.Actions.Controls.Refresh"
-                    class="org.apache.openwhisk.intellij.run.navigation.action.RefreshMetaDataAction"
+            <action id="WhiskRunWindow.Actions.Controls.Refresh"
+                    class="org.apache.openwhisk.intellij.run.toolwindow.action.RefreshMetaDataAction"
                     text="Refresh"
                     description="Refresh">
             </action>
-            <action id="WhiskRunWindow.Action.Actions.Controls.Edit"
-                    class="org.apache.openwhisk.intellij.run.navigation.action.OpenActionManagerDialogAction"
+            <action id="WhiskRunWindow.Actions.Controls.Edit"
+                    class="org.apache.openwhisk.intellij.run.toolwindow.action.OpenActionManagerDialogAction"
                     text="Edit"
                     description="Edit action metadata">
             </action>
         </group>
-        <group id="WskDeployWindow.Actions.Navigation.Controls" text="Manage wskdeploy">
-            <action id="WskDeployWindow.Actions.Navigation.Controls.Refresh"
-                    class="org.apache.openwhisk.intellij.wskdeploy.navigation.action.RefreshWskDeployAction"
+        <group id="WskDeployWindow.Actions.Controls" text="Manage wskdeploy">
+            <action id="WskDeployWindow.Actions.Controls.Refresh"
+                    class="org.apache.openwhisk.intellij.wskdeploy.toolwindow.action.RefreshWskDeployAction"
                     text="WskDeploy"
                     description="Refresh wskdeploy">
             </action>
-            <action id="WskDeployWindow.Actions.Navigation.Controls.CreateTemplate"
-                    class="org.apache.openwhisk.intellij.wskdeploy.navigation.action.CreateManifestTemplateAction"
+            <action id="WskDeployWindow.Actions.Controls.CreateTemplate"
+                    class="org.apache.openwhisk.intellij.wskdeploy.toolwindow.action.CreateManifestTemplateAction"
                     text="Create Manifest Template"
                     description="Create Manifest Template">
             </action>
 
-            <action id="WskDeployWindow.Actions.Navigation.Controls.ChooseWskDeployBin"
-                    class="org.apache.openwhisk.intellij.wskdeploy.navigation.action.ChooseWskDeployBinAction"
+            <action id="WskDeployWindow.Actions.Controls.ChooseWskDeployBin"
+                    class="org.apache.openwhisk.intellij.wskdeploy.toolwindow.action.ChooseWskDeployBinAction"
                     text="Find WskDeploy binary"
                     description="Find WskDeploy binary">
             </action>

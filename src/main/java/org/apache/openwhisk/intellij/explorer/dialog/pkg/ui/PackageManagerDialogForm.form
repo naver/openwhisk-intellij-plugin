@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.apache.openwhisk.intellij.explorer.dialog.pkg.ui.PackageManagerDialogForm">
+  <grid id="27dc6" binding="mainJPanel" layout-manager="GridLayoutManager" row-count="6" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="1060" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="e083a" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="800" height="30"/>
+          </grid>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="67410" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="635bb" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                    <maximum-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value="Name"/>
+                </properties>
+              </component>
+              <component id="a98f5" class="javax.swing.JLabel" binding="nameJLabel">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="250" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="faa4" class="javax.swing.JSeparator">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                    <maximum-size width="5" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <orientation value="1"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="e942a" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="818fc" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                    <maximum-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value="Namespace"/>
+                </properties>
+              </component>
+              <component id="4c848" class="javax.swing.JLabel" binding="namespaceJPanel">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="250" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="e60d9" class="javax.swing.JSeparator">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                    <maximum-size width="5" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <orientation value="1"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <component id="73d3d" class="javax.swing.JSeparator">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <maximum-size width="5" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <orientation value="1"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="8ee3" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="800" height="30"/>
+          </grid>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="d02f0" binding="sharedJPanel" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="58b28" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                    <maximum-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value="Shared"/>
+                </properties>
+              </component>
+              <component id="c5ea3" class="javax.swing.JCheckBox" binding="shareJCheckBox">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="250" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="c38a4" class="javax.swing.JSeparator">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                    <maximum-size width="5" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <orientation value="1"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="d76d" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="a3d13" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                    <maximum-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value="Version"/>
+                </properties>
+              </component>
+              <component id="c1dcf" class="javax.swing.JLabel" binding="versionJLabel">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="250" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value=""/>
+                </properties>
+              </component>
+              <component id="662c8" class="javax.swing.JSeparator">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                    <maximum-size width="5" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <orientation value="1"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <component id="dd7ea" class="javax.swing.JSeparator">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <maximum-size width="5" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <orientation value="1"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="71261" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="800" height="-1"/>
+          </grid>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="d4c6f" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+                <maximum-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <text value="Default Parameter"/>
+            </properties>
+          </component>
+          <component id="f162d" class="javax.swing.JSeparator">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <maximum-size width="5" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <orientation value="1"/>
+            </properties>
+          </component>
+          <scrollpane id="20925">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="700" height="150"/>
+              </grid>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="36ec3" class="javax.swing.JTextArea" binding="defaultParameterTextArea">
+                <constraints/>
+                <properties/>
+              </component>
+            </children>
+          </scrollpane>
+        </children>
+      </grid>
+      <component id="d0bd5" class="javax.swing.JSeparator">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="e5d4b" class="javax.swing.JSeparator">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="811bd" class="javax.swing.JSeparator">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+      </component>
+    </children>
+  </grid>
+</form>

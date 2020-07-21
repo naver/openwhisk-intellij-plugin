@@ -16,8 +16,8 @@
 
 package org.apache.openwhisk.intellij.common.whisk.model.action;
 
-import org.apache.openwhisk.intellij.connector.editor.model.ComboBoxEntityEntry;
-import org.apache.openwhisk.intellij.connector.editor.model.ComboBoxEntityType;
+import org.apache.openwhisk.intellij.explorer.editor.model.ComboBoxEntityEntry;
+import org.apache.openwhisk.intellij.explorer.editor.model.ComboBoxEntityType;
 import org.apache.openwhisk.intellij.common.whisk.model.Limits;
 import org.apache.openwhisk.intellij.common.whisk.model.exec.ExecMetaData;
 

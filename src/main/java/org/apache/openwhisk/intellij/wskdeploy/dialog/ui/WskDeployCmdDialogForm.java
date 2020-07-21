@@ -23,7 +23,7 @@ import com.intellij.openapi.project.Project;
 import org.apache.openwhisk.intellij.common.error.NotExistFileException;
 import org.apache.openwhisk.intellij.common.utils.EventUtils;
 import org.apache.openwhisk.intellij.common.utils.JsonParserUtils;
-import org.apache.openwhisk.intellij.connector.navigation.listener.RefreshWhiskTreeListener;
+import org.apache.openwhisk.intellij.explorer.toolwindow.listener.RefreshWhiskTreeListener;
 import org.apache.openwhisk.intellij.common.notification.SimpleNotifier;
 import org.apache.openwhisk.intellij.common.service.WhiskService;
 import org.apache.openwhisk.intellij.common.whisk.model.WhiskAuth;

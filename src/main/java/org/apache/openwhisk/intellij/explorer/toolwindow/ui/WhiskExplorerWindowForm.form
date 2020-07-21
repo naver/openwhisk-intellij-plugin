@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.apache.openwhisk.intellij.explorer.toolwindow.ui.WhiskExplorerWindowForm">
+  <grid id="27dc6" binding="mainJPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="9f9d2" binding="actionsJPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="North"/>
+        <properties/>
+        <border type="none"/>
+        <children/>
+      </grid>
+      <scrollpane id="4961f" binding="contentsJPanel">
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="7b9b9" class="javax.swing.JTree" binding="whiskJTree">
+            <constraints/>
+            <properties/>
+          </component>
+        </children>
+      </scrollpane>
+    </children>
+  </grid>
+</form>
