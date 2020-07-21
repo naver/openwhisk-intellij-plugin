@@ -26,12 +26,15 @@ import org.apache.openwhisk.intellij.common.whisk.model.Limits;
 import org.apache.openwhisk.intellij.common.whisk.model.Runtime;
 import org.apache.openwhisk.intellij.common.whisk.model.WhiskAuth;
 import org.apache.openwhisk.intellij.common.whisk.model.action.ExecutableWhiskAction;
+import org.apache.openwhisk.intellij.common.whisk.model.action.WhiskActionMetaData;
 import org.apache.openwhisk.intellij.common.whisk.model.exec.CodeExec;
 import org.apache.openwhisk.intellij.common.whisk.service.WhiskActionService;
 import org.apache.openwhisk.intellij.run.navigation.listener.RefreshActionOrTriggerListener;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.event.ListDataListener;
+import java.awt.*;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -54,7 +57,21 @@ public class ActionManagerDialogForm {
     private JCheckBox finalOptionJCheckBox;
     private JSpinner timeoutJSpinner;
     private JSpinner memoryJSpinner;
-    private JTextArea defaultParameterJTextArea;
+    private JPanel defaultParameterJPanel;
+    private JSeparator defaultParameterJSeparator;
+    private JPanel dockerImageJPanel;
+    private JSeparator dockerImageJSeparator;
+    private JPanel linkedActionsJPanel;
+    private JSeparator linkedActionsJSeparator;
+
+    @Nullable
+    private DefaultParameterForm defaultParameterForm;
+
+    @Nullable
+    private DockerImageForm dockerImageForm;
+
+    @Nullable
+    private LinkedActionsForm linkedActionsForm;
 
     private Project project;
     private WhiskAuth whiskAuth;
@@ -62,10 +79,51 @@ public class ActionManagerDialogForm {
 
     private WhiskActionService whiskActionService = WhiskActionService.getInstance();
 
-    public ActionManagerDialogForm(Project project, WhiskAuth auth, ExecutableWhiskAction action) {
+    public ActionManagerDialogForm(Project project, WhiskAuth auth, ExecutableWhiskAction action, List<WhiskActionMetaData> actions) {
         this.project = project;
         this.whiskAuth = auth;
         this.action = action;
+
+        switch (action.getKind()) {
+            case "sequence":
+                // add linked actions panel
+                linkedActionsForm = new LinkedActionsForm(project, action.getNamespace().split("/")[0], actions, action.getExec().getComponents());
+                linkedActionsJPanel.add(linkedActionsForm.getContent(), BorderLayout.CENTER);
+
+                // remove docker image panel
+                mainJPanel.remove(dockerImageJPanel);
+                mainJPanel.remove(dockerImageJSeparator);
+
+                // remove default parameter panel
+                mainJPanel.remove(defaultParameterJPanel);
+                mainJPanel.remove(defaultParameterJSeparator);
+                break;
+            case "blackbox":
+                // remove linked actions panel
+                mainJPanel.remove(linkedActionsJPanel);
+                mainJPanel.remove(linkedActionsJSeparator);
+
+                // add docker image panel
+                dockerImageForm = new DockerImageForm();
+                dockerImageJPanel.add(dockerImageForm.getContent(), BorderLayout.CENTER);
+
+                // add default parameter panel
+                defaultParameterForm = new DefaultParameterForm();
+                defaultParameterJPanel.add(defaultParameterForm.getContent(), BorderLayout.CENTER);
+                break;
+            default: // normal
+                // remove linked actions panel
+                mainJPanel.remove(linkedActionsJPanel);
+                mainJPanel.remove(linkedActionsJSeparator);
+
+                // remove docker image panel
+                mainJPanel.remove(dockerImageJPanel);
+                mainJPanel.remove(dockerImageJSeparator);
+
+                // add default parameter panel
+                defaultParameterForm = new DefaultParameterForm();
+                defaultParameterJPanel.add(defaultParameterForm.getContent(), BorderLayout.CENTER);
+        }
 
         runtimeJComboBox.setModel(new ComboBoxModel<Runtime>() {
             private Runtime selected;
@@ -181,18 +239,24 @@ public class ActionManagerDialogForm {
         // final option
         finalOptionJCheckBox.setSelected(action.isFinalDefaultParameter());
 
-        try {
-            // default parameter
-            defaultParameterJTextArea.setText(JsonParserUtils.writeParameterToJson(action.getParameters()));
-        } catch (IOException e) {
-            LOG.error("Failed to parse json: " + action.getFullyQualifiedName(), e);
+        if (defaultParameterForm != null) {
+            try {
+                // default parameter
+                defaultParameterForm.setDefaultParameter(JsonParserUtils.writeParameterToJson(action.getParameters()));
+            } catch (IOException e) {
+                LOG.error("Failed to parse json: " + action.getFullyQualifiedName(), e);
+            }
+        }
+
+        if (dockerImageForm != null) {
+            dockerImageForm.setDockerImage(action.getExec().getImage());
         }
     }
 
     public void updateAction() {
         try {
             // parameters
-            Optional<String> params = validateParams(defaultParameterJTextArea.getText());
+            Optional<String> params = getParameter();
             if (!params.isPresent()) {
                 NOTIFIER.notify(project, "The json format of the parameter is incorrect.", NotificationType.ERROR);
                 return;
@@ -235,9 +299,25 @@ public class ActionManagerDialogForm {
         }
     }
 
+    private Optional<String> getParameter() {
+        if (defaultParameterForm == null) {
+            return Optional.of("{}");
+        }
+        return validateParams(defaultParameterForm.getDefaultParameter());
+    }
+
     private CodeExec createExec(ExecutableWhiskAction action, Runtime runtime) {
         CodeExec codeExec = action.getExec();
         codeExec.setKind(runtime.toString());
+
+        if (dockerImageForm != null) {
+            codeExec.setImage(dockerImageForm.getDockerImage());
+        }
+
+        if (linkedActionsForm != null) {
+            codeExec.setComponents(linkedActionsForm.getComponents());
+        }
+
         return codeExec;
     }
 

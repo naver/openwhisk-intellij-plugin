@@ -172,9 +172,13 @@ public class JsonParserUtils {
     }
 
     // TODO test
-    public static Map<String, Object> parseMap(String json) throws IOException {
+    public static Map<String, Object> parseMap(String json) {
         if (StringUtils.isNotEmpty(json)) {
-            return mapper.readValue(json, Map.class);
+            try {
+                return mapper.readValue(json, Map.class);
+            } catch (IOException e) {
+                return new LinkedHashMap<>();
+            }
         } else {
             return new LinkedHashMap<>();
         }

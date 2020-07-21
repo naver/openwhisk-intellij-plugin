@@ -24,14 +24,8 @@ import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
-import org.apache.openwhisk.intellij.common.utils.EventUtils;
-import org.apache.openwhisk.intellij.connector.dialog.action.ActionManagerDialog;
-import org.apache.openwhisk.intellij.connector.dialog.trigger.TriggerManagerDialog;
-import org.apache.openwhisk.intellij.connector.navigation.listener.OpenActionControlActionListener;
-import org.apache.openwhisk.intellij.connector.navigation.listener.OpenTriggerControlActionListener;
-import org.apache.openwhisk.intellij.run.navigation.listener.*;
-import org.apache.openwhisk.intellij.run.navigation.ui.WhiskRunWindowForm;
 import org.apache.openwhisk.intellij.common.notification.SimpleNotifier;
+import org.apache.openwhisk.intellij.common.utils.EventUtils;
 import org.apache.openwhisk.intellij.common.whisk.model.WhiskAuth;
 import org.apache.openwhisk.intellij.common.whisk.model.action.ExecutableWhiskAction;
 import org.apache.openwhisk.intellij.common.whisk.model.action.WhiskActionMetaData;
@@ -39,6 +33,12 @@ import org.apache.openwhisk.intellij.common.whisk.model.trigger.ExecutableWhiskT
 import org.apache.openwhisk.intellij.common.whisk.service.WhiskActionService;
 import org.apache.openwhisk.intellij.common.whisk.service.WhiskActivationService;
 import org.apache.openwhisk.intellij.common.whisk.service.WhiskTriggerService;
+import org.apache.openwhisk.intellij.connector.dialog.action.ActionManagerDialog;
+import org.apache.openwhisk.intellij.connector.dialog.trigger.TriggerManagerDialog;
+import org.apache.openwhisk.intellij.connector.navigation.listener.OpenActionControlActionListener;
+import org.apache.openwhisk.intellij.connector.navigation.listener.OpenTriggerControlActionListener;
+import org.apache.openwhisk.intellij.run.navigation.listener.*;
+import org.apache.openwhisk.intellij.run.navigation.ui.WhiskRunWindowForm;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -127,28 +127,28 @@ public class WhiskRunWindowFactory implements ToolWindowFactory {
 
         EventUtils.subscribe(project, project, OpenActionManagerListener.TOPIC, () ->
                 whiskRunWindowForm.getCachedAuth().ifPresent(auth -> {
-                    String entity = whiskRunWindowForm.getCurrentEntity();
-                    if (entity.equals(ENTITY_ACTION)) {
-                        whiskRunWindowForm.getCachedAction().ifPresent(action -> {
-                            ActionManagerDialog dialog = new ActionManagerDialog(project, auth, action);
-                            if (dialog.showAndGet()) {
-                                LOG.info("ActionManagerDialog is closed");
-                            }
-                        });
-                    } else if (entity.equals(ENTITY_TRIGGER)) {
-                        whiskRunWindowForm.getCachedTrigger().ifPresent(trigger -> {
-                            try {
-                                List<WhiskActionMetaData> actions = whiskActionService.getWhiskActions(auth);
+                    try {
+                        List<WhiskActionMetaData> actions = whiskActionService.getWhiskActions(auth);
+                        String entity = whiskRunWindowForm.getCurrentEntity();
+                        if (entity.equals(ENTITY_ACTION)) {
+                            whiskRunWindowForm.getCachedAction().ifPresent(action -> {
+                                ActionManagerDialog dialog = new ActionManagerDialog(project, auth, action, actions);
+                                if (dialog.showAndGet()) {
+                                    LOG.info("ActionManagerDialog is closed");
+                                }
+                            });
+                        } else if (entity.equals(ENTITY_TRIGGER)) {
+                            whiskRunWindowForm.getCachedTrigger().ifPresent(trigger -> {
                                 TriggerManagerDialog dialog = new TriggerManagerDialog(project, auth, trigger, actions);
                                 if (dialog.showAndGet()) {
                                     LOG.info("TriggerManagerDialog is closed");
                                 }
-                            } catch (IOException e) {
-                                final String msg = "The action cannot be executed.";
-                                LOG.error(msg, e);
-                                NOTIFIER.notify(project, msg, NotificationType.ERROR);
-                            }
-                        });
+                            });
+                        }
+                    } catch (IOException e) {
+                        final String msg = "The action cannot be executed.";
+                        LOG.error(msg, e);
+                        NOTIFIER.notify(project, msg, NotificationType.ERROR);
                     }
                 }));
     }
