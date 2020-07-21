@@ -17,7 +17,7 @@ This extension finds the `.wskprops` configuration file located in the home path
 * Show the action code with syntax highlighting.
 * [Soon] Edit the action code on the remote server.
 * Invoke the action remotely and get the activation result.
-* [Soon] Show a list of actions related to the sequence action.
+* Show a list of actions related to the sequence action.
 * Show information about the trigger and related rules.
 * Show activations related to the action (Same as `wsk activation list <action>`).
 * Show detailed information of the activation (Same `as wsk activation get <activation_id>`).
