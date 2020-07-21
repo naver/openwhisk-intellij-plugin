@@ -23,20 +23,21 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class WskDeployTempleteDialog extends DialogWrapper {
 
     private Project project;
-    private PsiFile[] manifests;
-    private PsiFile[] sampleactions;
+    private List<PsiFile> manifests;
+    private List<PsiFile> sampleActions;
 
-    public WskDeployTempleteDialog(Project project, PsiFile[] manifests, PsiFile[] sampleactions) {
+    public WskDeployTempleteDialog(Project project, List<PsiFile> manifests, List<PsiFile> sampleActions) {
         super(true); // use current window as parent
         setTitle("Create WskDeploy Template");
         setResizable(false);
         this.project = project;
         this.manifests = manifests;
-        this.sampleactions = sampleactions;
+        this.sampleActions = sampleActions;
         init();
     }
 
@@ -54,16 +55,16 @@ public class WskDeployTempleteDialog extends DialogWrapper {
         builder.append("- src/hello.js<br/>");
         builder.append("<br/><br/>");
 
-        if (manifests.length > 0 | sampleactions.length > 0) {
+        if (manifests.size() > 0 | sampleActions.size() > 0) {
             builder.append("Files that already exist in the path below are not created:<br/>");
         }
-        if (manifests.length > 0) {
+        if (manifests.size() > 0) {
             for (PsiFile m : manifests) {
                 builder.append("- " + m.getVirtualFile().getPath().replaceAll(basePath + "/", "") + "<br/>");
             }
         }
-        if (sampleactions.length > 0) {
-            for (PsiFile s : sampleactions) {
+        if (sampleActions.size() > 0) {
+            for (PsiFile s : sampleActions) {
                 builder.append("- " + s.getVirtualFile().getPath().replaceAll(basePath + "/", "") + "<br/>");
             }
         }
