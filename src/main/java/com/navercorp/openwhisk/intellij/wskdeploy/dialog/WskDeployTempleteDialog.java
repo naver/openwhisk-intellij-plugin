@@ -70,7 +70,7 @@ public class WskDeployTempleteDialog extends DialogWrapper {
 
         builder.append("</html>");
         JLabel label = new JLabel(builder.toString());
-        label.setMinimumSize(new Dimension(200, 100));
+        label.setPreferredSize(new Dimension(500, 100));
         dialogPanel.add(label, BorderLayout.CENTER);
 
         return dialogPanel;
