@@ -44,16 +44,16 @@ public class ChooseWskDeployBinAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
         VirtualFile file = FileChooser.chooseFile(FileChooserDescriptorFactory.createSingleFileDescriptor(), e.getProject(), null);
-        Optional<VirtualFile> validWskDeploy = validateWskDeploy(Optional.ofNullable(file));
+        if (file == null) {
+            return;
+        }
+
+        Optional<VirtualFile> validWskDeploy = validateWskDeploy(Optional.of(file));
         if (validWskDeploy.isPresent()) {
             NOTIFIER.notify(e.getProject(), file.getName() + " file has been registered with wskdeploy.", NotificationType.INFORMATION);
             EventUtils.publish(e.getProject(), ChooseWskDeployBinaryListener.TOPIC, l -> l.chooseWskDeployBinary(validWskDeploy.get()));
         } else {
-            if (file == null) {
-                NOTIFIER.notify(e.getProject(), "The file cannot be chosen", NotificationType.ERROR);
-            } else {
-                NOTIFIER.notify(e.getProject(), file.getName() + " file cannot be used with wskdeploy.", NotificationType.ERROR);
-            }
+            NOTIFIER.notify(e.getProject(), file.getName() + " file cannot be used with wskdeploy.", NotificationType.ERROR);
         }
     }
 }
