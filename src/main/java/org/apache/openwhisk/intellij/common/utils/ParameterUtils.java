@@ -44,13 +44,19 @@ public class ParameterUtils {
         return list;
     }
 
-    public static Optional<String> validateParams(String params) throws IOException {
+    public static Optional<String> validateParams(String params) {
         if (StringUtils.isEmpty(params)) {
             return Optional.of("{}");
-        } else if (JsonParserUtils.isValidJson(params)) {
-            return Optional.of(params);
         } else {
-            return Optional.empty();
+            try {
+                if (JsonParserUtils.isValidJson(params)) {
+                    return Optional.of(params);
+                } else {
+                    return Optional.empty();
+                }
+            } catch (IOException e) {
+                return Optional.empty();
+            }
         }
     }
 }

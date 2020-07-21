@@ -34,13 +34,28 @@ public class CodeExecSerializer extends JsonSerializer<CodeExec> {
         jsonGenerator.writeFieldName("kind");
         jsonGenerator.writeString(codeExec.getKind());
 
-        jsonGenerator.writeFieldName("code");
-        jsonGenerator.writeString(codeExec.getCode());
-
+        if (Optional.ofNullable(codeExec.getCode()).isPresent()) {
+            jsonGenerator.writeFieldName("code");
+            jsonGenerator.writeString(codeExec.getCode());
+        }
 
         if (Optional.ofNullable(codeExec.getMain()).isPresent()) {
             jsonGenerator.writeFieldName("main");
             jsonGenerator.writeString(codeExec.getMain());
+        }
+
+        if (Optional.ofNullable(codeExec.getImage()).isPresent()) {
+            jsonGenerator.writeFieldName("image");
+            jsonGenerator.writeString(codeExec.getImage());
+        }
+
+        if (!codeExec.getComponents().isEmpty()) {
+            jsonGenerator.writeFieldName("components");
+            jsonGenerator.writeStartArray();
+            for (String c : codeExec.getComponents()) {
+                jsonGenerator.writeString(c);
+            }
+            jsonGenerator.writeEndArray();
         }
 
         jsonGenerator.writeEndObject();

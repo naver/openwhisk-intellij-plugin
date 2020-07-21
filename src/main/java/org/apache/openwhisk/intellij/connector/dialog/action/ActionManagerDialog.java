@@ -20,18 +20,20 @@ import com.intellij.openapi.project.Project;
 import org.apache.openwhisk.intellij.common.DialogWrapperWithApply;
 import org.apache.openwhisk.intellij.common.whisk.model.WhiskAuth;
 import org.apache.openwhisk.intellij.common.whisk.model.action.ExecutableWhiskAction;
+import org.apache.openwhisk.intellij.common.whisk.model.action.WhiskActionMetaData;
 import org.apache.openwhisk.intellij.connector.dialog.action.ui.ActionManagerDialogForm;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.util.List;
 
 public class ActionManagerDialog extends DialogWrapperWithApply {
 
     private ActionManagerDialogForm actionManagerDialogForm;
 
-    public ActionManagerDialog(Project project, WhiskAuth auth, ExecutableWhiskAction action) {
+    public ActionManagerDialog(Project project, WhiskAuth auth, ExecutableWhiskAction action, List<WhiskActionMetaData> actions) {
         super(project, true); // use current window as parent
-        actionManagerDialogForm = new ActionManagerDialogForm(project, auth, action);
+        actionManagerDialogForm = new ActionManagerDialogForm(project, auth, action, actions);
         setTitle("Manage Action");
         setResizable(false);
         init();

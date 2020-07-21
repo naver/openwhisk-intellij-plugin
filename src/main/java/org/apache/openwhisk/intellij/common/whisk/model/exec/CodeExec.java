@@ -26,8 +26,8 @@ public class CodeExec extends Exec {
     @Nullable
     private String main;
     private String code;
-    private String image;
-    private List<String> components = new ArrayList<>();
+    private String image; // for docker image
+    private List<String> components = new ArrayList<>(); // for sequence action
 
     public CodeExec() {
     }
@@ -73,10 +73,6 @@ public class CodeExec extends Exec {
         this.main = main;
     }
 
-    public ExecMetaData toExecMetaData() {
-        return new ExecMetaData(isBinary());
-    }
-
     public String getImage() {
         return image;
     }
@@ -91,6 +87,10 @@ public class CodeExec extends Exec {
 
     public void setComponents(List<String> components) {
         this.components = components;
+    }
+
+    public ExecMetaData toExecMetaData() {
+        return new ExecMetaData(isBinary());
     }
 
     @Override

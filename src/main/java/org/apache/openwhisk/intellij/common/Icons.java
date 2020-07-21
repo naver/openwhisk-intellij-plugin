@@ -37,6 +37,7 @@ public class Icons {
     public static final Icon KIND_PHP = load("/icons/language/php/php.svg");
     public static final Icon KIND_RUBY = load("/icons/language/ruby/rb.svg");
     public static final Icon KIND_SWIFT = load("/icons/language/swift/sw.svg");
+    public static final Icon KIND_SEQUENCE = load("/icons/seq.svg");
     public static final Icon KIND_DOCKER = load("/icons/language/docker/DockerCompose.svg");
 
     private static Icon load(String path) {
@@ -57,25 +58,4 @@ public class Icons {
         return REGISTERED_ICONS.get(key);
     }
 
-    public static Icon getKindIcon(String extension) {
-        switch (extension) {
-            case ".java":
-                return KIND_JAVA;
-            case ".js":
-                return KIND_JS;
-            case ".py":
-                return KIND_PYTHON;
-            case ".swift":
-                return KIND_SWIFT;
-            case ".php":
-                return KIND_PHP;
-            case ".go":
-                return KIND_GO;
-            case ".rb":
-                return KIND_RUBY;
-            default:
-                return KIND_DOCKER;
-        }
-
-    }
 }
