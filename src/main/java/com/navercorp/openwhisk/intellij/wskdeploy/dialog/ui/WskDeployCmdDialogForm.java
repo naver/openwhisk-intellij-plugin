@@ -74,7 +74,7 @@ public class WskDeployCmdDialogForm {
             WhiskAuthWithName auth = (WhiskAuthWithName) namespaceJList.getSelectedValue();
 
             LOG.info(cmd.toCmdString());
-            WskDeployCmdResponse response = runCommand(cmd.toCmd(auth.getAuth()));
+            WskDeployCmdResponse response = runCommand(cmd.toCmd(auth.getAuth())); // TODO running background thread
             LOG.info(response.getSuccessOutput());
             String errMsg = response.getErrorOutput();
             if (!errMsg.isEmpty()) {

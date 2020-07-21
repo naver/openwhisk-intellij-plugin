@@ -17,23 +17,21 @@
 package com.navercorp.openwhisk.intellij.wskdeploy.dialog;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.navercorp.openwhisk.intellij.wskdeploy.dialog.ui.WskDeployCmdDialogForm;
+import com.navercorp.openwhisk.intellij.common.DialogWrapperWithApply;
 import com.navercorp.openwhisk.intellij.common.whisk.model.wskdeploy.WskDeployCmd;
-import org.jetbrains.annotations.NotNull;
+import com.navercorp.openwhisk.intellij.wskdeploy.dialog.ui.WskDeployCmdDialogForm;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 
-public class WskDeployCmdDialog extends DialogWrapper {
+public class WskDeployCmdDialog extends DialogWrapperWithApply {
 
 
     private WskDeployCmdDialogForm wskDeployCmdDialogForm;
     private WskDeployCmd cmd;
 
     public WskDeployCmdDialog(Project project, WskDeployCmd cmd) {
-        super(true); // use current window as parent
+        super(project, true); // use current window as parent
         setTitle("Run WskDeploy Command");
         setResizable(false);
         this.cmd = cmd;
@@ -51,31 +49,17 @@ public class WskDeployCmdDialog extends DialogWrapper {
         }
     }
 
-    @NotNull
     @Override
-    protected Action[] createActions() {
-        return new Action[]{
-                myCancelAction, myOKAction, new WskDeployCmdDialog.myApplyAction("Apply")
-        };
-    }
-
-    private class myApplyAction extends DialogWrapperAction {
-
-        protected myApplyAction(@NotNull String name) {
-            super(name);
+    protected void doApplyAction() {
+        if (wskDeployCmdDialogForm != null) {
+            wskDeployCmdDialogForm.runWskDeploy();
         }
-
-        @Override
-        protected void doAction(ActionEvent e) {
-            if (wskDeployCmdDialogForm != null) {
-                wskDeployCmdDialogForm.runWskDeploy();
-            }
-        }
+        super.doApplyAction();
     }
 
     @Override
     protected void doOKAction() {
-        if (wskDeployCmdDialogForm != null) {
+        if (wskDeployCmdDialogForm != null && !myApplyAction.isApplied()) {
             wskDeployCmdDialogForm.runWskDeploy();
         }
         super.doOKAction();
