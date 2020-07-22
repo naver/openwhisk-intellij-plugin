@@ -16,6 +16,7 @@
 
 package com.navercorp.openwhisk.intellij.explorer.editor;
 
+import com.intellij.codeHighlighting.BackgroundEditorHighlighter;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.fileEditor.FileEditorLocation;
@@ -165,5 +166,21 @@ public class ActivationViewEditor implements FileEditor {
     @Override
     public <T> void putUserData(@NotNull Key<T> key, @Nullable T value) {
 
+    }
+
+    @Override
+    public void selectNotify() {
+
+    }
+
+    @Override
+    public void deselectNotify() {
+
+    }
+
+    @Nullable
+    @Override
+    public BackgroundEditorHighlighter getBackgroundHighlighter() {
+        return null; // Return {@code null} if no background highlighting activity necessary for this file editor.
     }
 }
