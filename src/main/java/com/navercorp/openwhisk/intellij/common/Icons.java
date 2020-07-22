@@ -30,6 +30,13 @@ public class Icons {
     public static final Icon ENTITY_TRIGGER = load("/icons/event.svg");
     public static final Icon ENTITY_TRIGGER_ROOT = load("/icons/eventGroup.svg");
 
+    public static final Icon ARROW_UP = load("/icons/arrowUp.svg");
+    public static final Icon ARROW_DOWN = load("/icons/arrowDown.svg");
+
+    public static final Icon OPEN_DISK_HOVER = load("/icons/openDiskHover.svg");
+    public static final Icon RUN_ANYTHING = load("/icons/run_anything.svg");
+    public static final Icon YAML = load("/icons/yaml.svg");
+
     public static final Icon KIND_JAVA = load("/icons/language/java/java.svg");
     public static final Icon KIND_JS = load("/icons/language/javascript/javascript.svg");
     public static final Icon KIND_GO = load("/icons/language/go/go.svg");

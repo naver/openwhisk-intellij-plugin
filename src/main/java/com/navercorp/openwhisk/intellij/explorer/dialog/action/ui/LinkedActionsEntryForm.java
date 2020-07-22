@@ -25,7 +25,9 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import static com.intellij.icons.AllIcons.General.*;
+import static com.intellij.icons.AllIcons.General.Remove;
+import static com.navercorp.openwhisk.intellij.common.Icons.ARROW_DOWN;
+import static com.navercorp.openwhisk.intellij.common.Icons.ARROW_UP;
 
 public class LinkedActionsEntryForm {
     private final static Logger LOG = Logger.getInstance(LinkedActionsEntryForm.class);
@@ -46,7 +48,7 @@ public class LinkedActionsEntryForm {
         indexJLabel.setHorizontalAlignment(SwingConstants.CENTER);
         setActionName(actionName);
 
-        upJButton.setIcon(ArrowUp);
+        upJButton.setIcon(ARROW_UP);
         upJButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -54,7 +56,7 @@ public class LinkedActionsEntryForm {
             }
         });
 
-        downJButton.setIcon(ArrowDown);
+        downJButton.setIcon(ARROW_DOWN);
         downJButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
