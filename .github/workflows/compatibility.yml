@@ -2,6 +2,7 @@ name: IntelliJ Platform Plugin Compatibility
 
 on:
   push:
+  pull_request:
 
 jobs:
   compatibility:
