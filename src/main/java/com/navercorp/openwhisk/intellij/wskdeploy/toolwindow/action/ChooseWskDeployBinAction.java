@@ -31,14 +31,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
-import static com.intellij.icons.AllIcons.General.OpenDiskHover;
+import static com.navercorp.openwhisk.intellij.common.Icons.OPEN_DISK_HOVER;
 
 public class ChooseWskDeployBinAction extends AnAction {
     private final static Logger LOG = Logger.getInstance(ChooseWskDeployBinAction.class);
     private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     ChooseWskDeployBinAction() {
-        super(OpenDiskHover);
+        super(OPEN_DISK_HOVER);
     }
 
     @Override

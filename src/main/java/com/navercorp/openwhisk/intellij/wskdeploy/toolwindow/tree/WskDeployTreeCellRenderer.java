@@ -23,8 +23,10 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import static com.intellij.icons.AllIcons.Actions.*;
-import static com.intellij.icons.AllIcons.FileTypes.Yaml;
+import static com.intellij.icons.AllIcons.Actions.Execute;
+import static com.intellij.icons.AllIcons.Actions.Rollback;
+import static com.navercorp.openwhisk.intellij.common.Icons.RUN_ANYTHING;
+import static com.navercorp.openwhisk.intellij.common.Icons.YAML;
 
 public class WskDeployTreeCellRenderer extends ColoredTreeCellRenderer {
     @Override
@@ -33,7 +35,7 @@ public class WskDeployTreeCellRenderer extends ColoredTreeCellRenderer {
         Object userObject = treeNode.getUserObject();
         if (userObject instanceof WskDeployManifest) {
             WskDeployManifest manifest = (WskDeployManifest) userObject;
-            setIcon(Yaml);
+            setIcon(YAML);
             append(manifest.getPath());
         } else if (userObject instanceof WskDeployCmdDeploy) {
             WskDeployCmdDeploy wskDeployCmdDeploy = (WskDeployCmdDeploy) userObject;
@@ -45,10 +47,10 @@ public class WskDeployTreeCellRenderer extends ColoredTreeCellRenderer {
             append(wskDeployCmdUndeploy.getCmdName());
         } else if (userObject instanceof WskDeployBinary) {
             WskDeployBinary wskDeployBinary = (WskDeployBinary) userObject;
-            setIcon(Run_anything);
+            setIcon(RUN_ANYTHING);
             append("wskdeploy (" + wskDeployBinary.getFullPath() + ")");
         } else if (userObject instanceof NullWskDeployBinary) {
-            setIcon(Run_anything);
+            setIcon(RUN_ANYTHING);
             append("There is no registered wskdeploy binary. Please find the file and register.");
         } else {
             append(userObject.toString());

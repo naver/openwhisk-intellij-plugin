@@ -67,7 +67,8 @@ public class CreateManifestTemplateAction extends AnAction {
                     if (manifestFiles.length == 0) {
                         // manifest template file
                         VirtualFile manifestFile = VfsUtil.findFileByURL(ResourceUtil.getResource(getClass(), "/template/", "manifest.yaml"));
-                        final VirtualFile baseParent = VfsUtil.findFile(Paths.get(basePath), true);
+                        final VirtualFile baseParent = VfsUtil.findFileByURL(Paths.get(basePath).toUri().toURL());
+
                         VfsUtilCore.copyFile(this, manifestFile, baseParent);
                         NOTIFIER.notify(project, manifestFile.getName() + " is created", NotificationType.INFORMATION);
                     }
