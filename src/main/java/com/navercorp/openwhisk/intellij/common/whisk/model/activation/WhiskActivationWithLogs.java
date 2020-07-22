@@ -30,14 +30,8 @@ public class WhiskActivationWithLogs extends WhiskActivation {
     public WhiskActivationWithLogs() {
     }
 
-    public WhiskActivationWithLogs(String subject, List<String> logs, Map<String, Object> response) {
-        this.subject = subject;
-        this.logs = logs;
-        this.response = response;
-    }
-
-    public WhiskActivationWithLogs(String activationId, String name, String namespace, String version, long start, long end, long duration, boolean publish, List<Map<String, Object>> annotations, String subject, List<String> logs, Map<String, Object> response) {
-        super(activationId, name, namespace, version, start, end, duration, publish, annotations);
+    public WhiskActivationWithLogs(String activationId, String name, String namespace, String version, String cause, long start, long end, long duration, boolean publish, List<Map<String, Object>> annotations, String subject, List<String> logs, Map<String, Object> response) {
+        super(activationId, name, namespace, version, cause, start, end, duration, publish, annotations);
         this.subject = subject;
         this.logs = logs;
         this.response = response;

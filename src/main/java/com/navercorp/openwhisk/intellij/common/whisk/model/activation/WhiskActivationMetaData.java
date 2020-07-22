@@ -26,12 +26,8 @@ public class WhiskActivationMetaData extends WhiskActivation {
     public WhiskActivationMetaData() {
     }
 
-    public WhiskActivationMetaData(int statusCode) {
-        this.statusCode = statusCode;
-    }
-
-    public WhiskActivationMetaData(String activationId, String name, String namespace, String version, long start, long end, long duration, boolean publish, List<Map<String, Object>> annotations, int statusCode) {
-        super(activationId, name, namespace, version, start, end, duration, publish, annotations);
+    public WhiskActivationMetaData(String activationId, String name, String namespace, String version, String cause, long start, long end, long duration, boolean publish, List<Map<String, Object>> annotations, int statusCode) {
+        super(activationId, name, namespace, version, cause, start, end, duration, publish, annotations);
         this.statusCode = statusCode;
     }
 
