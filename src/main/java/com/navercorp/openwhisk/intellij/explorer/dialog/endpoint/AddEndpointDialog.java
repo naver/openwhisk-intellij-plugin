@@ -55,7 +55,7 @@ public class AddEndpointDialog extends DialogWrapperWithApply {
 
     @Override
     protected void doOKAction() {
-        if (addEndpointDialogForm != null && myApplyAction.isApplied()) {
+        if (addEndpointDialogForm != null && !myApplyAction.isApplied()) {
             addEndpointDialogForm.addEndpoint();
         }
         super.doOKAction();

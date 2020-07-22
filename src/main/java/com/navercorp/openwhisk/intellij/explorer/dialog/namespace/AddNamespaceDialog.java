@@ -56,7 +56,7 @@ public class AddNamespaceDialog extends DialogWrapperWithApply {
 
     @Override
     protected void doOKAction() {
-        if (addNamespaceDialogForm != null && myApplyAction.isApplied()) {
+        if (addNamespaceDialogForm != null && !myApplyAction.isApplied()) {
             addNamespaceDialogForm.addNamespace();
         }
         super.doOKAction();
