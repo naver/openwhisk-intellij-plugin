@@ -2,8 +2,10 @@
     <id>com.navercorp.openwhisk.intellij</id>
     <name>DevTools for Apache Openwhisk</name>
     <vendor email="dl_lambda_op@navercorp.com" url="https://github.com/naver">NAVER</vendor>
+    <version>1.0.0</version>
+    <idea-version since-build="181.*" until-build="201.*"/>
 
-    <description>DevTools for Apache OpenWhisk</description>
+    <description>Assists users to develop/deploy/manage OpenWhisk entities in Intellij.</description>
 
     <depends>com.intellij.modules.lang</depends>
 
