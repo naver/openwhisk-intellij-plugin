@@ -26,6 +26,7 @@ public abstract class WhiskActivation {
     private String name;
     private String namespace;
     private String version;
+    private String cause;
     private long start;
     private long end;
     private long duration;
@@ -35,11 +36,12 @@ public abstract class WhiskActivation {
     public WhiskActivation() {
     }
 
-    public WhiskActivation(String activationId, String name, String namespace, String version, long start, long end, long duration, boolean publish, List<Map<String, Object>> annotations) {
+    public WhiskActivation(String activationId, String name, String namespace, String version, String cause, long start, long end, long duration, boolean publish, List<Map<String, Object>> annotations) {
         this.activationId = activationId;
         this.name = name;
         this.namespace = namespace;
         this.version = version;
+        this.cause = cause;
         this.start = start;
         this.end = end;
         this.duration = duration;
@@ -73,6 +75,14 @@ public abstract class WhiskActivation {
 
     public String getVersion() {
         return version;
+    }
+
+    public String getCause() {
+        return cause;
+    }
+
+    public void setCause(String cause) {
+        this.cause = cause;
     }
 
     public void setVersion(String version) {
