@@ -24,7 +24,7 @@ jobs:
         uses: ChrisCarini/intellij-platform-plugin-verifier-action@v0.0.2
         with:
           verifier-version: '1.241'
-          plugin-location: 'build/distributions/sample-intellij-plugin-*.zip'
+          plugin-location: 'build/distributions/*.zip'
           ide-versions: |
             ideaIC:2019.3
             ideaIU:2019.3
