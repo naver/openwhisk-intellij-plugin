@@ -5,7 +5,43 @@
     <version>1.1.1</version>
     <idea-version since-build="181.*" until-build="201.*"/>
 
-    <description>Assists users to develop/deploy/manage OpenWhisk entities in Intellij.</description>
+    <description><![CDATA[
+<p>
+    <strong>OpenWhisk-intellij-support</strong> is an open source Intellij Plugin for <a href="https://github.com/apache/openwhisk">Apache OpenWhisk</a>. It assists users to develop/deploy/manage OpenWhisk functions in Intellij.
+</p>
+
+<h2>Feature</h2>
+
+<h3>OpenWhisk Explorer</h3>
+<ul>
+    <li>Explore all entities in your endpoints/namespaces.
+        <ul>
+            <li>The <code>.wskprops</code> file is automatically registered.</li>
+            <li>You can add the API host manually.</li>
+            <li>You can add namespace manually by API auth key.</li>
+        </ul>
+    </li>
+    <li>Show the action code with syntax highlighting.</li>
+    <li>[Soon] Edit the action code on the remote server.</li>
+    <li>Invoke the action remotely and get the activation result.</li>
+    <li>Show a list of actions related to the sequence action.</li>
+    <li>Show information about the trigger and related rules.</li>
+    <li>Show activations related to the action (Same as <code>wsk activation list ${action}</code>).</li>
+    <li>Show detailed information of the activation (Same <code>as wsk activation get ${activation_id}</code>).</li>
+    <li>Update parameters of the action, package, and trigger.</li>
+</ul>
+
+<h3>Manifest View</h3>
+<ul>
+    <li>List up manifest YAML files in the workspace.</li>
+    <li>Deploy/Undeploy OpenWhisk packages with manifest (via wskdeploy).
+        <ul>
+            <li>Deploy with the deployment file.</li>
+            <li>Deploy with multiple credentials.</li>
+        </ul>
+    </li>
+</ul>
+    ]]></description>
 
     <depends>com.intellij.modules.lang</depends>
 
