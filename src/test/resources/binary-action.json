@@ -2,11 +2,11 @@
   "annotations": [
     {
       "key": "exec",
-      "value": "nodejs:10"
+      "value": "nodejs:12"
     }
   ],
   "exec": {
-    "kind": "nodejs:10",
+    "kind": "nodejs:12",
     "code": "aaaaa",
     "binary": true
   },

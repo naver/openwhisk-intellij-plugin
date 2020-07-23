@@ -11,10 +11,10 @@
     "binary": true
   },
   "limits": {
-    "timeout": 300000,
-    "memory": 512,
+    "concurrency": 1,
     "logs": 1,
-    "concurrency": 1
+    "memory": 256,
+    "timeout": 60000
   },
   "name": "testAct",
   "namespace": "testNs/testPkg",
