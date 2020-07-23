@@ -1,4 +1,4 @@
-package com.navercorp.openwhisk.intellij.common.utils.json; /**
+/**
  * Copyright 2020-present NAVER Corp.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +13,8 @@ package com.navercorp.openwhisk.intellij.common.utils.json; /**
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package com.navercorp.openwhisk.intellij.common.utils.json;
 
 import com.navercorp.openwhisk.intellij.common.utils.JsonParserUtils;
 import com.navercorp.openwhisk.intellij.common.whisk.model.Limits;
@@ -36,6 +38,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.navercorp.openwhisk.intellij.utils.AnnotationHelper.createActionAnnotation;
 import static junit.framework.TestCase.assertEquals;
 
 public class JsonParserUtilsTests {
@@ -43,35 +46,6 @@ public class JsonParserUtilsTests {
     /**
      * Helper functions
      */
-    private List<Map<String, Object>> createActionAnnotation(boolean webExport, boolean rawHttp, boolean finalEntry, String exec) {
-        List<Map<String, Object>> annotations = new ArrayList<>();
-        if (webExport) {
-            Map<String, Object> entry1 = new LinkedHashMap<>();
-            entry1.put("key", "web-export");
-            entry1.put("value", webExport);
-            annotations.add(entry1);
-
-            Map<String, Object> entry2 = new LinkedHashMap<>();
-            entry2.put("key", "raw-http");
-            entry2.put("value", rawHttp);
-            annotations.add(entry2);
-        }
-
-        if (finalEntry) {
-            Map<String, Object> entry3 = new LinkedHashMap<>();
-            entry3.put("key", "final");
-            entry3.put("value", finalEntry);
-            annotations.add(entry3);
-        }
-
-        Map<String, Object> entry4 = new LinkedHashMap<>();
-        entry4.put("key", "exec");
-        entry4.put("value", exec);
-        annotations.add(entry4);
-
-        return annotations;
-    }
-
     private List<Map<String, Object>> createPackageAnnotation(Map<String, String> binding) {
         List<Map<String, Object>> annotations = new ArrayList<>();
 
@@ -267,11 +241,11 @@ public class JsonParserUtilsTests {
                 "]";
 
         List<WhiskAction> expected = new ArrayList<>();
-        expected.add(new WhiskActionMetaData("testAct1", "testNs/testPkg1", "0.0.1", 1585756253499L, false, createActionAnnotation(true, false, true, "nodejs:10"), new Limits(1, 1, 256, 60000), new ExecMetaData(true)));
-        expected.add(new WhiskActionMetaData("testAct2", "testNs/testPkg2", "0.0.1", 1585756252393L, false, createActionAnnotation(true, false, true, "nodejs:10"), new Limits(1, 1, 256, 60000), new ExecMetaData(true)));
-        expected.add(new WhiskActionMetaData("testAct3", "testNs/testPkg3", "0.0.1", 1585756251289L, false, createActionAnnotation(true, false, true, "nodejs:10"), new Limits(1, 1, 256, 60000), new ExecMetaData(true)));
-        expected.add(new WhiskActionMetaData("testAct4", "testNs/testPkg4", "0.0.2", 1582709807073L, false, createActionAnnotation(false, false, false, "shell"), new Limits(1, 1, 256, 60000), new ExecMetaData(false)));
-        expected.add(new WhiskActionMetaData("testAct5", "testNs/testPkg5", "0.0.1", 1581316522182L, false, createActionAnnotation(false, false, false, "python:3"), new Limits(1, 1, 256, 60000), new ExecMetaData(false)));
+        expected.add(new WhiskActionMetaData("testAct1", "testNs/testPkg1", "0.0.1", 1585756253499L, false, createActionAnnotation(true, false, false, true, "nodejs:10"), new Limits(1, 1, 256, 60000), new ExecMetaData(true)));
+        expected.add(new WhiskActionMetaData("testAct2", "testNs/testPkg2", "0.0.1", 1585756252393L, false, createActionAnnotation(true, false, false, true, "nodejs:10"), new Limits(1, 1, 256, 60000), new ExecMetaData(true)));
+        expected.add(new WhiskActionMetaData("testAct3", "testNs/testPkg3", "0.0.1", 1585756251289L, false, createActionAnnotation(true, false, false, true, "nodejs:10"), new Limits(1, 1, 256, 60000), new ExecMetaData(true)));
+        expected.add(new WhiskActionMetaData("testAct4", "testNs/testPkg4", "0.0.2", 1582709807073L, false, createActionAnnotation(false, false, false, false, "shell"), new Limits(1, 1, 256, 60000), new ExecMetaData(false)));
+        expected.add(new WhiskActionMetaData("testAct5", "testNs/testPkg5", "0.0.1", 1581316522182L, false, createActionAnnotation(false, false, false, false, "python:3"), new Limits(1, 1, 256, 60000), new ExecMetaData(false)));
 
         // when
         List<WhiskActionMetaData> actual = JsonParserUtils.parseWhiskActions(actions);
@@ -327,7 +301,7 @@ public class JsonParserUtilsTests {
         param2.put("value", 1);
         parameters.add(param2);
 
-        ExecutableWhiskAction expected = new ExecutableWhiskAction("testAct", "testNs/testPkg", "0.0.2", 1581316522182L, false, createActionAnnotation(false, false, false, "nodejs:10"), new Limits(1, 1, 256, 60000), new CodeExec(false, "nodejs:10", "function main(params) {}", "","", new ArrayList<>()), parameters);
+        ExecutableWhiskAction expected = new ExecutableWhiskAction("testAct", "testNs/testPkg", "0.0.2", 1581316522182L, false, createActionAnnotation(false, false, false, false, "nodejs:10"), new Limits(1, 1, 256, 60000), new CodeExec(false, "nodejs:10", "function main(params) {}", "", "", new ArrayList<>()), parameters);
 
         // when
         ExecutableWhiskAction actual = JsonParserUtils.parseWhiskAction(action).get();
@@ -481,9 +455,9 @@ public class JsonParserUtilsTests {
         parameters.add(param2);
 
         List<CompactWhiskAction> actions = new ArrayList<>();
-        actions.add(new CompactWhiskAction("action1", "0.0.2", createActionAnnotation(false, false, false, "nodejs:10")));
-        actions.add(new CompactWhiskAction("action2", "0.0.2", createActionAnnotation(false, false, false, "nodejs:10")));
-        actions.add(new CompactWhiskAction("action3", "0.0.2", createActionAnnotation(false, false, false, "nodejs:10")));
+        actions.add(new CompactWhiskAction("action1", "0.0.2", createActionAnnotation(false, false, false, false, "nodejs:10")));
+        actions.add(new CompactWhiskAction("action2", "0.0.2", createActionAnnotation(false, false, false, false, "nodejs:10")));
+        actions.add(new CompactWhiskAction("action3", "0.0.2", createActionAnnotation(false, false, false, false, "nodejs:10")));
         WhiskPackageWithActions expected = new WhiskPackageWithActions("test", "testns", true, 1583828352890L, "0.0.6", createPackageAnnotation(null), new LinkedHashMap<>(), parameters, actions, new ArrayList<>());
 
         // when
