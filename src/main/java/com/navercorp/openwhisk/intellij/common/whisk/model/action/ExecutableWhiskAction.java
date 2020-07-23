@@ -22,6 +22,7 @@ import com.navercorp.openwhisk.intellij.common.whisk.model.exec.CodeExec;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class ExecutableWhiskAction extends WhiskAction<CodeExec> {
     private List<Map<String, Object>> parameters = new ArrayList<>();
@@ -50,14 +51,13 @@ public class ExecutableWhiskAction extends WhiskAction<CodeExec> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
+        if (!super.equals(o)) return false;
         ExecutableWhiskAction that = (ExecutableWhiskAction) o;
-
-        return parameters != null ? parameters.equals(that.parameters) : that.parameters == null;
+        return Objects.equals(parameters, that.parameters);
     }
 
     @Override
     public int hashCode() {
-        return parameters != null ? parameters.hashCode() : 0;
+        return Objects.hash(super.hashCode(), parameters);
     }
 }

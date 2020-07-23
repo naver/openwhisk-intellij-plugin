@@ -34,17 +34,6 @@ import static com.navercorp.openwhisk.intellij.utils.AnnotationHelper.createActi
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-
-// normal action
-
-// binary action
-
-// java action(binary)
-
-// sequence action
-
-// blackbox action
-
 public class WhiskActionTest {
     String name = "testName";
     String namespace = "testNamespace";

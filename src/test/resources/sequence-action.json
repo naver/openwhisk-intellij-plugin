@@ -1,0 +1,35 @@
+{
+  "annotations": [
+    {
+      "key": "exec",
+      "value": "sequence"
+    }
+  ],
+  "exec": {
+    "kind": "sequence",
+    "components": [
+      "/testNs/testAct1",
+      "/testNs/testAct2"
+    ]
+  },
+  "limits": {
+    "concurrency": 1,
+    "logs": 1,
+    "memory": 256,
+    "timeout": 60000
+  },
+  "name": "testAct",
+  "namespace": "testNs/testPkg",
+  "parameters": [
+    {
+      "key": "_actions",
+      "components": [
+        "/testNs/testAct1",
+        "/testNs/testAct2"
+      ]
+    }
+  ],
+  "publish": false,
+  "updated": 1585756253499,
+  "version": "0.0.1"
+}

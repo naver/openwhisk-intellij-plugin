@@ -1,0 +1,34 @@
+{
+  "annotations": [
+    {
+      "key": "exec",
+      "value": "blackbox"
+    }
+  ],
+  "exec": {
+    "kind": "blackbox",
+    "image": "imageRepo/imageName",
+    "binary": true
+  },
+  "limits": {
+    "timeout": 300000,
+    "memory": 512,
+    "logs": 1,
+    "concurrency": 1
+  },
+  "name": "testAct",
+  "namespace": "testNs/testPkg",
+  "parameters": [
+    {
+      "key": "name",
+      "value": "test"
+    },
+    {
+      "key": "count",
+      "value": 1
+    }
+  ],
+  "publish": false,
+  "updated": 1585756253499,
+  "version": "0.0.1"
+}

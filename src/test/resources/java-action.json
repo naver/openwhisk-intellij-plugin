@@ -1,0 +1,35 @@
+{
+  "annotations": [
+    {
+      "key": "exec",
+      "value": "java"
+    }
+  ],
+  "exec": {
+    "kind": "java",
+    "main": "test",
+    "binary": true,
+    "code": "aaaaa"
+  },
+  "limits": {
+    "concurrency": 1,
+    "logs": 1,
+    "memory": 256,
+    "timeout": 60000
+  },
+  "name": "testAct",
+  "namespace": "testNs/testPkg",
+  "parameters": [
+    {
+      "key": "name",
+      "value": "test"
+    },
+    {
+      "key": "count",
+      "value": 1
+    }
+  ],
+  "publish": false,
+  "updated": 1585756253499,
+  "version": "0.0.1"
+}
