@@ -7,8 +7,8 @@
   ],
   "exec": {
     "kind": "nodejs:12",
-    "code": "function main(params) {}",
-    "binary": false
+    "code": "aaaaa",
+    "binary": true
   },
   "limits": {
     "concurrency": 1,
@@ -29,6 +29,6 @@
     }
   ],
   "publish": false,
-  "updated": 1581316522182,
+  "updated": 1585756253499,
   "version": "0.0.1"
 }

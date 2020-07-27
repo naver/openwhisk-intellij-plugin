@@ -2,13 +2,15 @@
   "annotations": [
     {
       "key": "exec",
-      "value": "nodejs:12"
+      "value": "sequence"
     }
   ],
   "exec": {
-    "kind": "nodejs:12",
-    "code": "function main(params) {}",
-    "binary": false
+    "kind": "sequence",
+    "components": [
+      "/testNs/testAct1",
+      "/testNs/testAct2"
+    ]
   },
   "limits": {
     "concurrency": 1,
@@ -20,15 +22,14 @@
   "namespace": "testNs/testPkg",
   "parameters": [
     {
-      "key": "name",
-      "value": "test"
-    },
-    {
-      "key": "count",
-      "value": 1
+      "key": "_actions",
+      "components": [
+        "/testNs/testAct1",
+        "/testNs/testAct2"
+      ]
     }
   ],
   "publish": false,
-  "updated": 1581316522182,
+  "updated": 1585756253499,
   "version": "0.0.1"
 }

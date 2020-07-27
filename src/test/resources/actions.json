@@ -15,7 +15,7 @@
       },
       {
         "key": "exec",
-        "value": "nodejs:10"
+        "value": "nodejs:12"
       }
     ],
     "exec": {
@@ -49,7 +49,7 @@
       },
       {
         "key": "exec",
-        "value": "nodejs:10"
+        "value": "nodejs:12"
       }
     ],
     "exec": {
@@ -83,7 +83,7 @@
       },
       {
         "key": "exec",
-        "value": "nodejs:10"
+        "value": "nodejs:12"
       }
     ],
     "exec": {
@@ -105,7 +105,7 @@
     "annotations": [
       {
         "key": "exec",
-        "value": "shell"
+        "value": "blackbox"
       }
     ],
     "exec": {

@@ -1,4 +1,4 @@
-package com.navercorp.openwhisk.intellij.common.utils.json; /**
+/**
  * Copyright 2020-present NAVER Corp.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +13,8 @@ package com.navercorp.openwhisk.intellij.common.utils.json; /**
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package com.navercorp.openwhisk.intellij.common.utils.json;
 
 import com.navercorp.openwhisk.intellij.common.utils.JsonParserUtils;
 import com.navercorp.openwhisk.intellij.common.whisk.model.Limits;
@@ -36,6 +38,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.navercorp.openwhisk.intellij.utils.AnnotationHelper.createActionAnnotation;
 import static junit.framework.TestCase.assertEquals;
 
 public class JsonParserUtilsTests {
@@ -43,35 +46,6 @@ public class JsonParserUtilsTests {
     /**
      * Helper functions
      */
-    private List<Map<String, Object>> createActionAnnotation(boolean webExport, boolean rawHttp, boolean finalEntry, String exec) {
-        List<Map<String, Object>> annotations = new ArrayList<>();
-        if (webExport) {
-            Map<String, Object> entry1 = new LinkedHashMap<>();
-            entry1.put("key", "web-export");
-            entry1.put("value", webExport);
-            annotations.add(entry1);
-
-            Map<String, Object> entry2 = new LinkedHashMap<>();
-            entry2.put("key", "raw-http");
-            entry2.put("value", rawHttp);
-            annotations.add(entry2);
-        }
-
-        if (finalEntry) {
-            Map<String, Object> entry3 = new LinkedHashMap<>();
-            entry3.put("key", "final");
-            entry3.put("value", finalEntry);
-            annotations.add(entry3);
-        }
-
-        Map<String, Object> entry4 = new LinkedHashMap<>();
-        entry4.put("key", "exec");
-        entry4.put("value", exec);
-        annotations.add(entry4);
-
-        return annotations;
-    }
-
     private List<Map<String, Object>> createPackageAnnotation(Map<String, String> binding) {
         List<Map<String, Object>> annotations = new ArrayList<>();
 
@@ -111,230 +85,6 @@ public class JsonParserUtilsTests {
         Map<String, SimplifiedWhiskRule> rules = new LinkedHashMap<>();
         rules.put("test/rule1", new SimplifiedWhiskRule(new SimplifiedEntityMetaData("test", "action1"), "active"));
         return rules;
-    }
-
-    @Test
-    public void parseWhiskActions() throws IOException {
-
-        // given
-        String actions = "[\n" +
-                "  {\n" +
-                "    \"annotations\": [\n" +
-                "      {\n" +
-                "        \"key\": \"web-export\",\n" +
-                "        \"value\": true\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"key\": \"raw-http\",\n" +
-                "        \"value\": false\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"key\": \"final\",\n" +
-                "        \"value\": true\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"key\": \"exec\",\n" +
-                "        \"value\": \"nodejs:10\"\n" +
-                "      }\n" +
-                "    ],\n" +
-                "    \"exec\": {\n" +
-                "      \"binary\": true\n" +
-                "    },\n" +
-                "    \"limits\": {\n" +
-                "      \"concurrency\": 1,\n" +
-                "      \"logs\": 1,\n" +
-                "      \"memory\": 256,\n" +
-                "      \"timeout\": 60000\n" +
-                "    },\n" +
-                "    \"name\": \"testAct1\",\n" +
-                "    \"namespace\": \"testNs/testPkg1\",\n" +
-                "    \"publish\": false,\n" +
-                "    \"updated\": 1585756253499,\n" +
-                "    \"version\": \"0.0.1\"\n" +
-                "  },\n" +
-                "  {\n" +
-                "    \"annotations\": [\n" +
-                "      {\n" +
-                "        \"key\": \"web-export\",\n" +
-                "        \"value\": true\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"key\": \"raw-http\",\n" +
-                "        \"value\": false\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"key\": \"final\",\n" +
-                "        \"value\": true\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"key\": \"exec\",\n" +
-                "        \"value\": \"nodejs:10\"\n" +
-                "      }\n" +
-                "    ],\n" +
-                "    \"exec\": {\n" +
-                "      \"binary\": true\n" +
-                "    },\n" +
-                "    \"limits\": {\n" +
-                "      \"concurrency\": 1,\n" +
-                "      \"logs\": 1,\n" +
-                "      \"memory\": 256,\n" +
-                "      \"timeout\": 60000\n" +
-                "    },\n" +
-                "    \"name\": \"testAct2\",\n" +
-                "    \"namespace\": \"testNs/testPkg2\",\n" +
-                "    \"publish\": false,\n" +
-                "    \"updated\": 1585756252393,\n" +
-                "    \"version\": \"0.0.1\"\n" +
-                "  },\n" +
-                "  {\n" +
-                "    \"annotations\": [\n" +
-                "      {\n" +
-                "        \"key\": \"web-export\",\n" +
-                "        \"value\": true\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"key\": \"raw-http\",\n" +
-                "        \"value\": false\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"key\": \"final\",\n" +
-                "        \"value\": true\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"key\": \"exec\",\n" +
-                "        \"value\": \"nodejs:10\"\n" +
-                "      }\n" +
-                "    ],\n" +
-                "    \"exec\": {\n" +
-                "      \"binary\": true\n" +
-                "    },\n" +
-                "    \"limits\": {\n" +
-                "      \"concurrency\": 1,\n" +
-                "      \"logs\": 1,\n" +
-                "      \"memory\": 256,\n" +
-                "      \"timeout\": 60000\n" +
-                "    },\n" +
-                "    \"name\": \"testAct3\",\n" +
-                "    \"namespace\": \"testNs/testPkg3\",\n" +
-                "    \"publish\": false,\n" +
-                "    \"updated\": 1585756251289,\n" +
-                "    \"version\": \"0.0.1\"\n" +
-                "  },\n" +
-                "  {\n" +
-                "    \"annotations\": [\n" +
-                "      {\n" +
-                "        \"key\": \"exec\",\n" +
-                "        \"value\": \"shell\"\n" +
-                "      }\n" +
-                "    ],\n" +
-                "    \"exec\": {\n" +
-                "      \"binary\": false\n" +
-                "    },\n" +
-                "    \"limits\": {\n" +
-                "      \"concurrency\": 1,\n" +
-                "      \"logs\": 1,\n" +
-                "      \"memory\": 256,\n" +
-                "      \"timeout\": 60000\n" +
-                "    },\n" +
-                "    \"name\": \"testAct4\",\n" +
-                "    \"namespace\": \"testNs/testPkg4\",\n" +
-                "    \"publish\": false,\n" +
-                "    \"updated\": 1582709807073,\n" +
-                "    \"version\": \"0.0.2\"\n" +
-                "  },\n" +
-                "  {\n" +
-                "    \"annotations\": [\n" +
-                "      {\n" +
-                "        \"key\": \"exec\",\n" +
-                "        \"value\": \"python:3\"\n" +
-                "      }\n" +
-                "    ],\n" +
-                "    \"exec\": {\n" +
-                "      \"binary\": false\n" +
-                "    },\n" +
-                "    \"limits\": {\n" +
-                "      \"concurrency\": 1,\n" +
-                "      \"logs\": 1,\n" +
-                "      \"memory\": 256,\n" +
-                "      \"timeout\": 60000\n" +
-                "    },\n" +
-                "    \"name\": \"testAct5\",\n" +
-                "    \"namespace\": \"testNs/testPkg5\",\n" +
-                "    \"publish\": false,\n" +
-                "    \"updated\": 1581316522182,\n" +
-                "    \"version\": \"0.0.1\"\n" +
-                "  }\n" +
-                "]";
-
-        List<WhiskAction> expected = new ArrayList<>();
-        expected.add(new WhiskActionMetaData("testAct1", "testNs/testPkg1", "0.0.1", 1585756253499L, false, createActionAnnotation(true, false, true, "nodejs:10"), new Limits(1, 1, 256, 60000), new ExecMetaData(true)));
-        expected.add(new WhiskActionMetaData("testAct2", "testNs/testPkg2", "0.0.1", 1585756252393L, false, createActionAnnotation(true, false, true, "nodejs:10"), new Limits(1, 1, 256, 60000), new ExecMetaData(true)));
-        expected.add(new WhiskActionMetaData("testAct3", "testNs/testPkg3", "0.0.1", 1585756251289L, false, createActionAnnotation(true, false, true, "nodejs:10"), new Limits(1, 1, 256, 60000), new ExecMetaData(true)));
-        expected.add(new WhiskActionMetaData("testAct4", "testNs/testPkg4", "0.0.2", 1582709807073L, false, createActionAnnotation(false, false, false, "shell"), new Limits(1, 1, 256, 60000), new ExecMetaData(false)));
-        expected.add(new WhiskActionMetaData("testAct5", "testNs/testPkg5", "0.0.1", 1581316522182L, false, createActionAnnotation(false, false, false, "python:3"), new Limits(1, 1, 256, 60000), new ExecMetaData(false)));
-
-        // when
-        List<WhiskActionMetaData> actual = JsonParserUtils.parseWhiskActions(actions);
-
-        // then
-        assertEquals(actual, expected);
-    }
-
-    @Test
-    public void parseWhiskAction() throws IOException {
-        String action = "{\n" +
-                "  \"annotations\": [\n" +
-                "    {\n" +
-                "      \"key\": \"exec\",\n" +
-                "      \"value\": \"nodejs:10\"\n" +
-                "    }\n" +
-                "  ],\n" +
-                "  \"exec\": {\n" +
-                "    \"kind\": \"nodejs:10\",\n" +
-                "    \"code\": \"function main(params) {}\",\n" +
-                "    \"binary\": false\n" +
-                "  },\n" +
-                "  \"limits\": {\n" +
-                "    \"concurrency\": 1,\n" +
-                "    \"logs\": 1,\n" +
-                "    \"memory\": 256,\n" +
-                "    \"timeout\": 60000\n" +
-                "  },\n" +
-                "  \"name\": \"testAct\",\n" +
-                "  \"namespace\": \"testNs/testPkg\",\n" +
-                "  \"parameters\": [\n" +
-                "    {\n" +
-                "      \"key\": \"name\",\n" +
-                "      \"value\": \"test\"\n" +
-                "    },\n" +
-                "    {\n" +
-                "      \"key\": \"count\",\n" +
-                "      \"value\": 1\n" +
-                "    }\n" +
-                "  ],\n" +
-                "  \"publish\": false,\n" +
-                "  \"updated\": 1581316522182,\n" +
-                "  \"version\": \"0.0.2\"\n" +
-                "}\n";
-        List<Map<String, Object>> parameters = new ArrayList<>();
-        Map<String, Object> param1 = new LinkedHashMap<>();
-        param1.put("key", "name");
-        param1.put("value", "test");
-        parameters.add(param1);
-
-        Map<String, Object> param2 = new LinkedHashMap<>();
-        param2.put("key", "count");
-        param2.put("value", 1);
-        parameters.add(param2);
-
-        ExecutableWhiskAction expected = new ExecutableWhiskAction("testAct", "testNs/testPkg", "0.0.2", 1581316522182L, false, createActionAnnotation(false, false, false, "nodejs:10"), new Limits(1, 1, 256, 60000), new CodeExec(false, "nodejs:10", "function main(params) {}", "","", new ArrayList<>()), parameters);
-
-        // when
-        ExecutableWhiskAction actual = JsonParserUtils.parseWhiskAction(action).get();
-
-        // then
-        assertEquals(actual, expected);
-
     }
 
     @Test
@@ -481,9 +231,9 @@ public class JsonParserUtilsTests {
         parameters.add(param2);
 
         List<CompactWhiskAction> actions = new ArrayList<>();
-        actions.add(new CompactWhiskAction("action1", "0.0.2", createActionAnnotation(false, false, false, "nodejs:10")));
-        actions.add(new CompactWhiskAction("action2", "0.0.2", createActionAnnotation(false, false, false, "nodejs:10")));
-        actions.add(new CompactWhiskAction("action3", "0.0.2", createActionAnnotation(false, false, false, "nodejs:10")));
+        actions.add(new CompactWhiskAction("action1", "0.0.2", createActionAnnotation(false, false, false, false, "nodejs:10")));
+        actions.add(new CompactWhiskAction("action2", "0.0.2", createActionAnnotation(false, false, false, false, "nodejs:10")));
+        actions.add(new CompactWhiskAction("action3", "0.0.2", createActionAnnotation(false, false, false, false, "nodejs:10")));
         WhiskPackageWithActions expected = new WhiskPackageWithActions("test", "testns", true, 1583828352890L, "0.0.6", createPackageAnnotation(null), new LinkedHashMap<>(), parameters, actions, new ArrayList<>());
 
         // when

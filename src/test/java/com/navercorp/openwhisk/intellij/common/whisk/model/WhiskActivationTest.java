@@ -39,7 +39,7 @@ public class WhiskActivationTest {
     boolean expectedPublish = false;
 
     @Test
-    public void WhiskActionMetaDataGetterTest() {
+    public void testWhiskActionMetaData_getter() {
 
         List<Map<String, Object>> expectedAnnotations = new ArrayList<>();
         int expectedStatusCode = 0;
@@ -60,7 +60,7 @@ public class WhiskActivationTest {
     }
 
     @Test
-    public void WhiskActionMetaDataGetStatusTest() {
+    public void testWhiskActionMetaData_getStatus() {
         List<Map<String, Object>> expectedAnnotations = new ArrayList<>();
 
         int success = 0;
@@ -87,7 +87,7 @@ public class WhiskActivationTest {
     }
 
     @Test
-    public void WhiskActivationWithLogsGetterTest() {
+    public void testWhiskActivationWithLogs_getter() {
         List<Map<String, Object>> expectedAnnotations = new ArrayList<>();
         String expectedSubject = "testNamespace";
         List<String> expectedLogs = new ArrayList<>();

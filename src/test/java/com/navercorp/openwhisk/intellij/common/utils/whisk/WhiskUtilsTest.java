@@ -20,11 +20,11 @@ import com.navercorp.openwhisk.intellij.common.utils.WhiskUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class WhiskUtilsTest {
     @Test
-    public void getApihHostWithProtocol() {
+    public void testWhiskUtils_getApihHostWithProtocol() {
         String expected1 = "https://foo.com";
         String expected2 = "http://foo.com";
 

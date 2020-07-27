@@ -2,13 +2,14 @@
   "annotations": [
     {
       "key": "exec",
-      "value": "nodejs:12"
+      "value": "java"
     }
   ],
   "exec": {
-    "kind": "nodejs:12",
-    "code": "function main(params) {}",
-    "binary": false
+    "kind": "java",
+    "main": "test",
+    "binary": true,
+    "code": "aaaaa"
   },
   "limits": {
     "concurrency": 1,
@@ -29,6 +30,6 @@
     }
   ],
   "publish": false,
-  "updated": 1581316522182,
+  "updated": 1585756253499,
   "version": "0.0.1"
 }
