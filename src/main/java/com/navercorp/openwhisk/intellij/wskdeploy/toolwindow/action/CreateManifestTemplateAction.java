@@ -16,7 +16,6 @@
 
 package com.navercorp.openwhisk.intellij.wskdeploy.toolwindow.action;
 
-import com.google.common.collect.Streams;
 import com.intellij.icons.AllIcons;
 import com.intellij.notification.NotificationType;
 import com.intellij.openapi.actionSystem.AnAction;
@@ -27,7 +26,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.ResourceUtil;
@@ -38,15 +36,14 @@ import com.navercorp.openwhisk.intellij.wskdeploy.toolwindow.listener.RefreshWsk
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class CreateManifestTemplateAction extends AnAction {
     private final static Logger LOG = Logger.getInstance(CreateManifestTemplateAction.class);
     private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
-    private final String[] FILTER_PATH = new String[]{".idea"};
+
+    private final String[] META_FILES = new String[]{"manifest.yaml", "HOW-TO-DEPLOY.md"};
+    private final String[] SOURCE_FILES = new String[]{"index.js", "index.test.js", "package.json"};
 
     CreateManifestTemplateAction() {
         super(AllIcons.Actions.Menu_paste);
@@ -57,54 +54,35 @@ public class CreateManifestTemplateAction extends AnAction {
         final Project project = e.getProject();
         final String basePath = project.getBasePath();
 
-        // find manifest file in project
-        PsiFile[] YAMLFiles = FilenameIndex.getFilesByName(project, "manifest.yaml", GlobalSearchScope.allScope(project));
-        PsiFile[] YMLFiles = FilenameIndex.getFilesByName(project, "manifest.yml", GlobalSearchScope.allScope(project));
-        List<PsiFile> manifestFiles = Streams.concat(Arrays.stream(YAMLFiles), Arrays.stream(YMLFiles))
-                .filter(file -> filterByPath(file, FILTER_PATH))
-                .collect(Collectors.toList());
-
-        // find hello.js file in project
-        PsiFile[] jsFiles = FilenameIndex.getFilesByName(project, "hello.js", GlobalSearchScope.allScope(project));
-        List<PsiFile> sampleFiles = Arrays.stream(jsFiles)
-                .filter(file -> filterByPath(file, FILTER_PATH))
-                .collect(Collectors.toList());
-
-        if ((new WskDeployTempleteDialog(project, manifestFiles, sampleFiles)).showAndGet()) {
+        if ((new WskDeployTempleteDialog(project, META_FILES, SOURCE_FILES)).showAndGet()) {
             ApplicationManager.getApplication().runWriteAction(() -> {
-                try {
-                    if (manifestFiles.size() == 0) {
-                        // manifest template file
-                        VirtualFile manifestFile = VfsUtil.findFileByURL(ResourceUtil.getResource(getClass(), "/template/", "manifest.yaml"));
-                        final VirtualFile baseParent = VfsUtil.findFileByURL(Paths.get(basePath).toUri().toURL());
-
-                        VfsUtilCore.copyFile(this, manifestFile, baseParent);
-                        NOTIFIER.notify(project, manifestFile.getName() + " is created", NotificationType.INFORMATION);
-                    }
-
-                    if (sampleFiles.size() == 0) {
-                        // action template file
-                        VirtualFile sampleFile = VfsUtil.findFileByURL(ResourceUtil.getResource(getClass(), "/template/src/", "hello.js"));
-                        final VirtualFile sampleParent = VfsUtil.createDirectories(basePath + "/src");
-                        VfsUtilCore.copyFile(this, sampleFile, sampleParent);
-                        NOTIFIER.notify(project, sampleFile.getName() + " is created", NotificationType.INFORMATION);
-                    }
-
-                    // refresh manifest file tree
-                    EventUtils.publish(project, RefreshWskDeployManifestListener.TOPIC, RefreshWskDeployManifestListener::refreshWskDeployManifest);
-                } catch (IOException e1) {
-                    LOG.error(e1);
+                for (String filePath : META_FILES) {
+                    copyFile(project, "/template", filePath, basePath);
                 }
+
+                for (String filePath : SOURCE_FILES) {
+                    copyFile(project, "/template/src", filePath, basePath + "/src");
+                }
+
+                // refresh manifest file tree
+                EventUtils.publish(project, RefreshWskDeployManifestListener.TOPIC, RefreshWskDeployManifestListener::refreshWskDeployManifest);
             });
         }
     }
 
-    private boolean filterByPath(PsiFile file, String[] filterList) {
-        for (String path : filterList) {
-            if (file.getVirtualFile().getPath().contains(path)) {
-                return false;
+    private void copyFile(Project project, String resourcePath, String fileName, String toDir) {
+        try {
+            boolean exist = Arrays.stream(FilenameIndex.getFilesByName(project, fileName, GlobalSearchScope.allScope(project)))
+                    .anyMatch(file -> file.getVirtualFile().getPath().startsWith(toDir));
+
+            if (!exist) {
+                final VirtualFile file = VfsUtil.findFileByURL(ResourceUtil.getResource(getClass(), resourcePath, fileName));
+                final VirtualFile parent = VfsUtil.createDirectories(toDir);
+                VfsUtilCore.copyFile(this, file, parent);
+                NOTIFIER.notify(project, file.getName() + " is created", NotificationType.INFORMATION);
             }
+        } catch (IOException e) {
+            LOG.error(e);
         }
-        return true;
     }
 }
