@@ -16,6 +16,8 @@
 
 package com.navercorp.openwhisk.intellij.common.whisk.model;
 
+import java.util.Objects;
+
 public class Binding {
 
     private String namespace;
@@ -40,5 +42,19 @@ public class Binding {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Binding binding = (Binding) o;
+        return Objects.equals(namespace, binding.namespace) &&
+                Objects.equals(name, binding.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(namespace, name);
     }
 }

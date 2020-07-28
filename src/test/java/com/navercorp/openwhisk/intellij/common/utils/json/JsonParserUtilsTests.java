@@ -17,15 +17,6 @@
 package com.navercorp.openwhisk.intellij.common.utils.json;
 
 import com.navercorp.openwhisk.intellij.common.utils.JsonParserUtils;
-import com.navercorp.openwhisk.intellij.common.whisk.model.Limits;
-import com.navercorp.openwhisk.intellij.common.whisk.model.action.CompactWhiskAction;
-import com.navercorp.openwhisk.intellij.common.whisk.model.action.ExecutableWhiskAction;
-import com.navercorp.openwhisk.intellij.common.whisk.model.action.WhiskAction;
-import com.navercorp.openwhisk.intellij.common.whisk.model.action.WhiskActionMetaData;
-import com.navercorp.openwhisk.intellij.common.whisk.model.exec.CodeExec;
-import com.navercorp.openwhisk.intellij.common.whisk.model.exec.ExecMetaData;
-import com.navercorp.openwhisk.intellij.common.whisk.model.pkg.WhiskPackage;
-import com.navercorp.openwhisk.intellij.common.whisk.model.pkg.WhiskPackageWithActions;
 import com.navercorp.openwhisk.intellij.common.whisk.model.trigger.ExecutableWhiskTrigger;
 import com.navercorp.openwhisk.intellij.common.whisk.model.trigger.SimplifiedEntityMetaData;
 import com.navercorp.openwhisk.intellij.common.whisk.model.trigger.SimplifiedWhiskRule;
@@ -38,7 +29,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.navercorp.openwhisk.intellij.utils.AnnotationHelper.createActionAnnotation;
 import static junit.framework.TestCase.assertEquals;
 
 public class JsonParserUtilsTests {
@@ -46,31 +36,6 @@ public class JsonParserUtilsTests {
     /**
      * Helper functions
      */
-    private List<Map<String, Object>> createPackageAnnotation(Map<String, String> binding) {
-        List<Map<String, Object>> annotations = new ArrayList<>();
-
-        Map<String, Object> entry = new LinkedHashMap<>();
-        entry.put("key", "description");
-        entry.put("value", "test");
-        annotations.add(entry);
-
-        if (binding != null) {
-            Map<String, Object> entry1 = new LinkedHashMap<>();
-            entry1.put("key", "binding");
-            entry1.put("value", binding);
-            annotations.add(entry1);
-        }
-
-        return annotations;
-    }
-
-    private Map<String, String> createBinding(String name, String namespace) {
-        Map<String, String> binding = new LinkedHashMap<>();
-        binding.put("name", name);
-        binding.put("namespace", namespace);
-        return binding;
-    }
-
     private List<Map<String, Object>> createTriggerAlarmFeedAnnotation() {
         List<Map<String, Object>> annotations = new ArrayList<>();
 
@@ -85,162 +50,6 @@ public class JsonParserUtilsTests {
         Map<String, SimplifiedWhiskRule> rules = new LinkedHashMap<>();
         rules.put("test/rule1", new SimplifiedWhiskRule(new SimplifiedEntityMetaData("test", "action1"), "active"));
         return rules;
-    }
-
-    @Test
-    public void parseWhiskPackages() throws IOException {
-
-        // given
-        String packages = "[\n" +
-                "  {\n" +
-                "    \"annotations\": [\n" +
-                "      {\n" +
-                "        \"key\": \"description\",\n" +
-                "        \"value\": \"test\"\n" +
-                "      }\n" +
-                "    ],\n" +
-                "    \"binding\": false,\n" +
-                "    \"name\": \"pkg1\",\n" +
-                "    \"namespace\": \"ns\",\n" +
-                "    \"publish\": false,\n" +
-                "    \"updated\": 1586513535028,\n" +
-                "    \"version\": \"0.0.1\"\n" +
-                "  },\n" +
-                "  {\n" +
-                "    \"annotations\": [\n" +
-                "      {\n" +
-                "        \"key\": \"description\",\n" +
-                "        \"value\": \"test\"\n" +
-                "      }\n" +
-                "    ],\n" +
-                "    \"binding\": false,\n" +
-                "    \"name\": \"pkg2\",\n" +
-                "    \"namespace\": \"ns\",\n" +
-                "    \"publish\": false,\n" +
-                "    \"updated\": 1586513513922,\n" +
-                "    \"version\": \"0.0.1\"\n" +
-                "  },\n" +
-                "  {\n" +
-                "    \"annotations\": [\n" +
-                "      {\n" +
-                "        \"key\": \"description\",\n" +
-                "        \"value\": \"test\"\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"key\": \"binding\",\n" +
-                "        \"value\": {\n" +
-                "          \"name\": \"sharedpackage\",\n" +
-                "          \"namespace\": \"whisk.system\"\n" +
-                "        }\n" +
-                "      }\n" +
-                "    ],\n" +
-                "    \"binding\": {\n" +
-                "      \"name\": \"sharedpackage\",\n" +
-                "      \"namespace\": \"whisk.system\"\n" +
-                "    },\n" +
-                "    \"name\": \"pkg3\",\n" +
-                "    \"namespace\": \"ns\",\n" +
-                "    \"publish\": false,\n" +
-                "    \"updated\": 1557380799999,\n" +
-                "    \"version\": \"0.0.1\"\n" +
-                "  }\n" +
-                "]";
-
-        List<WhiskPackage> expected = new ArrayList<>();
-        expected.add(new WhiskPackage("pkg1", "ns", false, 1586513535028L, "0.0.1", createPackageAnnotation(null), false));
-        expected.add(new WhiskPackage("pkg2", "ns", false, 1586513513922L, "0.0.1", createPackageAnnotation(null), false));
-        Map<String, String> binding = createBinding("sharedpackage", "whisk.system");
-        expected.add(new WhiskPackage("pkg3", "ns", false, 1557380799999L, "0.0.1", createPackageAnnotation(binding), binding));
-
-        // when
-        List<WhiskPackage> actual = JsonParserUtils.parseWhiskPackages(packages);
-
-        // then
-        assertEquals(actual, expected);
-    }
-
-    @Test
-    public void parseWhiskPackage() throws IOException {
-        String pkg = "{\n" +
-                "  \"namespace\": \"testns\",\n" +
-                "  \"name\": \"test\",\n" +
-                "  \"version\": \"0.0.6\",\n" +
-                "  \"updated\": 1583828352890,\n" +
-                "  \"publish\": true,\n" +
-                "  \"annotations\": [\n" +
-                "    {\n" +
-                "      \"key\": \"description\",\n" +
-                "      \"value\": \"test\"\n" +
-                "    }\n" +
-                "  ],\n" +
-                "  \"parameters\": [\n" +
-                "    {\n" +
-                "      \"key\": \"test\",\n" +
-                "      \"value\": \"test\"\n" +
-                "    },\n" +
-                "    {\n" +
-                "      \"key\": \"test1\",\n" +
-                "      \"value\": \"test1\"\n" +
-                "    }\n" +
-                "  ],\n" +
-                "  \"binding\": {},\n" +
-                "  \"feeds\": [],\n" +
-                "  \"actions\": [\n" +
-                "    {\n" +
-                "      \"name\": \"action1\",\n" +
-                "      \"version\": \"0.0.2\",\n" +
-                "      \"annotations\": [\n" +
-                "        {\n" +
-                "          \"key\": \"exec\",\n" +
-                "          \"value\": \"nodejs:10\"\n" +
-                "        }\n" +
-                "      ]\n" +
-                "    },\n" +
-                "    {\n" +
-                "      \"name\": \"action2\",\n" +
-                "      \"version\": \"0.0.2\",\n" +
-                "      \"annotations\": [\n" +
-                "        {\n" +
-                "          \"key\": \"exec\",\n" +
-                "          \"value\": \"nodejs:10\"\n" +
-                "        }\n" +
-                "      ]\n" +
-                "    },\n" +
-                "    {\n" +
-                "      \"name\": \"action3\",\n" +
-                "      \"version\": \"0.0.2\",\n" +
-                "      \"annotations\": [\n" +
-                "        {\n" +
-                "          \"key\": \"exec\",\n" +
-                "          \"value\": \"nodejs:10\"\n" +
-                "        }\n" +
-                "      ]\n" +
-                "    }\n" +
-                "  ]\n" +
-                "}";
-
-        List<Map<String, Object>> parameters = new ArrayList<>();
-        Map<String, Object> param1 = new LinkedHashMap<>();
-        param1.put("key", "test");
-        param1.put("value", "test");
-        parameters.add(param1);
-
-        Map<String, Object> param2 = new LinkedHashMap<>();
-        param2.put("key", "test1");
-        param2.put("value", "test1");
-        parameters.add(param2);
-
-        List<CompactWhiskAction> actions = new ArrayList<>();
-        actions.add(new CompactWhiskAction("action1", "0.0.2", createActionAnnotation(false, false, false, false, "nodejs:10")));
-        actions.add(new CompactWhiskAction("action2", "0.0.2", createActionAnnotation(false, false, false, false, "nodejs:10")));
-        actions.add(new CompactWhiskAction("action3", "0.0.2", createActionAnnotation(false, false, false, false, "nodejs:10")));
-        WhiskPackageWithActions expected = new WhiskPackageWithActions("test", "testns", true, 1583828352890L, "0.0.6", createPackageAnnotation(null), new LinkedHashMap<>(), parameters, actions, new ArrayList<>());
-
-        // when
-        WhiskPackageWithActions actual = JsonParserUtils.parseWhiskPackage(pkg).get();
-
-        // then
-        assertEquals(actual, expected);
     }
 
     @Test

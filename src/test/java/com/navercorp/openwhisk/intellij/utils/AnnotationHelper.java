@@ -56,4 +56,37 @@ public class AnnotationHelper {
 
         return annotations;
     }
+
+    public static List<Map<String, Object>> createPackageAnnotation(String description, Map<String, String> binding) {
+        List<Map<String, Object>> annotations = new ArrayList<>();
+
+        Map<String, Object> entry1 = new LinkedHashMap<>();
+        entry1.put("key", "description");
+        entry1.put("value", description);
+        annotations.add(entry1);
+
+        if (binding != null) {
+            Map<String, Object> entry2 = new LinkedHashMap<>();
+            entry2.put("key", "binding");
+            entry2.put("value", binding);
+            annotations.add(entry2);
+        }
+
+        return annotations;
+    }
+
+    public static Map<String, String> createBinding(String name, String namespace) {
+        Map<String, String> binding = new LinkedHashMap<>();
+        binding.put("name", name);
+        binding.put("namespace", namespace);
+        return binding;
+    }
+
+    public static Map<String, String> createEmptyBinding() {
+        return new LinkedHashMap<>();
+    }
+
+    public static boolean createFalseBinding() {
+        return false;
+    }
 }
