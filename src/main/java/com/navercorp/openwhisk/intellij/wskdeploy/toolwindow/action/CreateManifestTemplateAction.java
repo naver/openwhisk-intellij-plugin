@@ -79,7 +79,9 @@ public class CreateManifestTemplateAction extends AnAction {
                 final VirtualFile file = VfsUtil.findFileByURL(ResourceUtil.getResource(getClass(), resourcePath, fileName));
                 final VirtualFile parent = VfsUtil.createDirectories(toDir);
                 VfsUtilCore.copyFile(this, file, parent);
-                NOTIFIER.notify(project, file.getName() + " is created", NotificationType.INFORMATION);
+                NOTIFIER.notify(project, fileName + " file is created", NotificationType.INFORMATION);
+            } else {
+                NOTIFIER.notify(project, fileName + " file already exist", NotificationType.WARNING);
             }
         } catch (IOException e) {
             LOG.error(e);
