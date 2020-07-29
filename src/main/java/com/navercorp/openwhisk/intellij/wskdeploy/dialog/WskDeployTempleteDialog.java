@@ -28,47 +28,35 @@ import java.util.List;
 public class WskDeployTempleteDialog extends DialogWrapper {
 
     private Project project;
-    private List<PsiFile> manifests;
-    private List<PsiFile> sampleActions;
+    private String[] metaFiles;
+    private String[] srcFiles;
 
-    public WskDeployTempleteDialog(Project project, List<PsiFile> manifests, List<PsiFile> sampleActions) {
+    public WskDeployTempleteDialog(Project project, String[] metaFiles, String[] srcFiles) {
         super(true); // use current window as parent
         setTitle("Create WskDeploy Template");
         setResizable(false);
         this.project = project;
-        this.manifests = manifests;
-        this.sampleActions = sampleActions;
+        this.metaFiles = metaFiles;
+        this.srcFiles = srcFiles;
         init();
     }
 
     @Nullable
     @Override
     protected JComponent createCenterPanel() {
-        final String basePath = project.getBasePath();
         JPanel dialogPanel = new JPanel(new BorderLayout());
 
         StringBuilder builder = new StringBuilder();
         builder.append("<html>");
         builder.append("Are you sure you want to create wskdeploy project in your workspace?<br/>");
         builder.append("The following file will be created:<br/>");
-        builder.append("- manifest.yaml<br/>");
-        builder.append("- src/hello.js<br/>");
-        builder.append("<br/><br/>");
-
-        if (manifests.size() > 0 | sampleActions.size() > 0) {
-            builder.append("Files that already exist in the path below are not created:<br/>");
-        }
-        if (manifests.size() > 0) {
-            for (PsiFile m : manifests) {
-                builder.append("- " + m.getVirtualFile().getPath().replaceAll(basePath + "/", "") + "<br/>");
-            }
-        }
-        if (sampleActions.size() > 0) {
-            for (PsiFile s : sampleActions) {
-                builder.append("- " + s.getVirtualFile().getPath().replaceAll(basePath + "/", "") + "<br/>");
-            }
+        for (String path : metaFiles) {
+            builder.append("- " + path + "<br/>");
         }
 
+        for (String path : srcFiles) {
+            builder.append("- src/" + path + "<br/>");
+        }
         builder.append("</html>");
         JLabel label = new JLabel(builder.toString());
         label.setPreferredSize(new Dimension(500, 100));
