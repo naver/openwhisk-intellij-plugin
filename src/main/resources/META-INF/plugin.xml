@@ -2,7 +2,7 @@
     <id>com.navercorp.openwhisk.intellij</id>
     <name>DevTools for Apache Openwhisk</name>
     <vendor email="dl_lambda_op@navercorp.com" url="https://github.com/naver">NAVER</vendor>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
     <idea-version since-build="181.*" until-build="201.*"/>
 
     <description><![CDATA[
@@ -42,6 +42,13 @@
     </li>
 </ul>
     ]]></description>
+
+    <change-notes><![CDATA[
+<h3>Manifest View</h3>
+<ul>
+    <li>Test code for wskdeploy sample code is supported.</li>
+</ul>
+    ]]></change-notes>
 
     <depends>com.intellij.modules.lang</depends>
 
