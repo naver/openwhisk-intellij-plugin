@@ -17,6 +17,7 @@
 plugins {
     id 'java'
     id 'org.jetbrains.intellij' version '0.4.18'
+    id 'checkstyle'
 }
 
 group 'com.navercorp.openwhisk.intellij'
@@ -45,4 +46,16 @@ patchPluginXml {
 publishPlugin {
     token = System.getenv("ORG_GRADLE_PROJECT_intellijPublishToken")
     channels 'beta'
+}
+
+checkstyle {
+    configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
+    toolVersion = 8.35
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
 }
