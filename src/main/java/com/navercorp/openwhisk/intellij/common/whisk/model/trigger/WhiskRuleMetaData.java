@@ -29,7 +29,8 @@ public class WhiskRuleMetaData {
     public WhiskRuleMetaData() {
     }
 
-    public WhiskRuleMetaData(String name, String namespace, String version, long updated, boolean publish, SimplifiedEntityMetaData action, SimplifiedEntityMetaData trigger) {
+    public WhiskRuleMetaData(String name, String namespace, String version, long updated, boolean publish,
+                             SimplifiedEntityMetaData action, SimplifiedEntityMetaData trigger) {
         this.name = name;
         this.namespace = namespace;
         this.version = version;

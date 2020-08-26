@@ -53,7 +53,9 @@ public class OpenAndFireTriggerAction extends AnAction {
         if (whiskAuth != null && whiskTriggerMetaData != null) {
             try {
                 whiskTriggerService.getWhiskTrigger(whiskAuth, whiskTriggerMetaData.getName()).ifPresent(executableWhiskTrigger ->
-                        EventUtils.publish(e.getProject(), OpenAndFireTriggerControlActionListener.TOPIC, (l) -> l.openAndFireTriggerControlWindow(whiskAuth, executableWhiskTrigger)));
+                        EventUtils.publish(e.getProject(),
+                                OpenAndFireTriggerControlActionListener.TOPIC,
+                                (l) -> l.openAndFireTriggerControlWindow(whiskAuth, executableWhiskTrigger)));
             } catch (IOException ex) {
                 final String msg = "The trigger cannot be loaded: " + whiskTriggerMetaData.getName();
                 LOG.error(msg, ex);

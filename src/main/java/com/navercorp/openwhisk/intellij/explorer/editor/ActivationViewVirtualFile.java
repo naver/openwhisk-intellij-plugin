@@ -42,7 +42,11 @@ public class ActivationViewVirtualFile extends VirtualFile {
 
     private ActivationViewVirtualFileSystem fileSystem;
 
-    public ActivationViewVirtualFile(@NotNull Project project, List<WhiskEndpoint> endpoints, Optional<WhiskAuth> whiskAuth, Optional<WhiskActionMetaData> action, Optional<WhiskTriggerMetaData> trigger) {
+    public ActivationViewVirtualFile(@NotNull Project project,
+                                     List<WhiskEndpoint> endpoints,
+                                     Optional<WhiskAuth> whiskAuth,
+                                     Optional<WhiskActionMetaData> action,
+                                     Optional<WhiskTriggerMetaData> trigger) {
         this.endpoints = endpoints;
         this.whiskAuth = whiskAuth;
         this.action = action;

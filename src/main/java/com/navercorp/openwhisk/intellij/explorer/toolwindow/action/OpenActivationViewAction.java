@@ -45,7 +45,10 @@ public class OpenActivationViewAction extends AnAction {
     private Optional<WhiskActionMetaData> action;
     private Optional<WhiskTriggerMetaData> trigger;
 
-    public OpenActivationViewAction(List<WhiskEndpoint> endpoints, Optional<WhiskAuth> whiskAuth, Optional<WhiskActionMetaData> action, Optional<WhiskTriggerMetaData> trigger) {
+    public OpenActivationViewAction(List<WhiskEndpoint> endpoints,
+                                    Optional<WhiskAuth> whiskAuth,
+                                    Optional<WhiskActionMetaData> action,
+                                    Optional<WhiskTriggerMetaData> trigger) {
         super("Activation", "Open activation view", Module);
         this.endpoints = endpoints;
         this.whiskAuth = whiskAuth;

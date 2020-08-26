@@ -52,7 +52,11 @@ public class ActivationViewEditor implements FileEditor {
     private ActivationViewEditorForm activationViewEditorForm;
     private WhiskActivationService whiskActivationService = WhiskActivationService.getInstance();
 
-    public ActivationViewEditor(Project project, List<WhiskEndpoint> endpoints, Optional<WhiskAuth> whiskAuth, Optional<WhiskActionMetaData> action, Optional<WhiskTriggerMetaData> trigger) {
+    public ActivationViewEditor(Project project,
+                                List<WhiskEndpoint> endpoints,
+                                Optional<WhiskAuth> whiskAuth,
+                                Optional<WhiskActionMetaData> action,
+                                Optional<WhiskTriggerMetaData> trigger) {
         activationViewEditorForm = new ActivationViewEditorForm(project, endpoints);
         activationViewEditorForm.cacheWhiskAuth(whiskAuth);
 
@@ -72,7 +76,8 @@ public class ActivationViewEditor implements FileEditor {
                      * TODO load activations of binding action after the follow upstream pr is merged: https://github.com/apache/openwhisk/pull/4919
                      */
                     try {
-                        List<WhiskActivationMetaData> activations = whiskActivationService.getWhiskActivations(auth, entity.toEntityName(), 100, 0); // TODO pagination
+                        List<WhiskActivationMetaData> activations =
+                                whiskActivationService.getWhiskActivations(auth, entity.toEntityName(), 100, 0); // TODO pagination
                         activationViewEditorForm.initializeActivationTable(activations);
                     } catch (IOException e) {
                         LOG.error(e);

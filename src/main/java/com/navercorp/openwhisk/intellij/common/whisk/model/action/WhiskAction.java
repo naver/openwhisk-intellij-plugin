@@ -39,7 +39,10 @@ public abstract class WhiskAction<E extends Exec> {
     public WhiskAction() {
     }
 
-    public WhiskAction(String name, String namespace, String version, long updated, boolean publish, List<Map<String, Object>> annotations, Limits limits, E exec) {
+    public WhiskAction(String name, String namespace, String version, long updated, boolean publish,
+                       List<Map<String, Object>> annotations,
+                       Limits limits,
+                       E exec) {
         this.name = name;
         this.namespace = namespace;
         this.version = version;

@@ -72,7 +72,9 @@ public class EditEndpointDialogForm {
         if (existAlias(endpoints, whiskEndpoint.getAlias(), alias)) {
             NOTIFIER.notify(project, "Failed to update endpoint: " + alias + " already exists.", NotificationType.ERROR);
         } else {
-            List<WhiskEndpoint> newEndpoints = updateWhiskEndpoint(endpoints, whiskEndpoint.getAlias(), new WhiskEndpoint(alias, apihost, whiskEndpoint.getNamespaces()));
+            List<WhiskEndpoint> newEndpoints = updateWhiskEndpoint(endpoints,
+                    whiskEndpoint.getAlias(),
+                    new WhiskEndpoint(alias, apihost, whiskEndpoint.getNamespaces()));
             saveEndpoints(newEndpoints);
 
             // Update action tree

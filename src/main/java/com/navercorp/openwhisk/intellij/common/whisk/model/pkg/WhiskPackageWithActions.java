@@ -31,7 +31,12 @@ public class WhiskPackageWithActions extends WhiskPackage {
     public WhiskPackageWithActions() {
     }
 
-    public WhiskPackageWithActions(String name, String namespace, boolean publish, long updated, String version, List<Map<String, Object>> annotations, Object binding, List<Map<String, Object>> parameters, List<CompactWhiskAction> actions, List<Object> feeds) {
+    public WhiskPackageWithActions(String name, String namespace, boolean publish, long updated, String version,
+                                   List<Map<String, Object>> annotations,
+                                   Object binding,
+                                   List<Map<String, Object>> parameters,
+                                   List<CompactWhiskAction> actions,
+                                   List<Object> feeds) {
         super(name, namespace, publish, updated, version, annotations, binding);
         this.parameters = parameters;
         this.actions = actions;

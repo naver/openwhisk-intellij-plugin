@@ -100,7 +100,10 @@ public class ActivationViewVirtualFileSystem extends VirtualFileSystem {
 
     @NotNull
     @Override
-    protected VirtualFile copyFile(Object requestor, @NotNull VirtualFile virtualFile, @NotNull VirtualFile newParent, @NotNull String copyName) throws IOException {
+    protected VirtualFile copyFile(Object requestor,
+                                   @NotNull VirtualFile virtualFile,
+                                   @NotNull VirtualFile newParent,
+                                   @NotNull String copyName) throws IOException {
         throw READONLY_FILE_SYSTEM;
     }
 

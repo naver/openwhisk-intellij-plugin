@@ -21,6 +21,7 @@ import com.intellij.notification.NotificationType;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.uiDesigner.core.GridConstraints;
+import com.navercorp.openwhisk.intellij.common.notification.SimpleNotifier;
 import com.navercorp.openwhisk.intellij.common.utils.JsonParserUtils;
 import com.navercorp.openwhisk.intellij.common.utils.ParameterUtils;
 import com.navercorp.openwhisk.intellij.common.whisk.model.Binding;
@@ -28,7 +29,6 @@ import com.navercorp.openwhisk.intellij.common.whisk.model.WhiskAuth;
 import com.navercorp.openwhisk.intellij.common.whisk.model.pkg.WhiskPackageWithActions;
 import com.navercorp.openwhisk.intellij.common.whisk.service.WhiskPackageService;
 import org.apache.commons.lang.StringUtils;
-import com.navercorp.openwhisk.intellij.common.notification.SimpleNotifier;
 
 import javax.swing.*;
 import java.awt.*;
@@ -73,7 +73,10 @@ public class PackageManagerDialogForm {
             Binding b = binding.get();
             JLabel label = new JLabel("from " + b.getNamespace() + "/" + b.getName());
             label.setPreferredSize(new Dimension(250, -1));
-            sharedJPanel.add(label, new GridConstraints(0, 2, 1, 1, SIZEPOLICY_CAN_GROW | SIZEPOLICY_CAN_SHRINK, SIZEPOLICY_CAN_GROW | SIZEPOLICY_CAN_SHRINK, FILL_NONE, ANCHOR_CENTER, new Dimension(-1, -1), new Dimension(250, -1), new Dimension(-1, -1), 0));
+            sharedJPanel.add(label, new GridConstraints(0, 2, 1, 1,
+                    SIZEPOLICY_CAN_GROW | SIZEPOLICY_CAN_SHRINK,
+                    SIZEPOLICY_CAN_GROW | SIZEPOLICY_CAN_SHRINK, FILL_NONE, ANCHOR_CENTER,
+                    new Dimension(-1, -1), new Dimension(250, -1), new Dimension(-1, -1), 0));
         } else {
             shareJCheckBox.setSelected(whiskPackage.isPublish());
         }

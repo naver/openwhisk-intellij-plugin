@@ -27,8 +27,10 @@ import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
+import com.navercorp.openwhisk.intellij.common.notification.SimpleNotifier;
 import com.navercorp.openwhisk.intellij.common.utils.JsonParserUtils;
 import com.navercorp.openwhisk.intellij.common.utils.ParameterUtils;
+import com.navercorp.openwhisk.intellij.common.whisk.model.WhiskAuth;
 import com.navercorp.openwhisk.intellij.common.whisk.model.action.ExecutableWhiskAction;
 import com.navercorp.openwhisk.intellij.common.whisk.model.activation.WhiskActivationWithLogs;
 import com.navercorp.openwhisk.intellij.common.whisk.model.trigger.ExecutableWhiskTrigger;
@@ -36,8 +38,6 @@ import com.navercorp.openwhisk.intellij.common.whisk.service.WhiskActionService;
 import com.navercorp.openwhisk.intellij.common.whisk.service.WhiskActivationService;
 import com.navercorp.openwhisk.intellij.common.whisk.service.WhiskTriggerService;
 import org.apache.commons.lang.StringUtils;
-import com.navercorp.openwhisk.intellij.common.notification.SimpleNotifier;
-import com.navercorp.openwhisk.intellij.common.whisk.model.WhiskAuth;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -159,7 +159,11 @@ public class WhiskRunWindowForm {
 
                     Optional<String> params = ParameterUtils.validateParams(paramJTextArea.getText());
                     if (params.isPresent()) {
-                        String result = whiskActionService.invokeWhiskAction(auth, Optional.ofNullable(action.getNamespacePath()), action.getWhiskPackage(), action.getName(), params.get());
+                        String result = whiskActionService.invokeWhiskAction(auth,
+                                Optional.ofNullable(action.getNamespacePath()),
+                                action.getWhiskPackage(),
+                                action.getName(),
+                                params.get());
                         updateResult(result);
                     } else {
                         NOTIFIER.notify(project, "The json format of the parameter is incorrect.", NotificationType.ERROR);
@@ -198,7 +202,10 @@ public class WhiskRunWindowForm {
         }
     }
 
-    public void fireTrigger(WhiskTriggerService whiskTriggerService, WhiskActivationService whiskActivationService, WhiskAuth auth, ExecutableWhiskTrigger trigger) {
+    public void fireTrigger(WhiskTriggerService whiskTriggerService,
+                            WhiskActivationService whiskActivationService,
+                            WhiskAuth auth,
+                            ExecutableWhiskTrigger trigger) {
         ProgressManager.getInstance().run(new Task.Backgroundable(project, "Fire trigger") {
             @Override
             public void run(@NotNull ProgressIndicator indicator) {

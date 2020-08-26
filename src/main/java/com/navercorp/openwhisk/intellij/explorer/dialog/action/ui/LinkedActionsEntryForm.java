@@ -41,7 +41,12 @@ public class LinkedActionsEntryForm {
 
     private String namespace;
 
-    public LinkedActionsEntryForm(int index, String namespace, String actionName, UpActionListener upActionListener, DownActionListener downActionListener, RemoveActionListener removeActionListener) {
+    public LinkedActionsEntryForm(int index,
+                                  String namespace,
+                                  String actionName,
+                                  UpActionListener upActionListener,
+                                  DownActionListener downActionListener,
+                                  RemoveActionListener removeActionListener) {
         this.namespace = namespace;
 
         indexJLabel.setText(String.valueOf(index));

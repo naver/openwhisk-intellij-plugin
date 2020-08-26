@@ -36,7 +36,9 @@ public abstract class WhiskActivation {
     public WhiskActivation() {
     }
 
-    public WhiskActivation(String activationId, String name, String namespace, String version, String cause, long start, long end, long duration, boolean publish, List<Map<String, Object>> annotations) {
+    public WhiskActivation(String activationId, String name, String namespace, String version, String cause,
+                           long start, long end, long duration, boolean publish,
+                           List<Map<String, Object>> annotations) {
         this.activationId = activationId;
         this.name = name;
         this.namespace = namespace;

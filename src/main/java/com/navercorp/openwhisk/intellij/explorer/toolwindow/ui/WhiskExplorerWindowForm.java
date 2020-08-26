@@ -27,6 +27,7 @@ import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.ToolWindow;
+import com.navercorp.openwhisk.intellij.common.notification.SimpleNotifier;
 import com.navercorp.openwhisk.intellij.common.service.WhiskService;
 import com.navercorp.openwhisk.intellij.common.utils.EventUtils;
 import com.navercorp.openwhisk.intellij.common.utils.FileUtils;
@@ -50,7 +51,6 @@ import com.navercorp.openwhisk.intellij.explorer.toolwindow.listener.RefreshWhis
 import com.navercorp.openwhisk.intellij.explorer.toolwindow.tree.WhiskTree;
 import com.navercorp.openwhisk.intellij.explorer.toolwindow.tree.WhiskTreeCellRenderer;
 import org.apache.commons.lang.StringUtils;
-import com.navercorp.openwhisk.intellij.common.notification.SimpleNotifier;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -159,7 +159,9 @@ public class WhiskExplorerWindowForm {
                             WhiskAuth auth = new WhiskAuth(namespace.getAuth(), endpoint.getApihost());
 
                             try {
-                                whiskActionService.getWhiskAction(auth, Optional.ofNullable(namespace.getPath()), Optional.ofNullable(pkg.getName()), whiskAction.getName())
+                                whiskActionService.getWhiskAction(auth,
+                                        Optional.ofNullable(namespace.getPath()),
+                                        Optional.ofNullable(pkg.getName()), whiskAction.getName())
                                         .ifPresent(executableWhiskAction -> openEditorAndWhiskRunWindow(project, auth, executableWhiskAction));
                             } catch (IOException e1) {
                                 final String msg1 = "The action cannot be opened.";
@@ -205,7 +207,9 @@ public class WhiskExplorerWindowForm {
                             boundPkg.getBinding().ifPresent(p -> {
                                 try {
                                     //When clicked, the code is fetched from the remote server.
-                                    whiskActionService.getWhiskAction(auth, Optional.ofNullable(p.getNamespace()), Optional.ofNullable(p.getName()), action.getName())
+                                    whiskActionService.getWhiskAction(auth,
+                                            Optional.ofNullable(p.getNamespace()),
+                                            Optional.ofNullable(p.getName()), action.getName())
                                             .ifPresent(executableWhiskAction -> openEditorAndWhiskRunWindow(project, auth, executableWhiskAction));
                                 } catch (IOException e1) {
                                     final String msg1 = "The action cannot be opened.";
@@ -233,7 +237,9 @@ public class WhiskExplorerWindowForm {
                         LOG.info(whiskTriggerMetaData.getName());
                         try {
                             whiskTriggerService.getWhiskTrigger(auth, whiskTriggerMetaData.getName()).ifPresent(executableWhiskTrigger ->
-                                    EventUtils.publish(project, OpenTriggerControlActionListener.TOPIC, (l) -> l.openTriggerControlWindow(auth, executableWhiskTrigger)));
+                                    EventUtils.publish(project,
+                                            OpenTriggerControlActionListener.TOPIC,
+                                            (l) -> l.openTriggerControlWindow(auth, executableWhiskTrigger)));
                         } catch (IOException ex) {
                             final String msg = "The trigger cannot be loaded: " + whiskTriggerMetaData.getName();
                             LOG.error(msg, ex);
@@ -345,7 +351,14 @@ public class WhiskExplorerWindowForm {
     }
 
     private WhiskActionMetaData toBindingWhiskActionMetaData(WhiskPackage whiskPackage, ExecutableWhiskAction action) {
-        return new WhiskActionMetaData(action.getName(), whiskPackage.getNamespace() + "/" + whiskPackage.getName(), action.getVersion(), action.getUpdated(), action.isPublish(), action.getAnnotations(), action.getLimits(), action.getExec().toExecMetaData());
+        return new WhiskActionMetaData(action.getName(),
+                whiskPackage.getNamespace() + "/" + whiskPackage.getName(),
+                action.getVersion(),
+                action.getUpdated(),
+                action.isPublish(),
+                action.getAnnotations(),
+                action.getLimits(),
+                action.getExec().toExecMetaData());
     }
 
 

@@ -53,7 +53,10 @@ public class EditActionAction extends AnAction {
         if (whiskAuth != null && whiskActionMetaData != null) {
             try {
                 List<WhiskActionMetaData> actions = whiskActionService.getWhiskActions(whiskAuth);
-                whiskActionService.getWhiskAction(whiskAuth, Optional.of(whiskActionMetaData.getNamespacePath()), whiskActionMetaData.getWhiskPackage(), whiskActionMetaData.getName())
+                whiskActionService.getWhiskAction(whiskAuth,
+                        Optional.of(whiskActionMetaData.getNamespacePath()),
+                        whiskActionMetaData.getWhiskPackage(),
+                        whiskActionMetaData.getName())
                         .ifPresent(action -> {
                             ActionManagerDialog dialog = new ActionManagerDialog(e.getProject(), whiskAuth, action, actions);
                             if (dialog.showAndGet()) {
