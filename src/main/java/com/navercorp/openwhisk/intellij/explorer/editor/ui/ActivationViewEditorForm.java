@@ -220,7 +220,7 @@ public class ActivationViewEditorForm {
     }
 
     /**
-     * Helper functions
+     * Helper functions.
      */
     private List<WhiskActivationMetaData> loadActivations(WhiskAuth auth, Optional<ComboBoxEntityEntry> entity) {
         try {

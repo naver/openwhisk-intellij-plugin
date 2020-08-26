@@ -53,7 +53,7 @@ public class WhiskRunWindowForm {
     public static String ENTITY_TRIGGER = "Trigger";
 
     /**
-     * Main Panel
+     * Main Panel.
      */
     private JPanel mainJPanel;
 
@@ -66,7 +66,7 @@ public class WhiskRunWindowForm {
     private JScrollPane resultJScrollPane;
 
     /**
-     * Cache data
+     * Cache data.
      */
     private ToolWindow toolWindow;
     private Project project;
@@ -136,7 +136,7 @@ public class WhiskRunWindowForm {
     }
 
     /**
-     * Action Tab
+     * Action Tab.
      */
     public void initializeActionTab(ExecutableWhiskAction action) {
         try {
@@ -190,7 +190,7 @@ public class WhiskRunWindowForm {
     }
 
     /**
-     * Trigger Tab
+     * Trigger Tab.
      */
     public void initializeTriggerTab(ExecutableWhiskTrigger trigger) {
         try {
