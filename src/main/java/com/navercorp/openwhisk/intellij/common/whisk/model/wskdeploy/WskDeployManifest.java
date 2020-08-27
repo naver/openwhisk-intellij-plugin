@@ -63,8 +63,7 @@ public class WskDeployManifest {
         WskDeployManifest manifest = (WskDeployManifest) o;
 
         if (path != null ? !path.equals(manifest.path) : manifest.path != null) return false;
-        if (fullPath != null ? !fullPath.equals(manifest.fullPath) : manifest.fullPath != null)
-            return false;
+        if (fullPath != null ? !fullPath.equals(manifest.fullPath) : manifest.fullPath != null) return false;
         return name != null ? name.equals(manifest.name) : manifest.name == null;
     }
 

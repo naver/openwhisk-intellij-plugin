@@ -106,10 +106,8 @@ public class WhiskRuleMetaData {
         if (updated != whiskRuleMetaData.updated) return false;
         if (publish != whiskRuleMetaData.publish) return false;
         if (name != null ? !name.equals(whiskRuleMetaData.name) : whiskRuleMetaData.name != null) return false;
-        if (namespace != null ? !namespace.equals(whiskRuleMetaData.namespace) : whiskRuleMetaData.namespace != null)
-            return false;
-        if (version != null ? !version.equals(whiskRuleMetaData.version) : whiskRuleMetaData.version != null)
-            return false;
+        if (namespace != null ? !namespace.equals(whiskRuleMetaData.namespace) : whiskRuleMetaData.namespace != null) return false;
+        if (version != null ? !version.equals(whiskRuleMetaData.version) : whiskRuleMetaData.version != null) return false;
         if (action != null ? !action.equals(whiskRuleMetaData.action) : whiskRuleMetaData.action != null) return false;
         return trigger != null ? trigger.equals(whiskRuleMetaData.trigger) : whiskRuleMetaData.trigger == null;
     }
