@@ -36,7 +36,8 @@ public class SimpleNotifier {
         return LazyHolder.INSTANCE;
     }
 
-    private final NotificationGroup NOTIFICATION_GROUP = new NotificationGroup("Simple Notification Group", NotificationDisplayType.STICKY_BALLOON, true);
+    private static final NotificationGroup NOTIFICATION_GROUP =
+            new NotificationGroup("Simple Notification Group", NotificationDisplayType.STICKY_BALLOON, true);
 
     public Notification notify(@NotNull String content, @NotNull final NotificationType type) {
         return notify(null, content, type);

@@ -52,12 +52,15 @@ public enum Runtime {
                     case "6":
                     case "8":
                         return name + ":" + version + " (Deprecated)";
+                    default:
+                        return name + ":" + version;
                 }
-        }
-        if (version.length() > 0) {
-            return name + ":" + version;
-        } else {
-            return name;
+            default:
+                if (version.length() > 0) {
+                    return name + ":" + version;
+                } else {
+                    return name;
+                }
         }
     }
 
