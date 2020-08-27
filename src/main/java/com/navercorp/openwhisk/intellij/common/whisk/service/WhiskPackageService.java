@@ -44,11 +44,11 @@ public class WhiskPackageService {
     }
 
     private static class LazyHolder {
-        private static final WhiskPackageService instance = new WhiskPackageService();
+        private static final WhiskPackageService INSTANCE = new WhiskPackageService();
     }
 
     public static WhiskPackageService getInstance() {
-        return WhiskPackageService.LazyHolder.instance;
+        return WhiskPackageService.LazyHolder.INSTANCE;
     }
 
     public List<WhiskPackage> getWhiskPackages(WhiskAuth whiskAuth) throws IOException {

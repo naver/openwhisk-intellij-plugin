@@ -40,11 +40,11 @@ public class WhiskActionService {
     }
 
     private static class LazyHolder {
-        private static final WhiskActionService instance = new WhiskActionService();
+        private static final WhiskActionService INSTANCE = new WhiskActionService();
     }
 
     public static WhiskActionService getInstance() {
-        return LazyHolder.instance;
+        return LazyHolder.INSTANCE;
     }
 
     public List<WhiskActionMetaData> getWhiskActions(WhiskAuth whiskAuth) throws IOException {

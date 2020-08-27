@@ -35,11 +35,11 @@ public class WhiskActivationService {
     }
 
     private static class LazyHolder {
-        private static final WhiskActivationService instance = new WhiskActivationService();
+        private static final WhiskActivationService INSTANCE = new WhiskActivationService();
     }
 
     public static WhiskActivationService getInstance() {
-        return LazyHolder.instance;
+        return LazyHolder.INSTANCE;
     }
 
     public List<WhiskActivationMetaData> getWhiskActivations(WhiskAuth whiskAuth, Optional<String> name, int limit, int skip) throws IOException {

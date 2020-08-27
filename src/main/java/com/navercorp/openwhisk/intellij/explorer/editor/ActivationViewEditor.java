@@ -104,7 +104,7 @@ public class ActivationViewEditor implements FileEditor {
         } else if (trigger.isPresent()) {
             return trigger.map(WhiskTriggerMetaData::toCombBoxEntityEntry);
         } else {
-            return Optional.of(ComboBoxEntityEntry.NoneComboBoxEntityEntry);
+            return Optional.of(ComboBoxEntityEntry.NONE_COMBO_BOX_ENTITY_ENTRY);
         }
     }
 

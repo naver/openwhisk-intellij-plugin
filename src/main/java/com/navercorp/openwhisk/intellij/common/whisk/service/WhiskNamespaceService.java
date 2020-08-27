@@ -34,11 +34,11 @@ public class WhiskNamespaceService {
     }
 
     private static class LazyHolder {
-        private static final WhiskNamespaceService instance = new WhiskNamespaceService();
+        private static final WhiskNamespaceService INSTANCE = new WhiskNamespaceService();
     }
 
     public static WhiskNamespaceService getInstance() {
-        return LazyHolder.instance;
+        return LazyHolder.INSTANCE;
     }
 
     public Optional<WhiskNamespace> validateNamespace(WhiskAuth whiskAuth) {

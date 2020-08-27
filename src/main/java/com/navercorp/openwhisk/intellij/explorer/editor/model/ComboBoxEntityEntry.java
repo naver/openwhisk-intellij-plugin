@@ -20,7 +20,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class ComboBoxEntityEntry {
-    public static final ComboBoxEntityEntry NoneComboBoxEntityEntry = new ComboBoxEntityEntry("None (Please select an entity)", ComboBoxEntityType.NONE);
+    public static final ComboBoxEntityEntry NONE_COMBO_BOX_ENTITY_ENTRY = new ComboBoxEntityEntry("None (Please select an entity)", ComboBoxEntityType.NONE);
 
     private String name;
     private ComboBoxEntityType type;

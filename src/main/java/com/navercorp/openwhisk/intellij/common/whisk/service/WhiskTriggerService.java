@@ -40,11 +40,11 @@ public class WhiskTriggerService {
     }
 
     private static class LazyHolder {
-        private static final WhiskTriggerService instance = new WhiskTriggerService();
+        private static final WhiskTriggerService INSTANCE = new WhiskTriggerService();
     }
 
     public static WhiskTriggerService getInstance() {
-        return LazyHolder.instance;
+        return LazyHolder.INSTANCE;
     }
 
     public List<WhiskTriggerMetaData> getWhiskTriggers(WhiskAuth whiskAuth) throws IOException {

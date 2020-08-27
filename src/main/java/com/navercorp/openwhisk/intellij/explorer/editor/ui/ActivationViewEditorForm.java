@@ -158,7 +158,7 @@ public class ActivationViewEditorForm {
          * TODO Add binding action
          */
         List<ComboBoxEntityEntry> entries = Stream.of(
-                Stream.of(ComboBoxEntityEntry.NoneComboBoxEntityEntry),
+                Stream.of(ComboBoxEntityEntry.NONE_COMBO_BOX_ENTITY_ENTRY),
                 actions.stream().map(WhiskActionMetaData::toCombBoxEntityEntry),
                 triggers.stream().map(WhiskTriggerMetaData::toCombBoxEntityEntry))
                 .flatMap(a -> a)
