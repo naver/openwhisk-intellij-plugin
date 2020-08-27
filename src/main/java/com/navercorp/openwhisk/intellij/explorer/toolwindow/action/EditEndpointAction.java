@@ -25,7 +25,7 @@ import com.navercorp.openwhisk.intellij.explorer.dialog.endpoint.EditEndpointDia
 import static com.intellij.icons.AllIcons.Actions.Edit;
 
 public class EditEndpointAction extends AnAction {
-    private final static Logger LOG = Logger.getInstance(EditEndpointAction.class);
+    private static final Logger LOG = Logger.getInstance(EditEndpointAction.class);
 
     private WhiskEndpoint whiskEndpoint;
 

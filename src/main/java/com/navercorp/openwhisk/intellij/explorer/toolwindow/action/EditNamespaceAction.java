@@ -28,8 +28,8 @@ import org.jetbrains.annotations.NotNull;
 import static com.intellij.icons.AllIcons.Actions.Edit;
 
 public class EditNamespaceAction extends AnAction {
-    private final static Logger LOG = Logger.getInstance(EditNamespaceAction.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(EditNamespaceAction.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private WhiskAuth whiskAuth;
     private WhiskNamespace whiskNamespace;

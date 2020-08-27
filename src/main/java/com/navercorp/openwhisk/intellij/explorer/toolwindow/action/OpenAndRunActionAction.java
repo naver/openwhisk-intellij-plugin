@@ -34,8 +34,8 @@ import java.util.Optional;
 import static com.intellij.icons.AllIcons.Actions.Execute;
 
 public class OpenAndRunActionAction extends AnAction {
-    private final static Logger LOG = Logger.getInstance(OpenAndRunActionAction.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(OpenAndRunActionAction.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private WhiskActionService whiskActionService = WhiskActionService.getInstance();
 

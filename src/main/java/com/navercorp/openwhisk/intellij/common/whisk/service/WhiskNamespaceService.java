@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 public class WhiskNamespaceService {
-    private final static Logger LOG = Logger.getInstance(WhiskNamespaceService.class);
+    private static final Logger LOG = Logger.getInstance(WhiskNamespaceService.class);
 
     private WhiskNamespaceService() {
 

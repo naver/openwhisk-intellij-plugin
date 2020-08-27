@@ -56,8 +56,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class WskDeployWindowForm {
-    private final static Logger LOG = Logger.getInstance(WskDeployWindowForm.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(WskDeployWindowForm.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private String WSKDEPLOY_URL = "https://github.com/apache/openwhisk-wskdeploy/releases";
 

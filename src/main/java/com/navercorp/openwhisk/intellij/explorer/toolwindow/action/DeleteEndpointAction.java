@@ -40,8 +40,8 @@ import java.util.stream.Collectors;
 import static com.intellij.icons.AllIcons.General.Remove;
 
 public class DeleteEndpointAction extends AnAction {
-    private final static Logger LOG = Logger.getInstance(DeleteEndpointAction.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(DeleteEndpointAction.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private WhiskEndpoint whiskEndpoint;
 

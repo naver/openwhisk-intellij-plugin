@@ -30,7 +30,7 @@ import static com.navercorp.openwhisk.intellij.common.utils.JsonParserUtils.writ
 
 public class FileUtils {
 
-    private final static Logger LOG = Logger.getInstance(FileUtils.class);
+    private static final Logger LOG = Logger.getInstance(FileUtils.class);
 
     /**
      * It accumulates in the .gradle/caches subfolder and files are not automatically cleared unless you delete the cache directory.

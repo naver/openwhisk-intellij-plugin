@@ -34,7 +34,7 @@ import java.util.Optional;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class WhiskTriggerService {
-    private final static Logger LOG = Logger.getInstance(WhiskTriggerService.class);
+    private static final Logger LOG = Logger.getInstance(WhiskTriggerService.class);
 
     private WhiskTriggerService() {
     }

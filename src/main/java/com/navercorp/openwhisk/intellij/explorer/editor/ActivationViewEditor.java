@@ -45,8 +45,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ActivationViewEditor implements FileEditor {
-    private final static Logger LOG = Logger.getInstance(ActivationViewEditor.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(ActivationViewEditor.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private Project project;
     private ActivationViewEditorForm activationViewEditorForm;

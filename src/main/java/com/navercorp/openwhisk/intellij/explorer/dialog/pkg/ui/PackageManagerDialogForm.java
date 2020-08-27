@@ -41,8 +41,8 @@ import java.util.Optional;
 import static com.intellij.uiDesigner.core.GridConstraints.*;
 
 public class PackageManagerDialogForm {
-    private final static Logger LOG = Logger.getInstance(PackageManagerDialogForm.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(PackageManagerDialogForm.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private JPanel mainJPanel;
     private JCheckBox shareJCheckBox;

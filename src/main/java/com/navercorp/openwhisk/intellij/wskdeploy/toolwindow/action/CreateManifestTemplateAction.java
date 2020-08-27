@@ -39,8 +39,8 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class CreateManifestTemplateAction extends AnAction {
-    private final static Logger LOG = Logger.getInstance(CreateManifestTemplateAction.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(CreateManifestTemplateAction.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private final String[] META_FILES = new String[]{"manifest.yaml", "HOW-TO-DEPLOY.md"};
     private final String[] SOURCE_FILES = new String[]{"index.js", "index.test.js", "package.json"};

@@ -41,8 +41,8 @@ import java.util.stream.Collectors;
 import static com.intellij.icons.AllIcons.General.Remove;
 
 public class DeleteNamespaceAction extends AnAction {
-    private final static Logger LOG = Logger.getInstance(DeleteNamespaceAction.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(DeleteNamespaceAction.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private WhiskNamespace whiskNamespace;
 

@@ -33,8 +33,8 @@ import java.io.IOException;
 import static com.intellij.icons.AllIcons.Actions.GC;
 
 public class DeleteTriggerAction extends AnAction {
-    private final static Logger LOG = Logger.getInstance(DeleteTriggerAction.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(DeleteTriggerAction.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private WhiskTriggerMetaData whiskTriggerMetaData;
     private WhiskAuth whiskAuth;

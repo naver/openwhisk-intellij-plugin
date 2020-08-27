@@ -32,8 +32,8 @@ import java.io.IOException;
 import static com.intellij.icons.AllIcons.Actions.Edit;
 
 public class EditPackageAction extends AnAction {
-    private final static Logger LOG = Logger.getInstance(EditPackageAction.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(EditPackageAction.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private WhiskAuth whiskAuth;
     private WhiskPackage whiskPackage;

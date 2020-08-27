@@ -38,8 +38,8 @@ import java.util.Map;
 import java.util.Optional;
 
 public class TriggerCreationManagerDialogForm {
-    private final static Logger LOG = Logger.getInstance(TriggerCreationManagerDialogForm.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(TriggerCreationManagerDialogForm.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private JPanel mainJPanel;
     private JTextField triggerNameJTextField;

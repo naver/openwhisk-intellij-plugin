@@ -33,7 +33,7 @@ import java.util.Optional;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class WhiskActionService {
-    private final static Logger LOG = Logger.getInstance(WhiskActionService.class);
+    private static final Logger LOG = Logger.getInstance(WhiskActionService.class);
 
     private WhiskActionService() {
 

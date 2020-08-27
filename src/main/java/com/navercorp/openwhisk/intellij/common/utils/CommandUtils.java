@@ -25,7 +25,7 @@ import java.io.InputStreamReader;
 
 public class CommandUtils {
 
-    private final static Logger LOG = Logger.getInstance(CommandUtils.class);
+    private static final Logger LOG = Logger.getInstance(CommandUtils.class);
 
     public static WskDeployCmdResponse runCommand(String[] command)
             throws IOException, InterruptedException {

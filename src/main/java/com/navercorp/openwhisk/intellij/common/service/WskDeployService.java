@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
         }
 )
 public class WskDeployService implements PersistentStateComponent<WskDeployService> {
-    private final static Logger LOG = Logger.getInstance(WskDeployService.class);
+    private static final Logger LOG = Logger.getInstance(WskDeployService.class);
 
     public String wskdeployPath;
     public String wskdeployName;

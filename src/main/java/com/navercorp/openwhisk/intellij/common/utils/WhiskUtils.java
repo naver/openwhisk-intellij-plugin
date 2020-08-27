@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class WhiskUtils {
-    private final static Logger LOG = Logger.getInstance(WhiskUtils.class);
+    private static final Logger LOG = Logger.getInstance(WhiskUtils.class);
 
     public static Optional<WhiskAuth> findWhiskAuth(List<WhiskEndpoint> endpoints, WhiskNamespace namespace) {
         for (WhiskEndpoint ep: endpoints) {

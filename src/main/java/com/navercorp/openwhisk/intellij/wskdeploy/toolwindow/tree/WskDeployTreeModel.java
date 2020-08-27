@@ -29,8 +29,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class WskDeployTreeModel implements TreeModel {
-    private final static Logger LOG = Logger.getInstance(WskDeployTreeModel.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(WskDeployTreeModel.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private DefaultTreeModel innerModel;
     private DefaultMutableTreeNode root;

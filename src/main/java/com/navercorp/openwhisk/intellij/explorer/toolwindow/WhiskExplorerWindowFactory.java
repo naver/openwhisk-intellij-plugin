@@ -45,8 +45,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class WhiskExplorerWindowFactory implements ToolWindowFactory {
-    private final static Logger LOG = Logger.getInstance(WhiskExplorerWindowFactory.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(WhiskExplorerWindowFactory.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {

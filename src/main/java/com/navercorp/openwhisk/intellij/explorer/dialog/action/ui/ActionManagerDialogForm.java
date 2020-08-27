@@ -43,8 +43,8 @@ import java.util.Map;
 import java.util.Optional;
 
 public class ActionManagerDialogForm {
-    private final static Logger LOG = Logger.getInstance(ActionManagerDialogForm.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(ActionManagerDialogForm.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private JPanel mainJPanel;
     private JComboBox runtimeJComboBox;

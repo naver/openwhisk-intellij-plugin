@@ -26,8 +26,8 @@ import org.jetbrains.annotations.NotNull;
 import static com.intellij.icons.AllIcons.General.Add;
 
 public class AddEndpointAction extends AnAction {
-    private final static Logger LOG = Logger.getInstance(AddEndpointAction.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(AddEndpointAction.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     public AddEndpointAction() {
         super("Add Endpoint", "Add Endpoint", Add);

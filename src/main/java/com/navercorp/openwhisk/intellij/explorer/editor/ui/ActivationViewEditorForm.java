@@ -48,8 +48,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ActivationViewEditorForm {
-    private final static Logger LOG = Logger.getInstance(ActivationViewEditorForm.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(ActivationViewEditorForm.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
     private final int ACTIVATION_ID_COLUMN = 1;

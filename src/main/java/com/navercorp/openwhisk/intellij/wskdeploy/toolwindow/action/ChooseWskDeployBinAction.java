@@ -34,8 +34,8 @@ import java.util.Optional;
 import static com.navercorp.openwhisk.intellij.common.Icons.OPEN_DISK_HOVER;
 
 public class ChooseWskDeployBinAction extends AnAction {
-    private final static Logger LOG = Logger.getInstance(ChooseWskDeployBinAction.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(ChooseWskDeployBinAction.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     ChooseWskDeployBinAction() {
         super(OPEN_DISK_HOVER);

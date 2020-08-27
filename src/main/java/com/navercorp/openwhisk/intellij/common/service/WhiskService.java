@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
         }
 )
 public class WhiskService implements PersistentStateComponent<WhiskService> {
-    private final static Logger LOG = Logger.getInstance(WhiskService.class);
+    private static final Logger LOG = Logger.getInstance(WhiskService.class);
 
     public String endpoints;
 

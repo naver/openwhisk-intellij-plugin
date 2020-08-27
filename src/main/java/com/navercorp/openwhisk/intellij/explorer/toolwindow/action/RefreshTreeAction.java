@@ -26,8 +26,8 @@ import com.navercorp.openwhisk.intellij.common.notification.SimpleNotifier;
 import static com.intellij.icons.AllIcons.Actions.Refresh;
 
 public class RefreshTreeAction extends AnAction {
-    private final static Logger LOG = Logger.getInstance(RefreshTreeAction.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(RefreshTreeAction.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     public RefreshTreeAction() {
         super(Refresh);

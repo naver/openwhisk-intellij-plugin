@@ -42,8 +42,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class AddNamespaceDialogForm {
-    private final static Logger LOG = Logger.getInstance(AddNamespaceDialogForm.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(AddNamespaceDialogForm.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private JPanel mainJPanel;
     private JPasswordField authKeyJPasswordField;

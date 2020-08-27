@@ -31,7 +31,7 @@ import java.util.Optional;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class WhiskRuleService {
-    private final static Logger LOG = Logger.getInstance(WhiskRuleService.class);
+    private static final Logger LOG = Logger.getInstance(WhiskRuleService.class);
 
     private WhiskRuleService() {
     }

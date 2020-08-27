@@ -26,8 +26,8 @@ import com.navercorp.openwhisk.intellij.wskdeploy.toolwindow.listener.RefreshWsk
 import static com.intellij.icons.AllIcons.Actions.Refresh;
 
 public class RefreshWskDeployAction extends AnAction {
-    private final static Logger LOG = Logger.getInstance(RefreshWskDeployAction.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(RefreshWskDeployAction.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     public RefreshWskDeployAction() {
         super(Refresh);

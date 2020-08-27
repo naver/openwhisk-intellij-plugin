@@ -26,7 +26,7 @@ import java.util.Optional;
 import static com.navercorp.openwhisk.intellij.common.utils.CommandUtils.runCommand;
 
 public class ValidationUtils {
-    private final static Logger LOG = Logger.getInstance(ValidationUtils.class);
+    private static final Logger LOG = Logger.getInstance(ValidationUtils.class);
 
     public static Optional<VirtualFile> validateWskDeploy(Optional<VirtualFile> wskdeploy) {
         return wskdeploy.flatMap(wskdeployFile -> {

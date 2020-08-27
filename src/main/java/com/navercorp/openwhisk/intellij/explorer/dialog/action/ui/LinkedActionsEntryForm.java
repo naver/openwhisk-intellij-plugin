@@ -30,7 +30,7 @@ import static com.navercorp.openwhisk.intellij.common.Icons.ARROW_DOWN;
 import static com.navercorp.openwhisk.intellij.common.Icons.ARROW_UP;
 
 public class LinkedActionsEntryForm {
-    private final static Logger LOG = Logger.getInstance(LinkedActionsEntryForm.class);
+    private static final Logger LOG = Logger.getInstance(LinkedActionsEntryForm.class);
 
     private JPanel mainJPanel;
     private JTextField actionJTextField;

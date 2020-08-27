@@ -46,8 +46,8 @@ import java.io.IOException;
 import java.util.Optional;
 
 public class WhiskRunWindowForm {
-    private final static Logger LOG = Logger.getInstance(WhiskRunWindowForm.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(WhiskRunWindowForm.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     public static String ENTITY_ACTION = "Action";
     public static String ENTITY_TRIGGER = "Trigger";
