@@ -200,7 +200,7 @@ public class TriggerManagerDialogForm {
     }
 
     /**
-     * Helper functions
+     * Helper functions.
      */
     private void addLinkedAction(String actionName, String ruleName) {
         LinkedActionsForm linkedActionsForm = new LinkedActionsForm(project, actionName, ruleName, this::removeLinkedAction);

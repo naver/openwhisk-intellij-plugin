@@ -85,9 +85,8 @@ public class TriggerCreationManagerDialogForm {
     }
 
     /**
-     * Helper functions
+     * Helper functions.
      */
-
     private void refreshWhiskTree() {
         EventUtils.publish(project, RefreshWhiskTreeListener.TOPIC, RefreshWhiskTreeListener::refreshWhiskTree);
         WhiskService service = ServiceManager.getService(project, WhiskService.class);

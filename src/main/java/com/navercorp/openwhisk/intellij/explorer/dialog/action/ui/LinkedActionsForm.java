@@ -110,7 +110,7 @@ public class LinkedActionsForm {
     }
 
     /**
-     * Helper functions
+     * Helper functions.
      */
     private void addLinkedAction(int index, String namespace, String actionName) {
         LinkedActionsEntryForm entry = new LinkedActionsEntryForm(index, namespace, actionName,
