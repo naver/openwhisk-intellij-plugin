@@ -105,7 +105,10 @@ public class WhiskExplorerWindowForm {
 
         if (StringUtils.isNotEmpty(service.getEndpoints())) {
             try {
-                endpoints = getEntities(whiskPackageService, whiskActionService, whiskTriggerService, JsonParserUtils.parseWhiskEndpoints(service.getEndpoints()));
+                endpoints = getEntities(whiskPackageService,
+                        whiskActionService,
+                        whiskTriggerService,
+                        JsonParserUtils.parseWhiskEndpoints(service.getEndpoints()));
             } catch (IOException e) {
                 final String msg = "Failed to parsing endpoints: " + service.getEndpoints();
                 LOG.error(msg, e);
@@ -222,6 +225,7 @@ public class WhiskExplorerWindowForm {
                         }
                     } else if (userObject instanceof WhiskTriggerRoot) {
                         // Nothing to do
+                        LOG.debug("[WhiskTriggerRoot] is selected");
                     } else if (userObject instanceof WhiskTriggerMetaData) {
                         DefaultMutableTreeNode namespaceNode = (DefaultMutableTreeNode) node.getParent().getParent();
 
