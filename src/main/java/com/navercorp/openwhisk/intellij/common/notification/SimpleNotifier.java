@@ -29,11 +29,11 @@ public class SimpleNotifier {
     }
 
     private static class LazyHolder {
-        private static final SimpleNotifier instance = new SimpleNotifier();
+        private static final SimpleNotifier INSTANCE = new SimpleNotifier();
     }
 
     public static SimpleNotifier getInstance() {
-        return LazyHolder.instance;
+        return LazyHolder.INSTANCE;
     }
 
     private final NotificationGroup NOTIFICATION_GROUP = new NotificationGroup("Simple Notification Group", NotificationDisplayType.STICKY_BALLOON, true);
