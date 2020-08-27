@@ -30,14 +30,14 @@ import static com.navercorp.openwhisk.intellij.utils.AnnotationHelper.*;
 import static org.junit.Assert.*;
 
 public class WhiskPackageTest {
-    String name = "testPkg";
-    String namespace = "testNamespace";
-    String version = "1.0.0";
-    long updated = 1581316522182L;
-    boolean publish = false;
+    private String name = "testPkg";
+    private String namespace = "testNamespace";
+    private String version = "1.0.0";
+    private long updated = 1581316522182L;
+    private boolean publish = false;
 
     @Test
-    public void testWhiskPackage_getBinding() {
+    public void testWhiskPackageGetBinding() {
         List<Map<String, Object>> annotations = createPackageAnnotation("test-description", null);
         WhiskPackage notBoundPackage = new WhiskPackage(name, namespace, publish, updated, version, annotations, createFalseBinding());
 
@@ -45,7 +45,7 @@ public class WhiskPackageTest {
     }
 
     @Test
-    public void testBoundWhiskPackage_getBinding() {
+    public void testBoundWhiskPackageGetBinding() {
         Binding binding = new Binding("boundPkg", "boundNamespace");
 
         Map<String, String> bindingMap = createBinding(binding.getName(), binding.getNamespace());
@@ -58,19 +58,20 @@ public class WhiskPackageTest {
 
 
     @Test
-    public void testWhiskPackageWithActions_getBinding() {
+    public void testWhiskPackageWithActionsGetBinding() {
         List<Map<String, Object>> parameters = new ArrayList<>();
         List<CompactWhiskAction> actions = new ArrayList<>();
         List<Object> feeds = new ArrayList<>();
 
         List<Map<String, Object>> annotations = createPackageAnnotation("test-description", null);
-        WhiskPackageWithActions notBoundPackage = new WhiskPackageWithActions(name, namespace, publish, updated, version, annotations, createEmptyBinding(), parameters, actions, feeds);
+        WhiskPackageWithActions notBoundPackage = new WhiskPackageWithActions(name, namespace, publish, updated, version, annotations,
+                createEmptyBinding(), parameters, actions, feeds);
 
         assertFalse(notBoundPackage.getBinding().isPresent());
     }
 
     @Test
-    public void testBoundWhiskPackageWithActions_getBinding() {
+    public void testBoundWhiskPackageWithActionsGetBinding() {
         List<Map<String, Object>> parameters = new ArrayList<>();
         List<CompactWhiskAction> actions = new ArrayList<>();
         List<Object> feeds = new ArrayList<>();
@@ -79,7 +80,8 @@ public class WhiskPackageTest {
 
         Map<String, String> bindingMap = createBinding(binding.getName(), binding.getNamespace());
         List<Map<String, Object>> annotations = createPackageAnnotation("test-description", bindingMap);
-        WhiskPackageWithActions boundPackage = new WhiskPackageWithActions(name, namespace, publish, updated, version, annotations, bindingMap, parameters, actions, feeds);
+        WhiskPackageWithActions boundPackage = new WhiskPackageWithActions(name, namespace, publish, updated, version,
+                annotations, bindingMap, parameters, actions, feeds);
 
         assertTrue(boundPackage.getBinding().isPresent());
         assertEquals(binding, Optional.of(binding).get());

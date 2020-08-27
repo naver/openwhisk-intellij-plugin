@@ -24,7 +24,7 @@ import static org.junit.Assert.assertEquals;
 
 public class WhiskUtilsTest {
     @Test
-    public void testWhiskUtils_getApihHostWithProtocol() {
+    public void testGetApihHostWithProtocol() {
         String expected1 = "https://foo.com";
         String expected2 = "http://foo.com";
 

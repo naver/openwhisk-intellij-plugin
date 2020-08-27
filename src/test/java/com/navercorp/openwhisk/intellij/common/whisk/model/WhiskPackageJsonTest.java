@@ -73,7 +73,8 @@ public class WhiskPackageJsonTest {
         actions.add(new CompactWhiskAction("action1", "0.0.2", createActionAnnotation(false, false, false, false, "nodejs:10")));
         actions.add(new CompactWhiskAction("action2", "0.0.2", createActionAnnotation(false, false, false, false, "nodejs:10")));
         actions.add(new CompactWhiskAction("action3", "0.0.2", createActionAnnotation(false, false, false, false, "nodejs:10")));
-        WhiskPackageWithActions expected = new WhiskPackageWithActions("test", "testns", true, 1583828352890L, "0.0.6", createPackageAnnotation("test", null), createEmptyBinding(), parameters, actions, new ArrayList<>());
+        WhiskPackageWithActions expected = new WhiskPackageWithActions("test", "testns", true, 1583828352890L, "0.0.6",
+                createPackageAnnotation("test", null), createEmptyBinding(), parameters, actions, new ArrayList<>());
 
         // when
         WhiskPackageWithActions actual = JsonParserUtils.parseWhiskPackage(pkg).get();

@@ -35,18 +35,18 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class WhiskActionTest {
-    String name = "testName";
-    String namespace = "testNamespace";
-    String pkg = "testPkg";
-    String version = "1.0.0";
-    long updated = 1581316522182L;
-    boolean publish = false;
-    List<Map<String, Object>> annotations = createActionAnnotation(false, false, false, false, "nodejs:12");
-    Limits limits = new Limits(1, 1, 256, 60000);
-    ExecMetaData exec = new ExecMetaData(false);
+    private String name = "testName";
+    private String namespace = "testNamespace";
+    private String pkg = "testPkg";
+    private String version = "1.0.0";
+    private long updated = 1581316522182L;
+    private boolean publish = false;
+    private List<Map<String, Object>> annotations = createActionAnnotation(false, false, false, false, "nodejs:12");
+    private Limits limits = new Limits(1, 1, 256, 60000);
+    private ExecMetaData exec = new ExecMetaData(false);
 
     @Test
-    public void testWhiskAction_getWhiskPackage() {
+    public void testGetWhiskPackage() {
         String expectedPkg = pkg;
 
         WhiskActionMetaData action = new WhiskActionMetaData(name, namespace, version, updated, publish, annotations, limits, exec);
@@ -58,7 +58,7 @@ public class WhiskActionTest {
 
 
     @Test
-    public void testWhiskAction_getNamespacePath() {
+    public void testGetNamespacePath() {
         String expectedNamespace = namespace;
 
         WhiskActionMetaData action = new WhiskActionMetaData(name, namespace, version, updated, publish, annotations, limits, exec);
@@ -69,7 +69,7 @@ public class WhiskActionTest {
     }
 
     @Test
-    public void testWhiskAction_getFullyQualifiedName() {
+    public void testGetFullyQualifiedName() {
         String expectedFQN = namespace + "/" + name;
         String expectedPkgFQN = namespace + "/" + pkg + "/" + name;
 
@@ -82,7 +82,7 @@ public class WhiskActionTest {
 
 
     @Test
-    public void testWhiskAction_getKind() {
+    public void testGetKind() {
         String expectedNodeKind = "nodejs:12";
         String expectedRubyKind = "ruby:2.5";
         String expectedPhpKind = "php:7.3";
@@ -101,7 +101,7 @@ public class WhiskActionTest {
     }
 
     @Test
-    public void testWhiskAction_getKindExtension() {
+    public void testGetKindExtension() {
         String expectedNodeExtension = ".js";
         String expectedRubyExtension = ".rb";
         String expectedPhpExtension = ".php";
@@ -125,7 +125,7 @@ public class WhiskActionTest {
 
 
     @Test
-    public void testWhiskAction_getKindIcon() {
+    public void testGetKindIcon() {
         Icon expectedNodeIcon = Icons.KIND_JS;
         Icon expectedRubyIcon = Icons.KIND_RUBY;
         Icon expectedPhpIcon = Icons.KIND_PHP;
@@ -149,8 +149,8 @@ public class WhiskActionTest {
 
 
     @Test
-    public void testWhiskAction_isSequenceAction() {
-        List<Map<String, Object>> annotations = createActionAnnotation(false, false, false, false, "sequence");
+    public void testIsSequenceAction() {
+        List<Map<String, Object>> sequenceAnnotations = createActionAnnotation(false, false, false, false, "sequence");
 
         List<Map<String, Object>> parameters = new ArrayList<>();
 
@@ -161,7 +161,8 @@ public class WhiskActionTest {
 
         CodeExec codeExec = new CodeExec(false, "sequence", null, null, null, components);
 
-        ExecutableWhiskAction sequenceAction = new ExecutableWhiskAction(name, namespace, version, updated, publish, annotations, limits, codeExec, parameters);
+        ExecutableWhiskAction sequenceAction = new ExecutableWhiskAction(name, namespace, version, updated, publish,
+                sequenceAnnotations, limits, codeExec, parameters);
 
         assertTrue(sequenceAction.isSequenceAction());
     }

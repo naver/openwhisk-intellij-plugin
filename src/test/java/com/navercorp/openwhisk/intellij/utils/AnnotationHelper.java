@@ -16,12 +16,19 @@
 
 package com.navercorp.openwhisk.intellij.utils;
 
+import com.navercorp.openwhisk.intellij.common.whisk.model.trigger.SimplifiedEntityMetaData;
+import com.navercorp.openwhisk.intellij.common.whisk.model.trigger.SimplifiedWhiskRule;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class AnnotationHelper {
+
+    protected AnnotationHelper() {
+        throw new UnsupportedOperationException("Utility classes should not have a public or default constructor.");
+    }
 
     public static List<Map<String, Object>> createActionAnnotation(boolean webExport, boolean rawHttp, boolean customOption, boolean finalEntry, String kind) {
         List<Map<String, Object>> annotations = new ArrayList<>();
@@ -88,5 +95,21 @@ public class AnnotationHelper {
 
     public static boolean createFalseBinding() {
         return false;
+    }
+
+    public static List<Map<String, Object>> createTriggerAlarmFeedAnnotation() {
+        List<Map<String, Object>> annotations = new ArrayList<>();
+
+        Map<String, Object> entry = new LinkedHashMap<>();
+        entry.put("key", "feed");
+        entry.put("value", "/whisk.system/alarms/alarm");
+        annotations.add(entry);
+        return annotations;
+    }
+
+    public static Map<String, SimplifiedWhiskRule> createRule(String ruleName, String namespace, String actionName) {
+        Map<String, SimplifiedWhiskRule> rules = new LinkedHashMap<>();
+        rules.put(namespace + "/" + ruleName, new SimplifiedWhiskRule(new SimplifiedEntityMetaData(namespace, actionName), "active"));
+        return rules;
     }
 }
