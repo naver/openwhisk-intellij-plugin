@@ -59,8 +59,7 @@ public class ComboBoxEntityEntry {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ComboBoxEntityEntry that = (ComboBoxEntityEntry) o;
-        return Objects.equals(name, that.name) &&
-                type == that.type;
+        return Objects.equals(name, that.name) && type == that.type;
     }
 
     @Override

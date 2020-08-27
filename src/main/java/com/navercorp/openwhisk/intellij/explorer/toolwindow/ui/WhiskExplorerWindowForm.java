@@ -409,11 +409,11 @@ public class WhiskExplorerWindowForm {
                 WhiskNamespace namespace = (WhiskNamespace) node.getUserObject();
                 WhiskEndpoint endpoint = (WhiskEndpoint) parent.getUserObject();
                 return Optional.of(new WhiskAuth(namespace.getAuth(), endpoint.getApihost()));
-            } else if (node.getUserObject() instanceof WhiskActionMetaData ||
-                    node.getUserObject() instanceof CompactWhiskAction ||
-                    node.getUserObject() instanceof WhiskTriggerMetaData ||
-                    node.getUserObject() instanceof WhiskTriggerRoot ||
-                    node.getUserObject() instanceof WhiskPackage
+            } else if (node.getUserObject() instanceof WhiskActionMetaData
+                    || node.getUserObject() instanceof CompactWhiskAction
+                    || node.getUserObject() instanceof WhiskTriggerMetaData
+                    || node.getUserObject() instanceof WhiskTriggerRoot
+                    || node.getUserObject() instanceof WhiskPackage
             ) {
                 return getAuthFromTreeNode(parent);
             }

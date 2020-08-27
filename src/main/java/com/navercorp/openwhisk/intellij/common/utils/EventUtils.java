@@ -30,9 +30,7 @@ public class EventUtils {
     @NotNull
     private static MessageBusConnection connect(@NotNull Project project, @Nullable Disposable parentDisposable) {
         MessageBus messageBus = project.getMessageBus();
-        return parentDisposable == null ?
-                messageBus.connect(project) :
-                messageBus.connect(parentDisposable);
+        return parentDisposable == null ? messageBus.connect(project) : messageBus.connect(parentDisposable);
     }
 
     public static <T> void subscribe(Project project, @Nullable Disposable parentDisposable, Topic<T> topic, T handler) {

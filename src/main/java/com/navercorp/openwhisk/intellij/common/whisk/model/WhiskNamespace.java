@@ -99,11 +99,11 @@ public class WhiskNamespace {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WhiskNamespace that = (WhiskNamespace) o;
-        return Objects.equals(auth, that.auth) &&
-                Objects.equals(path, that.path) &&
-                Objects.equals(packages, that.packages) &&
-                Objects.equals(actions, that.actions) &&
-                Objects.equals(triggers, that.triggers);
+        return Objects.equals(auth, that.auth)
+                && Objects.equals(path, that.path)
+                && Objects.equals(packages, that.packages)
+                && Objects.equals(actions, that.actions)
+                && Objects.equals(triggers, that.triggers);
     }
 
     @Override

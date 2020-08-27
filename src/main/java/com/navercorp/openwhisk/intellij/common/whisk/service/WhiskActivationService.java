@@ -43,9 +43,9 @@ public class WhiskActivationService {
     }
 
     public List<WhiskActivationMetaData> getWhiskActivations(WhiskAuth whiskAuth, Optional<String> name, int limit, int skip) throws IOException {
-        String endpoint = whiskAuth.getApihost() +
-                "/api/v1/namespaces/_/activations" +
-                "?limit=" + limit + "&skip=" + skip + "" + name.map(n -> "&name=" + n).orElse("");
+        String endpoint = whiskAuth.getApihost()
+                + "/api/v1/namespaces/_/activations"
+                + "?limit=" + limit + "&skip=" + skip + "" + name.map(n -> "&name=" + n).orElse("");
         String authorization = whiskAuth.getBasicAuthHeader();
 
         String result = Request.Get(endpoint)
