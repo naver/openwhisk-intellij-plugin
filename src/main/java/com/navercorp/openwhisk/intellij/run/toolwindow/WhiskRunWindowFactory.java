@@ -49,21 +49,19 @@ import static com.navercorp.openwhisk.intellij.run.toolwindow.ui.WhiskRunWindowF
 import static com.navercorp.openwhisk.intellij.run.toolwindow.ui.WhiskRunWindowForm.ENTITY_TRIGGER;
 
 public class WhiskRunWindowFactory implements ToolWindowFactory {
-    private final static Logger LOG = Logger.getInstance(WhiskRunWindowFactory.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(WhiskRunWindowFactory.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
-    private final static String ID = "Whisk Run";
+    private static final String ID = "Whisk Run";
 
     private WhiskActionService whiskActionService = WhiskActionService.getInstance();
     private WhiskActivationService whiskActivationService = WhiskActivationService.getInstance();
     private WhiskTriggerService whiskTriggerService = WhiskTriggerService.getInstance();
 
-    private Project project;
     private WhiskRunWindowForm whiskRunWindowForm;
 
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
-        this.project = project;
         this.whiskRunWindowForm = new WhiskRunWindowForm(project, toolWindow);
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
         Content content = contentFactory.createContent(whiskRunWindowForm.getContent(), null, false);

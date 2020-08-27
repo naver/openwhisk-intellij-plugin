@@ -16,10 +16,10 @@
 
 package com.navercorp.openwhisk.intellij.common.whisk.model.action;
 
-import com.navercorp.openwhisk.intellij.explorer.editor.model.ComboBoxEntityEntry;
-import com.navercorp.openwhisk.intellij.explorer.editor.model.ComboBoxEntityType;
 import com.navercorp.openwhisk.intellij.common.whisk.model.Limits;
 import com.navercorp.openwhisk.intellij.common.whisk.model.exec.ExecMetaData;
+import com.navercorp.openwhisk.intellij.explorer.editor.model.ComboBoxEntityEntry;
+import com.navercorp.openwhisk.intellij.explorer.editor.model.ComboBoxEntityType;
 
 import java.util.List;
 import java.util.Map;
@@ -28,7 +28,10 @@ public class WhiskActionMetaData extends WhiskAction<ExecMetaData> {
     public WhiskActionMetaData() {
     }
 
-    public WhiskActionMetaData(String name, String namespace, String version, long updated, boolean publish, List<Map<String, Object>> annotations, Limits limits, ExecMetaData exec) {
+    public WhiskActionMetaData(String name, String namespace, String version, long updated, boolean publish,
+                               List<Map<String, Object>> annotations,
+                               Limits limits,
+                               ExecMetaData exec) {
         super(name, namespace, version, updated, publish, annotations, limits, exec);
     }
 

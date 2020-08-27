@@ -31,17 +31,17 @@ import java.util.Optional;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class WhiskRuleService {
-    private final static Logger LOG = Logger.getInstance(WhiskRuleService.class);
+    private static final Logger LOG = Logger.getInstance(WhiskRuleService.class);
 
     private WhiskRuleService() {
     }
 
     private static class LazyHolder {
-        private static final WhiskRuleService instance = new WhiskRuleService();
+        private static final WhiskRuleService INSTANCE = new WhiskRuleService();
     }
 
     public static WhiskRuleService getInstance() {
-        return LazyHolder.instance;
+        return LazyHolder.INSTANCE;
     }
 
     public Optional<WhiskRule> updateWhiskRule(WhiskAuth whiskAuth, String ruleName, Map<String, Object> payload) throws IOException {

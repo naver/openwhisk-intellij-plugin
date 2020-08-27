@@ -43,8 +43,10 @@ import java.util.*;
 import static com.intellij.icons.AllIcons.General.Add;
 
 public class TriggerManagerDialogForm {
-    private final static Logger LOG = Logger.getInstance(TriggerManagerDialogForm.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(TriggerManagerDialogForm.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+
+    private static final String DEFAULT_RULE_TEXTAREA_MSG = "If not entered, it is automatically generated.";
 
     private JPanel mainJPanel;
     private JPanel tirggerNameJPanel;
@@ -58,8 +60,6 @@ public class TriggerManagerDialogForm {
     private JPanel linkedActionsJPanel;
     private JPanel triggerDefaultParameterJPanel;
     private JTextArea defaultParameterJTextArea;
-
-    private String DEFAULT_RULE_TEXTAREA_MSG = "If not entered, it is automatically generated.";
 
     private Project project;
     private Map<String, LinkedActionsForm> cachedRules = new HashMap<>();
@@ -124,7 +124,7 @@ public class TriggerManagerDialogForm {
         for (Map.Entry<String, SimplifiedWhiskRule> set : trigger.getRules().entrySet()) {
             String ruleName = set.getKey().replace(namespace + "/", "");
             String actionName = set.getValue().getAction().getPkgActionName();
-            addLinkedAction(project, actionName, ruleName);
+            addLinkedAction(actionName, ruleName);
         }
 
         addJButton.setIcon(Add);
@@ -143,7 +143,7 @@ public class TriggerManagerDialogForm {
 
                 WhiskActionMetaData action = (WhiskActionMetaData) selectActionJComboBox.getSelectedItem();
                 String actionName = action.getWhiskPackage().map(pkg -> pkg + "/" + action.getName()).orElse(action.getName());
-                addLinkedAction(project, actionName, ruleName);
+                addLinkedAction(actionName, ruleName);
             }
         });
     }
@@ -200,9 +200,9 @@ public class TriggerManagerDialogForm {
     }
 
     /**
-     * Helper functions
+     * Helper functions.
      */
-    private void addLinkedAction(Project project, String actionName, String ruleName) {
+    private void addLinkedAction(String actionName, String ruleName) {
         LinkedActionsForm linkedActionsForm = new LinkedActionsForm(project, actionName, ruleName, this::removeLinkedAction);
         linkedActionsJPanel.setLayout(new BoxLayout(linkedActionsJPanel, BoxLayout.Y_AXIS));
         linkedActionsJPanel.add(linkedActionsForm.getContent());

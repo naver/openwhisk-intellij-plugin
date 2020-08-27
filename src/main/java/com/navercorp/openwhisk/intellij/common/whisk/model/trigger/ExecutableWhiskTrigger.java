@@ -34,7 +34,11 @@ public class ExecutableWhiskTrigger extends WhiskTrigger {
     public ExecutableWhiskTrigger() {
     }
 
-    public ExecutableWhiskTrigger(String name, String namespace, String version, long updated, boolean publish, List<Map<String, Object>> annotations, List<Map<String, Object>> parameters, Map<String, SimplifiedWhiskRule> rules, Map<String, Object> limits) {
+    public ExecutableWhiskTrigger(String name, String namespace, String version, long updated, boolean publish,
+                                  List<Map<String, Object>> annotations,
+                                  List<Map<String, Object>> parameters,
+                                  Map<String, SimplifiedWhiskRule> rules,
+                                  Map<String, Object> limits) {
         super(name, namespace, version, updated, publish, annotations);
         this.parameters = parameters;
         this.rules = rules;

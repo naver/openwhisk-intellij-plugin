@@ -45,14 +45,18 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ActivationViewEditor implements FileEditor {
-    private final static Logger LOG = Logger.getInstance(ActivationViewEditor.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(ActivationViewEditor.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private Project project;
     private ActivationViewEditorForm activationViewEditorForm;
     private WhiskActivationService whiskActivationService = WhiskActivationService.getInstance();
 
-    public ActivationViewEditor(Project project, List<WhiskEndpoint> endpoints, Optional<WhiskAuth> whiskAuth, Optional<WhiskActionMetaData> action, Optional<WhiskTriggerMetaData> trigger) {
+    public ActivationViewEditor(Project project,
+                                List<WhiskEndpoint> endpoints,
+                                Optional<WhiskAuth> whiskAuth,
+                                Optional<WhiskActionMetaData> action,
+                                Optional<WhiskTriggerMetaData> trigger) {
         activationViewEditorForm = new ActivationViewEditorForm(project, endpoints);
         activationViewEditorForm.cacheWhiskAuth(whiskAuth);
 
@@ -72,7 +76,8 @@ public class ActivationViewEditor implements FileEditor {
                      * TODO load activations of binding action after the follow upstream pr is merged: https://github.com/apache/openwhisk/pull/4919
                      */
                     try {
-                        List<WhiskActivationMetaData> activations = whiskActivationService.getWhiskActivations(auth, entity.toEntityName(), 100, 0); // TODO pagination
+                        List<WhiskActivationMetaData> activations =
+                                whiskActivationService.getWhiskActivations(auth, entity.toEntityName(), 100, 0); // TODO pagination
                         activationViewEditorForm.initializeActivationTable(activations);
                     } catch (IOException e) {
                         LOG.error(e);
@@ -99,7 +104,7 @@ public class ActivationViewEditor implements FileEditor {
         } else if (trigger.isPresent()) {
             return trigger.map(WhiskTriggerMetaData::toCombBoxEntityEntry);
         } else {
-            return Optional.of(ComboBoxEntityEntry.NoneComboBoxEntityEntry);
+            return Optional.of(ComboBoxEntityEntry.NONE_COMBO_BOX_ENTITY_ENTRY);
         }
     }
 

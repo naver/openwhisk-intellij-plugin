@@ -34,8 +34,8 @@ import java.util.stream.Collectors;
 import static com.intellij.icons.AllIcons.General.Add;
 
 public class LinkedActionsForm {
-    private final static Logger LOG = Logger.getInstance(LinkedActionsForm.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(LinkedActionsForm.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private JPanel mainJPanel;
     private JComboBox actionsJComboBox;
@@ -110,7 +110,7 @@ public class LinkedActionsForm {
     }
 
     /**
-     * Helper functions
+     * Helper functions.
      */
     private void addLinkedAction(int index, String namespace, String actionName) {
         LinkedActionsEntryForm entry = new LinkedActionsEntryForm(index, namespace, actionName,

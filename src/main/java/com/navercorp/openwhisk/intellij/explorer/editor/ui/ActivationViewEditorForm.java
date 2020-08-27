@@ -48,11 +48,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ActivationViewEditorForm {
-    private final static Logger LOG = Logger.getInstance(ActivationViewEditorForm.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(ActivationViewEditorForm.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
-    private final int ACTIVATION_ID_COLUMN = 1;
+    private static final int ACTIVATION_ID_COLUMN = 1;
 
     private JPanel mainJPanel;
     private JPanel actionsToobarJPanel;
@@ -158,7 +158,7 @@ public class ActivationViewEditorForm {
          * TODO Add binding action
          */
         List<ComboBoxEntityEntry> entries = Stream.of(
-                Stream.of(ComboBoxEntityEntry.NoneComboBoxEntityEntry),
+                Stream.of(ComboBoxEntityEntry.NONE_COMBO_BOX_ENTITY_ENTRY),
                 actions.stream().map(WhiskActionMetaData::toCombBoxEntityEntry),
                 triggers.stream().map(WhiskTriggerMetaData::toCombBoxEntityEntry))
                 .flatMap(a -> a)
@@ -220,7 +220,7 @@ public class ActivationViewEditorForm {
     }
 
     /**
-     * Helper functions
+     * Helper functions.
      */
     private List<WhiskActivationMetaData> loadActivations(WhiskAuth auth, Optional<ComboBoxEntityEntry> entity) {
         try {

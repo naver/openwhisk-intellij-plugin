@@ -56,10 +56,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class WskDeployWindowForm {
-    private final static Logger LOG = Logger.getInstance(WskDeployWindowForm.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(WskDeployWindowForm.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
-    private String WSKDEPLOY_URL = "https://github.com/apache/openwhisk-wskdeploy/releases";
+    private static final String WSKDEPLOY_URL = "https://github.com/apache/openwhisk-wskdeploy/releases";
 
     private JPanel mainJPanel;
     private JPanel actionsJPanel;
@@ -139,8 +139,8 @@ public class WskDeployWindowForm {
 
         EventUtils.subscribe(project, project, ChooseWskDeployBinaryListener.TOPIC, (chosenWskDeployFile) -> {
             WskDeployBinary wskDeployBinary = new WskDeployBinary(chosenWskDeployFile.getPath(), chosenWskDeployFile.getName());
-            wskDeployService.wskdeployName = wskDeployBinary.getName();
-            wskDeployService.wskdeployPath = wskDeployBinary.getFullPath();
+            wskDeployService.setWskdeployName(wskDeployBinary.getName());
+            wskDeployService.setWskdeployPath(wskDeployBinary.getFullPath());
             wskDeployService.loadState(wskDeployService);
 
             wskdeployJTree.setModel(new WskDeployTreeModel(wskDeployBinary, loadWskDeployManifest(project)));
@@ -150,8 +150,8 @@ public class WskDeployWindowForm {
 
 
     private Optional<WskDeployFile> loadRegisteredWskDeploy() {
-        if (wskDeployService.wskdeployPath != null && wskDeployService.wskdeployName != null) {
-            VirtualFile file = LocalFileSystem.getInstance().findFileByPath(wskDeployService.wskdeployPath);
+        if (wskDeployService.getWskdeployPath() != null && wskDeployService.getWskdeployName() != null) {
+            VirtualFile file = LocalFileSystem.getInstance().findFileByPath(wskDeployService.getWskdeployPath());
             return ValidationUtils.validateWskDeploy(Optional.ofNullable(file))
                     .map(validWskDeploy -> new WskDeployBinary(validWskDeploy.getPath(), validWskDeploy.getName()));
         } else {

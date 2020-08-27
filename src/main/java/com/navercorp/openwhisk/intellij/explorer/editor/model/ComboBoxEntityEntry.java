@@ -20,7 +20,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class ComboBoxEntityEntry {
-    public static final ComboBoxEntityEntry NoneComboBoxEntityEntry = new ComboBoxEntityEntry("None (Please select an entity)", ComboBoxEntityType.NONE);
+    public static final ComboBoxEntityEntry NONE_COMBO_BOX_ENTITY_ENTRY = new ComboBoxEntityEntry("None (Please select an entity)", ComboBoxEntityType.NONE);
 
     private String name;
     private ComboBoxEntityType type;
@@ -59,8 +59,7 @@ public class ComboBoxEntityEntry {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ComboBoxEntityEntry that = (ComboBoxEntityEntry) o;
-        return Objects.equals(name, that.name) &&
-                type == that.type;
+        return Objects.equals(name, that.name) && type == that.type;
     }
 
     @Override

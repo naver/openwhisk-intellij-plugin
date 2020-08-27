@@ -28,23 +28,25 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 
 public class WhiskActivationTest {
-    String expectedActivationId = "969c2bf39e3b40599c2bf59e3b901911";
-    String expectedName = "testName";
-    String expectedNamespace = "testNamespace";
-    String expectedVersion = "1.0.0";
-    String expectedCause = "51adf3c3f875df3gadf3c0f875ef3eb9";
-    long expectedStart = 1592555196109L;
-    long expectedEnd = 1592555196153L;
-    long expectedDuration = 50;
-    boolean expectedPublish = false;
+    private String expectedActivationId = "969c2bf39e3b40599c2bf59e3b901911";
+    private String expectedName = "testName";
+    private String expectedNamespace = "testNamespace";
+    private String expectedVersion = "1.0.0";
+    private String expectedCause = "51adf3c3f875df3gadf3c0f875ef3eb9";
+    private long expectedStart = 1592555196109L;
+    private long expectedEnd = 1592555196153L;
+    private long expectedDuration = 50;
+    private boolean expectedPublish = false;
 
     @Test
-    public void testWhiskActionMetaData_getter() {
+    public void testWhiskActionMetaDataGetter() {
 
         List<Map<String, Object>> expectedAnnotations = new ArrayList<>();
         int expectedStatusCode = 0;
 
-        WhiskActivationMetaData activationMetaData = new WhiskActivationMetaData(expectedActivationId, expectedName, expectedNamespace, expectedVersion, expectedCause, expectedStart, expectedEnd, expectedDuration, expectedPublish, expectedAnnotations, expectedStatusCode);
+        WhiskActivationMetaData activationMetaData = new WhiskActivationMetaData(
+                expectedActivationId, expectedName, expectedNamespace, expectedVersion, expectedCause,
+                expectedStart, expectedEnd, expectedDuration, expectedPublish, expectedAnnotations, expectedStatusCode);
 
         assertEquals(expectedActivationId, activationMetaData.getActivationId());
         assertEquals(expectedName, activationMetaData.getName());
@@ -60,40 +62,50 @@ public class WhiskActivationTest {
     }
 
     @Test
-    public void testWhiskActionMetaData_getStatus() {
+    public void testWhiskActionMetaDataGetStatus() {
         List<Map<String, Object>> expectedAnnotations = new ArrayList<>();
 
         int success = 0;
         String expectedSuccessMessage0 = "success";
-        WhiskActivationMetaData activationMetaData0 = new WhiskActivationMetaData(expectedActivationId, expectedName, expectedNamespace, expectedVersion, expectedCause, expectedStart, expectedEnd, expectedDuration, expectedPublish, expectedAnnotations, success);
+        WhiskActivationMetaData activationMetaData0 = new WhiskActivationMetaData(
+                expectedActivationId, expectedName, expectedNamespace, expectedVersion, expectedCause,
+                expectedStart, expectedEnd, expectedDuration, expectedPublish, expectedAnnotations, success);
         assertEquals(expectedSuccessMessage0, activationMetaData0.getStatus());
 
 
         int applicationError = 1;
         String expectedSuccessMessage1 = "application error";
-        WhiskActivationMetaData activationMetaData1 = new WhiskActivationMetaData(expectedActivationId, expectedName, expectedNamespace, expectedVersion, expectedCause, expectedStart, expectedEnd, expectedDuration, expectedPublish, expectedAnnotations, applicationError);
+        WhiskActivationMetaData activationMetaData1 = new WhiskActivationMetaData(
+                expectedActivationId, expectedName, expectedNamespace, expectedVersion, expectedCause,
+                expectedStart, expectedEnd, expectedDuration, expectedPublish, expectedAnnotations, applicationError);
         assertEquals(expectedSuccessMessage1, activationMetaData1.getStatus());
 
         int developerError = 2;
         String expectedSuccessMessage2 = "developer error";
-        WhiskActivationMetaData activationMetaData2 = new WhiskActivationMetaData(expectedActivationId, expectedName, expectedNamespace, expectedVersion, expectedCause, expectedStart, expectedEnd, expectedDuration, expectedPublish, expectedAnnotations, developerError);
+        WhiskActivationMetaData activationMetaData2 = new WhiskActivationMetaData(
+                expectedActivationId, expectedName, expectedNamespace, expectedVersion, expectedCause,
+                        expectedStart, expectedEnd, expectedDuration, expectedPublish, expectedAnnotations, developerError);
         assertEquals(expectedSuccessMessage2, activationMetaData2.getStatus());
 
 
         int internalError = 3;
         String expectedSuccessMessage3 = "internal error";
-        WhiskActivationMetaData activationMetaData3 = new WhiskActivationMetaData(expectedActivationId, expectedName, expectedNamespace, expectedVersion, expectedCause, expectedStart, expectedEnd, expectedDuration, expectedPublish, expectedAnnotations, internalError);
+        WhiskActivationMetaData activationMetaData3 = new WhiskActivationMetaData(
+                expectedActivationId, expectedName, expectedNamespace, expectedVersion, expectedCause,
+                expectedStart, expectedEnd, expectedDuration, expectedPublish, expectedAnnotations, internalError);
         assertEquals(expectedSuccessMessage3, activationMetaData3.getStatus());
     }
 
     @Test
-    public void testWhiskActivationWithLogs_getter() {
+    public void testWhiskActivationWithLogsGetter() {
         List<Map<String, Object>> expectedAnnotations = new ArrayList<>();
         String expectedSubject = "testNamespace";
         List<String> expectedLogs = new ArrayList<>();
         Map<String, Object> expectedResponse = new LinkedHashMap<>();
 
-        WhiskActivationWithLogs activationWithLogs = new WhiskActivationWithLogs(expectedActivationId, expectedName, expectedNamespace, expectedVersion, expectedCause, expectedStart, expectedEnd, expectedDuration, expectedPublish, expectedAnnotations, expectedSubject, expectedLogs, expectedResponse);
+        WhiskActivationWithLogs activationWithLogs = new WhiskActivationWithLogs(
+                expectedActivationId, expectedName, expectedNamespace, expectedVersion, expectedCause,
+                expectedStart, expectedEnd, expectedDuration, expectedPublish, expectedAnnotations, expectedSubject, expectedLogs, expectedResponse);
 
         assertEquals(expectedActivationId, activationWithLogs.getActivationId());
         assertEquals(expectedName, activationWithLogs.getName());

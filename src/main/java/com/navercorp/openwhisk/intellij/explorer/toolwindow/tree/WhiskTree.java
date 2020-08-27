@@ -38,8 +38,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class WhiskTree implements TreeModel {
-    private final static Logger LOG = Logger.getInstance(WhiskTree.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(WhiskTree.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private DefaultTreeModel innerModel;
     private DefaultMutableTreeNode root;

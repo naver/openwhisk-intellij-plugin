@@ -28,7 +28,8 @@ public class WhiskRule extends WhiskRuleMetaData {
     public WhiskRule() {
     }
 
-    public WhiskRule(String name, String namespace, String version, long updated, boolean publish, SimplifiedEntityMetaData action, SimplifiedEntityMetaData trigger) {
+    public WhiskRule(String name, String namespace, String version, long updated, boolean publish,
+                     SimplifiedEntityMetaData action, SimplifiedEntityMetaData trigger) {
         super(name, namespace, version, updated, publish, action, trigger);
     }
 

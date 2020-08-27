@@ -31,9 +31,9 @@ import org.jetbrains.annotations.Nullable;
         }
 )
 public class WhiskService implements PersistentStateComponent<WhiskService> {
-    private final static Logger LOG = Logger.getInstance(WhiskService.class);
+    private static final Logger LOG = Logger.getInstance(WhiskService.class);
 
-    public String endpoints;
+    private String endpoints;
 
     @Nullable
     @Override
@@ -45,5 +45,13 @@ public class WhiskService implements PersistentStateComponent<WhiskService> {
     public void loadState(@NotNull WhiskService state) {
         LOG.info("Save state");
         XmlSerializerUtil.copyBean(state, this);
+    }
+
+    public String getEndpoints() {
+        return endpoints;
+    }
+
+    public void setEndpoints(String endpoints) {
+        this.endpoints = endpoints;
     }
 }

@@ -34,8 +34,8 @@ import java.util.Optional;
 import static com.intellij.icons.AllIcons.Actions.Edit;
 
 public class EditActionAction extends AnAction {
-    private final static Logger LOG = Logger.getInstance(EditActionAction.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(EditActionAction.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private WhiskAuth whiskAuth;
     private WhiskActionMetaData whiskActionMetaData;
@@ -53,7 +53,10 @@ public class EditActionAction extends AnAction {
         if (whiskAuth != null && whiskActionMetaData != null) {
             try {
                 List<WhiskActionMetaData> actions = whiskActionService.getWhiskActions(whiskAuth);
-                whiskActionService.getWhiskAction(whiskAuth, Optional.of(whiskActionMetaData.getNamespacePath()), whiskActionMetaData.getWhiskPackage(), whiskActionMetaData.getName())
+                whiskActionService.getWhiskAction(whiskAuth,
+                        Optional.of(whiskActionMetaData.getNamespacePath()),
+                        whiskActionMetaData.getWhiskPackage(),
+                        whiskActionMetaData.getName())
                         .ifPresent(action -> {
                             ActionManagerDialog dialog = new ActionManagerDialog(e.getProject(), whiskAuth, action, actions);
                             if (dialog.showAndGet()) {

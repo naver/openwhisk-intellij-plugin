@@ -49,8 +49,8 @@ public class Binding {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Binding binding = (Binding) o;
-        return Objects.equals(namespace, binding.namespace) &&
-                Objects.equals(name, binding.name);
+        return Objects.equals(namespace, binding.namespace)
+                && Objects.equals(name, binding.name);
     }
 
     @Override

@@ -25,7 +25,7 @@ import static org.junit.Assert.assertEquals;
 public class WhiskEndpointTest {
 
     @Test
-    public void testWhiskEndpointWithConstructor_getApihost() {
+    public void testWhiskEndpointWithConstructorGetApihost() {
         String expected1 = "https://foo.com";
         String expected2 = "http://foo.com";
 
@@ -40,7 +40,7 @@ public class WhiskEndpointTest {
     }
 
     @Test
-    public void testWhiskEndpointWithSetMethod_getApihost() {
+    public void testWhiskEndpointWithSetMethodGetApihost() {
         String expected1 = "http://foo.com";
         String expected2 = "https://bar.com";
         String expected3 = "ftp://foo.com";

@@ -34,7 +34,11 @@ public class ExecutableWhiskAction extends WhiskAction<CodeExec> {
         this.parameters = parameters;
     }
 
-    public ExecutableWhiskAction(String name, String namespace, String version, long updated, boolean publish, List<Map<String, Object>> annotations, Limits limits, CodeExec exec, List<Map<String, Object>> parameters) {
+    public ExecutableWhiskAction(String name, String namespace, String version, long updated, boolean publish,
+                                 List<Map<String, Object>> annotations,
+                                 Limits limits,
+                                 CodeExec exec,
+                                 List<Map<String, Object>> parameters) {
         super(name, namespace, version, updated, publish, annotations, limits, exec);
         this.parameters = parameters;
     }

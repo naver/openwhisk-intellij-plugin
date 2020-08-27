@@ -37,18 +37,18 @@ import java.util.Optional;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class WhiskPackageService {
-    private final static Logger LOG = Logger.getInstance(WhiskPackageService.class);
+    private static final Logger LOG = Logger.getInstance(WhiskPackageService.class);
 
     private WhiskPackageService() {
 
     }
 
     private static class LazyHolder {
-        private static final WhiskPackageService instance = new WhiskPackageService();
+        private static final WhiskPackageService INSTANCE = new WhiskPackageService();
     }
 
     public static WhiskPackageService getInstance() {
-        return WhiskPackageService.LazyHolder.instance;
+        return WhiskPackageService.LazyHolder.INSTANCE;
     }
 
     public List<WhiskPackage> getWhiskPackages(WhiskAuth whiskAuth) throws IOException {

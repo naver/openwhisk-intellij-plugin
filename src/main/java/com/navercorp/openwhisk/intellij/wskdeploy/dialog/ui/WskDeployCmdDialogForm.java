@@ -40,8 +40,8 @@ import java.util.List;
 import static com.navercorp.openwhisk.intellij.common.utils.CommandUtils.runCommand;
 
 public class WskDeployCmdDialogForm {
-    private final static Logger LOG = Logger.getInstance(WskDeployCmdDialogForm.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(WskDeployCmdDialogForm.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private JPanel mainJPanel;
     private JList namespaceJList;
@@ -58,7 +58,7 @@ public class WskDeployCmdDialogForm {
 
         try {
             WhiskService whiskService = ServiceManager.getService(project, WhiskService.class);
-            List<WhiskEndpoint> endpoints = new ArrayList<>(JsonParserUtils.parseWhiskEndpoints(whiskService.endpoints)); // make mutable
+            List<WhiskEndpoint> endpoints = new ArrayList<>(JsonParserUtils.parseWhiskEndpoints(whiskService.getEndpoints())); // make mutable
 
             namespaceJList.setListData(endpoints.stream().flatMap(ep ->
                     ep.getNamespaces().stream().map(ns ->

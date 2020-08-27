@@ -25,12 +25,16 @@ import java.util.List;
 import java.util.Optional;
 
 public class WhiskUtils {
-    private final static Logger LOG = Logger.getInstance(WhiskUtils.class);
+    private static final Logger LOG = Logger.getInstance(WhiskUtils.class);
+
+    protected WhiskUtils() {
+        throw new UnsupportedOperationException("Utility classes should not have a public or default constructor.");
+    }
 
     public static Optional<WhiskAuth> findWhiskAuth(List<WhiskEndpoint> endpoints, WhiskNamespace namespace) {
-        for (WhiskEndpoint ep: endpoints) {
-            for (WhiskNamespace np: ep.getNamespaces()) {
-                if(np.getAuth().equals(namespace.getAuth()) && np.getPath().equals(namespace.getPath())) {
+        for (WhiskEndpoint ep : endpoints) {
+            for (WhiskNamespace np : ep.getNamespaces()) {
+                if (np.getAuth().equals(namespace.getAuth()) && np.getPath().equals(namespace.getPath())) {
                     return Optional.of(new WhiskAuth(np.getAuth(), ep.getApihost()));
                 }
             }
@@ -39,9 +43,9 @@ public class WhiskUtils {
     }
 
     public static Optional<WhiskNamespace> findWhiskNamespace(List<WhiskEndpoint> endpoints, String auth) {
-        for (WhiskEndpoint ep: endpoints) {
-            for (WhiskNamespace np: ep.getNamespaces()) {
-                if(np.getAuth().equals(auth)) {
+        for (WhiskEndpoint ep : endpoints) {
+            for (WhiskNamespace np : ep.getNamespaces()) {
+                if (np.getAuth().equals(auth)) {
                     return Optional.of(np);
                 }
             }

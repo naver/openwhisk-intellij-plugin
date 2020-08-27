@@ -41,8 +41,8 @@ import java.util.stream.Collectors;
 import static com.intellij.icons.AllIcons.General.Remove;
 
 public class DeleteNamespaceAction extends AnAction {
-    private final static Logger LOG = Logger.getInstance(DeleteNamespaceAction.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(DeleteNamespaceAction.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private WhiskNamespace whiskNamespace;
 
@@ -64,7 +64,7 @@ public class DeleteNamespaceAction extends AnAction {
                 WhiskService whiskService = ServiceManager.getService(project, WhiskService.class);
                 List<WhiskEndpoint> endpoints = new ArrayList<>();
                 try {
-                    endpoints = new ArrayList<>(JsonParserUtils.parseWhiskEndpoints(whiskService.endpoints)); // make mutable
+                    endpoints = new ArrayList<>(JsonParserUtils.parseWhiskEndpoints(whiskService.getEndpoints())); // make mutable
                 } catch (IOException ex) {
                     LOG.error("Endpoint parsing failed", ex);
                 }
@@ -80,12 +80,12 @@ public class DeleteNamespaceAction extends AnAction {
     }
 
 
-    private List<WhiskEndpoint> removeNamespace(List<WhiskEndpoint> endpoints, WhiskNamespace whiskNamespace) {
+    private List<WhiskEndpoint> removeNamespace(List<WhiskEndpoint> endpoints, WhiskNamespace namespace) {
         return endpoints.stream()
                 .peek(ep -> {
                     List<WhiskNamespace> namespaces = ep.getNamespaces()
                             .stream()
-                            .filter(ns -> !ns.getPath().equals(whiskNamespace.getPath()) && !ns.getAuth().equals(whiskNamespace.getAuth()))  // remove namespace
+                            .filter(ns -> !ns.getPath().equals(namespace.getPath()) && !ns.getAuth().equals(namespace.getAuth()))  // remove namespace
                             .collect(Collectors.toList());
                     ep.setNamespaces(namespaces);
                 })
@@ -95,7 +95,7 @@ public class DeleteNamespaceAction extends AnAction {
     private void saveEndpoints(WhiskService whiskService, List<WhiskEndpoint> newEndpoints) {
         try {
             String eps = JsonParserUtils.writeEndpointsToJson(newEndpoints);
-            whiskService.endpoints = eps;
+            whiskService.setEndpoints(eps);
             whiskService.loadState(whiskService);
         } catch (JsonProcessingException e) {
             LOG.error("Endpoint parsing failed", e);

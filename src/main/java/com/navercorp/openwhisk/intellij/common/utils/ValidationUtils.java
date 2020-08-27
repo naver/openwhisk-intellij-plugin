@@ -26,7 +26,11 @@ import java.util.Optional;
 import static com.navercorp.openwhisk.intellij.common.utils.CommandUtils.runCommand;
 
 public class ValidationUtils {
-    private final static Logger LOG = Logger.getInstance(ValidationUtils.class);
+    private static final Logger LOG = Logger.getInstance(ValidationUtils.class);
+
+    protected ValidationUtils() {
+        throw new UnsupportedOperationException("Utility classes should not have a public or default constructor.");
+    }
 
     public static Optional<VirtualFile> validateWskDeploy(Optional<VirtualFile> wskdeploy) {
         return wskdeploy.flatMap(wskdeployFile -> {

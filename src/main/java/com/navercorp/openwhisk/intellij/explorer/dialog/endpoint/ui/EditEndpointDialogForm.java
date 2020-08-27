@@ -34,8 +34,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EditEndpointDialogForm {
-    private final static Logger LOG = Logger.getInstance(EditEndpointDialogForm.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(EditEndpointDialogForm.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private JPanel mainJPanel;
     private JTextField aliasJTextField;
@@ -56,7 +56,7 @@ public class EditEndpointDialogForm {
          */
         this.whiskService = ServiceManager.getService(project, WhiskService.class);
         try {
-            endpoints = new ArrayList<>(JsonParserUtils.parseWhiskEndpoints(whiskService.endpoints)); // make mutable
+            endpoints = new ArrayList<>(JsonParserUtils.parseWhiskEndpoints(whiskService.getEndpoints())); // make mutable
         } catch (IOException e) {
             LOG.error("Endpoint parsing failed", e);
         }
@@ -72,7 +72,9 @@ public class EditEndpointDialogForm {
         if (existAlias(endpoints, whiskEndpoint.getAlias(), alias)) {
             NOTIFIER.notify(project, "Failed to update endpoint: " + alias + " already exists.", NotificationType.ERROR);
         } else {
-            List<WhiskEndpoint> newEndpoints = updateWhiskEndpoint(endpoints, whiskEndpoint.getAlias(), new WhiskEndpoint(alias, apihost, whiskEndpoint.getNamespaces()));
+            List<WhiskEndpoint> newEndpoints = updateWhiskEndpoint(endpoints,
+                    whiskEndpoint.getAlias(),
+                    new WhiskEndpoint(alias, apihost, whiskEndpoint.getNamespaces()));
             saveEndpoints(newEndpoints);
 
             // Update action tree
@@ -99,7 +101,7 @@ public class EditEndpointDialogForm {
     private void saveEndpoints(List<WhiskEndpoint> newEndpoints) {
         try {
             String eps = JsonParserUtils.writeEndpointsToJson(newEndpoints);
-            whiskService.endpoints = eps;
+            whiskService.setEndpoints(eps);
             whiskService.loadState(whiskService);
         } catch (JsonProcessingException e) {
             LOG.error("Endpoint parsing failed", e);

@@ -38,8 +38,8 @@ import java.util.Map;
 import java.util.Optional;
 
 public class TriggerCreationManagerDialogForm {
-    private final static Logger LOG = Logger.getInstance(TriggerCreationManagerDialogForm.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(TriggerCreationManagerDialogForm.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private JPanel mainJPanel;
     private JTextField triggerNameJTextField;
@@ -85,14 +85,13 @@ public class TriggerCreationManagerDialogForm {
     }
 
     /**
-     * Helper functions
+     * Helper functions.
      */
-
     private void refreshWhiskTree() {
         EventUtils.publish(project, RefreshWhiskTreeListener.TOPIC, RefreshWhiskTreeListener::refreshWhiskTree);
         WhiskService service = ServiceManager.getService(project, WhiskService.class);
         try {
-            List<WhiskEndpoint> endpoints = JsonParserUtils.parseWhiskEndpoints(service.endpoints);
+            List<WhiskEndpoint> endpoints = JsonParserUtils.parseWhiskEndpoints(service.getEndpoints());
             if (!endpoints.isEmpty()) {
                 EventUtils.publish(project, RefreshWhiskTreeListener.TOPIC, RefreshWhiskTreeListener::refreshWhiskTree);
             } else {

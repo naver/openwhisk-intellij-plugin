@@ -20,12 +20,12 @@ import com.intellij.notification.NotificationType;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.diagnostic.Logger;
+import com.navercorp.openwhisk.intellij.common.notification.SimpleNotifier;
 import com.navercorp.openwhisk.intellij.common.utils.EventUtils;
 import com.navercorp.openwhisk.intellij.common.whisk.model.WhiskAuth;
 import com.navercorp.openwhisk.intellij.common.whisk.model.action.WhiskActionMetaData;
 import com.navercorp.openwhisk.intellij.common.whisk.service.WhiskActionService;
 import com.navercorp.openwhisk.intellij.run.toolwindow.listener.OpenAndRunActionControlActionListener;
-import com.navercorp.openwhisk.intellij.common.notification.SimpleNotifier;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -34,8 +34,8 @@ import java.util.Optional;
 import static com.intellij.icons.AllIcons.Actions.Execute;
 
 public class OpenAndRunActionAction extends AnAction {
-    private final static Logger LOG = Logger.getInstance(OpenAndRunActionAction.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(OpenAndRunActionAction.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private WhiskActionService whiskActionService = WhiskActionService.getInstance();
 
@@ -52,9 +52,14 @@ public class OpenAndRunActionAction extends AnAction {
     public void actionPerformed(@NotNull AnActionEvent e) {
         if (whiskAuth != null && whiskActionMetaData != null) {
             try {
-                whiskActionService.getWhiskAction(whiskAuth, Optional.ofNullable(whiskActionMetaData.getNamespacePath()), whiskActionMetaData.getWhiskPackage(), whiskActionMetaData.getName())
+                whiskActionService.getWhiskAction(whiskAuth,
+                        Optional.ofNullable(whiskActionMetaData.getNamespacePath()),
+                        whiskActionMetaData.getWhiskPackage(),
+                        whiskActionMetaData.getName())
                         .ifPresent(executableWhiskAction ->
-                                EventUtils.publish(e.getProject(), OpenAndRunActionControlActionListener.TOPIC, (l) -> l.openAndRunActionControlWindow(whiskAuth, executableWhiskAction)));
+                                EventUtils.publish(e.getProject(),
+                                        OpenAndRunActionControlActionListener.TOPIC,
+                                        (l) -> l.openAndRunActionControlWindow(whiskAuth, executableWhiskAction)));
             } catch (IOException ex) {
                 final String msg = "The action cannot be loaded: " + whiskActionMetaData.getFullyQualifiedName();
                 LOG.error(msg, ex);

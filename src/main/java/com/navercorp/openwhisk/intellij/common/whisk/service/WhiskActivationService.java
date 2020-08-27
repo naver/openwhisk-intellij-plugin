@@ -17,11 +17,11 @@
 package com.navercorp.openwhisk.intellij.common.whisk.service;
 
 import com.navercorp.openwhisk.intellij.common.utils.JsonParserUtils;
-import org.apache.http.HttpHeaders;
-import org.apache.http.client.fluent.Request;
 import com.navercorp.openwhisk.intellij.common.whisk.model.WhiskAuth;
 import com.navercorp.openwhisk.intellij.common.whisk.model.activation.WhiskActivationMetaData;
 import com.navercorp.openwhisk.intellij.common.whisk.model.activation.WhiskActivationWithLogs;
+import org.apache.http.HttpHeaders;
+import org.apache.http.client.fluent.Request;
 
 import java.io.IOException;
 import java.util.List;
@@ -35,15 +35,17 @@ public class WhiskActivationService {
     }
 
     private static class LazyHolder {
-        private static final WhiskActivationService instance = new WhiskActivationService();
+        private static final WhiskActivationService INSTANCE = new WhiskActivationService();
     }
 
     public static WhiskActivationService getInstance() {
-        return LazyHolder.instance;
+        return LazyHolder.INSTANCE;
     }
 
     public List<WhiskActivationMetaData> getWhiskActivations(WhiskAuth whiskAuth, Optional<String> name, int limit, int skip) throws IOException {
-        String endpoint = whiskAuth.getApihost() + "/api/v1/namespaces/_/activations?limit=" + limit + "&skip=" + skip + "" + name.map(n -> "&name=" + n).orElse("");
+        String endpoint = whiskAuth.getApihost()
+                + "/api/v1/namespaces/_/activations"
+                + "?limit=" + limit + "&skip=" + skip + "" + name.map(n -> "&name=" + n).orElse("");
         String authorization = whiskAuth.getBasicAuthHeader();
 
         String result = Request.Get(endpoint)

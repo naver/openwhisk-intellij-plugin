@@ -23,6 +23,10 @@ import java.util.*;
 
 public class ParameterUtils {
 
+    protected ParameterUtils() {
+        throw new UnsupportedOperationException("Utility classes should not have a public or default constructor.");
+    }
+
     // TODO test
     public static Map<String, Object> listMapToMap(List<Map<String, Object>> params) {
         Map<String, Object> map = new LinkedHashMap<>();

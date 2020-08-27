@@ -27,12 +27,14 @@ import org.jetbrains.annotations.Nullable;
 
 public class EventUtils {
 
+    protected EventUtils() {
+        throw new UnsupportedOperationException("Utility classes should not have a public or default constructor.");
+    }
+
     @NotNull
     private static MessageBusConnection connect(@NotNull Project project, @Nullable Disposable parentDisposable) {
         MessageBus messageBus = project.getMessageBus();
-        return parentDisposable == null ?
-                messageBus.connect(project) :
-                messageBus.connect(parentDisposable);
+        return parentDisposable == null ? messageBus.connect(project) : messageBus.connect(parentDisposable);
     }
 
     public static <T> void subscribe(Project project, @Nullable Disposable parentDisposable, Topic<T> topic, T handler) {

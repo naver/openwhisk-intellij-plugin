@@ -33,8 +33,8 @@ import java.io.IOException;
 import static com.intellij.icons.AllIcons.Actions.Execute;
 
 public class OpenAndFireTriggerAction extends AnAction {
-    private final static Logger LOG = Logger.getInstance(OpenAndFireTriggerAction.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(OpenAndFireTriggerAction.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private WhiskTriggerMetaData whiskTriggerMetaData;
     private WhiskAuth whiskAuth;
@@ -53,7 +53,9 @@ public class OpenAndFireTriggerAction extends AnAction {
         if (whiskAuth != null && whiskTriggerMetaData != null) {
             try {
                 whiskTriggerService.getWhiskTrigger(whiskAuth, whiskTriggerMetaData.getName()).ifPresent(executableWhiskTrigger ->
-                        EventUtils.publish(e.getProject(), OpenAndFireTriggerControlActionListener.TOPIC, (l) -> l.openAndFireTriggerControlWindow(whiskAuth, executableWhiskTrigger)));
+                        EventUtils.publish(e.getProject(),
+                                OpenAndFireTriggerControlActionListener.TOPIC,
+                                (l) -> l.openAndFireTriggerControlWindow(whiskAuth, executableWhiskTrigger)));
             } catch (IOException ex) {
                 final String msg = "The trigger cannot be loaded: " + whiskTriggerMetaData.getName();
                 LOG.error(msg, ex);

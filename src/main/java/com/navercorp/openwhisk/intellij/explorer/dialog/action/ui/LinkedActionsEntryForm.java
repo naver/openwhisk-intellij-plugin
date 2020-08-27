@@ -30,7 +30,7 @@ import static com.navercorp.openwhisk.intellij.common.Icons.ARROW_DOWN;
 import static com.navercorp.openwhisk.intellij.common.Icons.ARROW_UP;
 
 public class LinkedActionsEntryForm {
-    private final static Logger LOG = Logger.getInstance(LinkedActionsEntryForm.class);
+    private static final Logger LOG = Logger.getInstance(LinkedActionsEntryForm.class);
 
     private JPanel mainJPanel;
     private JTextField actionJTextField;
@@ -41,7 +41,12 @@ public class LinkedActionsEntryForm {
 
     private String namespace;
 
-    public LinkedActionsEntryForm(int index, String namespace, String actionName, UpActionListener upActionListener, DownActionListener downActionListener, RemoveActionListener removeActionListener) {
+    public LinkedActionsEntryForm(int index,
+                                  String namespace,
+                                  String actionName,
+                                  UpActionListener upActionListener,
+                                  DownActionListener downActionListener,
+                                  RemoveActionListener removeActionListener) {
         this.namespace = namespace;
 
         indexJLabel.setText(String.valueOf(index));

@@ -40,8 +40,8 @@ import java.util.stream.Collectors;
 import static com.intellij.icons.AllIcons.General.Remove;
 
 public class DeleteEndpointAction extends AnAction {
-    private final static Logger LOG = Logger.getInstance(DeleteEndpointAction.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(DeleteEndpointAction.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private WhiskEndpoint whiskEndpoint;
 
@@ -63,7 +63,7 @@ public class DeleteEndpointAction extends AnAction {
                 WhiskService whiskService = ServiceManager.getService(project, WhiskService.class);
                 List<WhiskEndpoint> endpoints = new ArrayList<>();
                 try {
-                    endpoints = new ArrayList<>(JsonParserUtils.parseWhiskEndpoints(whiskService.endpoints)); // make mutable
+                    endpoints = new ArrayList<>(JsonParserUtils.parseWhiskEndpoints(whiskService.getEndpoints())); // make mutable
                 } catch (IOException ex) {
                     LOG.error("Endpoint parsing failed", ex);
                 }
@@ -79,16 +79,16 @@ public class DeleteEndpointAction extends AnAction {
     }
 
 
-    private List<WhiskEndpoint> removeEndpoint(List<WhiskEndpoint> endpoints, WhiskEndpoint whiskEndpoint) {
+    private List<WhiskEndpoint> removeEndpoint(List<WhiskEndpoint> endpoints, WhiskEndpoint endpoint) {
         return endpoints.stream()
-                .filter(ep -> !ep.getAlias().equals(whiskEndpoint.getAlias())) // remove endpoint
+                .filter(ep -> !ep.getAlias().equals(endpoint.getAlias())) // remove endpoint
                 .collect(Collectors.toList());
     }
 
     private void saveEndpoints(WhiskService whiskService, List<WhiskEndpoint> newEndpoints) {
         try {
             String eps = JsonParserUtils.writeEndpointsToJson(newEndpoints);
-            whiskService.endpoints = eps;
+            whiskService.setEndpoints(eps);
             whiskService.loadState(whiskService);
         } catch (JsonProcessingException e) {
             LOG.error("Endpoint parsing failed", e);

@@ -26,8 +26,8 @@ import com.navercorp.openwhisk.intellij.explorer.dialog.namespace.AddNamespaceDi
 import org.jetbrains.annotations.NotNull;
 
 public class AddNamespaceAction extends AnAction {
-    private final static Logger LOG = Logger.getInstance(AddNamespaceAction.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(AddNamespaceAction.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private WhiskEndpoint whiskEndpoint;
 

@@ -25,6 +25,10 @@ import java.util.Map;
 
 public class Icons {
 
+    protected Icons() {
+        throw new UnsupportedOperationException("Utility classes should not have a public or default constructor.");
+    }
+
     private static final Map<String, Icon> REGISTERED_ICONS = new THashMap<>();
 
     public static final Icon ENTITY_TRIGGER = load("/icons/event.svg");

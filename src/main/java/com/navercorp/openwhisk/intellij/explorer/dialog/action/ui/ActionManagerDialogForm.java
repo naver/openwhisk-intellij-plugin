@@ -19,6 +19,7 @@ package com.navercorp.openwhisk.intellij.explorer.dialog.action.ui;
 import com.intellij.notification.NotificationType;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
+import com.navercorp.openwhisk.intellij.common.notification.SimpleNotifier;
 import com.navercorp.openwhisk.intellij.common.utils.EventUtils;
 import com.navercorp.openwhisk.intellij.common.utils.JsonParserUtils;
 import com.navercorp.openwhisk.intellij.common.utils.ParameterUtils;
@@ -30,7 +31,6 @@ import com.navercorp.openwhisk.intellij.common.whisk.model.action.WhiskActionMet
 import com.navercorp.openwhisk.intellij.common.whisk.model.exec.CodeExec;
 import com.navercorp.openwhisk.intellij.common.whisk.service.WhiskActionService;
 import com.navercorp.openwhisk.intellij.run.toolwindow.listener.RefreshActionOrTriggerListener;
-import com.navercorp.openwhisk.intellij.common.notification.SimpleNotifier;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -43,8 +43,8 @@ import java.util.Map;
 import java.util.Optional;
 
 public class ActionManagerDialogForm {
-    private final static Logger LOG = Logger.getInstance(ActionManagerDialogForm.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(ActionManagerDialogForm.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private JPanel mainJPanel;
     private JComboBox runtimeJComboBox;
@@ -303,8 +303,8 @@ public class ActionManagerDialogForm {
         return ParameterUtils.validateParams(defaultParameterForm.getDefaultParameter());
     }
 
-    private CodeExec createExec(ExecutableWhiskAction action, Runtime runtime) {
-        CodeExec codeExec = action.getExec();
+    private CodeExec createExec(ExecutableWhiskAction executableWhiskAction, Runtime runtime) {
+        CodeExec codeExec = executableWhiskAction.getExec();
         codeExec.setKind(runtime.toString());
 
         if (dockerImageForm != null) {
@@ -318,8 +318,12 @@ public class ActionManagerDialogForm {
         return codeExec;
     }
 
-    private List<Map<String, Object>> annotationToCollection(ExecutableWhiskAction action, boolean web, boolean rawHttp, boolean customOption, boolean finalDefaultParameter) {
-        Map<String, Object> annotations = ParameterUtils.listMapToMap(action.getAnnotations());
+    private List<Map<String, Object>> annotationToCollection(ExecutableWhiskAction executableWhiskAction,
+                                                             boolean web,
+                                                             boolean rawHttp,
+                                                             boolean customOption,
+                                                             boolean finalDefaultParameter) {
+        Map<String, Object> annotations = ParameterUtils.listMapToMap(executableWhiskAction.getAnnotations());
         annotations.put("web-export", web);
         annotations.put("raw-http", rawHttp);
         annotations.put("web-custom-options", customOption);

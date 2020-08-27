@@ -42,8 +42,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class EditNamespaceDialogForm {
-    private final static Logger LOG = Logger.getInstance(EditNamespaceDialogForm.class);
-    private final static SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
+    private static final Logger LOG = Logger.getInstance(EditNamespaceDialogForm.class);
+    private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private JPanel mainJPanel;
 
@@ -72,7 +72,7 @@ public class EditNamespaceDialogForm {
          */
         this.whiskService = ServiceManager.getService(project, WhiskService.class);
         try {
-            endpoints = new ArrayList<>(JsonParserUtils.parseWhiskEndpoints(whiskService.endpoints)); // make mutable
+            endpoints = new ArrayList<>(JsonParserUtils.parseWhiskEndpoints(whiskService.getEndpoints())); // make mutable
         } catch (IOException e) {
             LOG.error("Endpoint parsing failed", e);
         }
@@ -143,7 +143,7 @@ public class EditNamespaceDialogForm {
     private void saveEndpoints(List<WhiskEndpoint> newEndpoints) {
         try {
             String eps = JsonParserUtils.writeEndpointsToJson(newEndpoints);
-            whiskService.endpoints = eps;
+            whiskService.setEndpoints(eps);
             whiskService.loadState(whiskService);
         } catch (JsonProcessingException e) {
             LOG.error("Endpoint parsing failed", e);

@@ -42,11 +42,23 @@ public class WhiskActionJsonTest {
         String actions = readFile("actions.json");
 
         List<WhiskAction> expected = new ArrayList<>();
-        expected.add(new WhiskActionMetaData("testAct1", "testNs/testPkg1", "0.0.1", 1585756253499L, false, createActionAnnotation(true, false, false, true, "nodejs:12"), new Limits(1, 1, 256, 60000), new ExecMetaData(true)));
-        expected.add(new WhiskActionMetaData("testAct2", "testNs/testPkg2", "0.0.1", 1585756252393L, false, createActionAnnotation(true, false, false, true, "nodejs:12"), new Limits(1, 1, 256, 60000), new ExecMetaData(true)));
-        expected.add(new WhiskActionMetaData("testAct3", "testNs/testPkg3", "0.0.1", 1585756251289L, false, createActionAnnotation(true, false, false, true, "nodejs:12"), new Limits(1, 1, 256, 60000), new ExecMetaData(true)));
-        expected.add(new WhiskActionMetaData("testAct4", "testNs/testPkg4", "0.0.2", 1582709807073L, false, createActionAnnotation(false, false, false, false, "blackbox"), new Limits(1, 1, 256, 60000), new ExecMetaData(false)));
-        expected.add(new WhiskActionMetaData("testAct5", "testNs/testPkg5", "0.0.1", 1581316522182L, false, createActionAnnotation(false, false, false, false, "python:3"), new Limits(1, 1, 256, 60000), new ExecMetaData(false)));
+        expected.add(new WhiskActionMetaData("testAct1", "testNs/testPkg1", "0.0.1", 1585756253499L, false,
+                createActionAnnotation(true, false, false, true, "nodejs:12"),
+                new Limits(1, 1, 256, 60000),
+                new ExecMetaData(true)));
+        expected.add(new WhiskActionMetaData("testAct2", "testNs/testPkg2", "0.0.1", 1585756252393L, false,
+                createActionAnnotation(true, false, false, true, "nodejs:12"),
+                new Limits(1, 1, 256, 60000),
+                new ExecMetaData(true)));
+        expected.add(new WhiskActionMetaData("testAct3", "testNs/testPkg3", "0.0.1", 1585756251289L, false,
+                createActionAnnotation(true, false, false, true, "nodejs:12"),
+                new Limits(1, 1, 256, 60000), new ExecMetaData(true)));
+        expected.add(new WhiskActionMetaData("testAct4", "testNs/testPkg4", "0.0.2", 1582709807073L, false,
+                createActionAnnotation(false, false, false, false, "blackbox"),
+                new Limits(1, 1, 256, 60000), new ExecMetaData(false)));
+        expected.add(new WhiskActionMetaData("testAct5", "testNs/testPkg5", "0.0.1", 1581316522182L, false,
+                createActionAnnotation(false, false, false, false, "python:3"),
+                new Limits(1, 1, 256, 60000), new ExecMetaData(false)));
 
         // when
         List<WhiskActionMetaData> actual = JsonParserUtils.parseWhiskActions(actions);

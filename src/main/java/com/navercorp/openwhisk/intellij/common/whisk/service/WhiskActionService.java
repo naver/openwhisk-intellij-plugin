@@ -18,12 +18,12 @@ package com.navercorp.openwhisk.intellij.common.whisk.service;
 
 import com.intellij.openapi.diagnostic.Logger;
 import com.navercorp.openwhisk.intellij.common.utils.JsonParserUtils;
-import org.apache.http.HttpHeaders;
-import org.apache.http.client.fluent.Request;
-import org.apache.http.entity.ContentType;
 import com.navercorp.openwhisk.intellij.common.whisk.model.WhiskAuth;
 import com.navercorp.openwhisk.intellij.common.whisk.model.action.ExecutableWhiskAction;
 import com.navercorp.openwhisk.intellij.common.whisk.model.action.WhiskActionMetaData;
+import org.apache.http.HttpHeaders;
+import org.apache.http.client.fluent.Request;
+import org.apache.http.entity.ContentType;
 
 import java.io.IOException;
 import java.util.List;
@@ -33,18 +33,18 @@ import java.util.Optional;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class WhiskActionService {
-    private final static Logger LOG = Logger.getInstance(WhiskActionService.class);
+    private static final Logger LOG = Logger.getInstance(WhiskActionService.class);
 
     private WhiskActionService() {
 
     }
 
     private static class LazyHolder {
-        private static final WhiskActionService instance = new WhiskActionService();
+        private static final WhiskActionService INSTANCE = new WhiskActionService();
     }
 
     public static WhiskActionService getInstance() {
-        return LazyHolder.instance;
+        return LazyHolder.INSTANCE;
     }
 
     public List<WhiskActionMetaData> getWhiskActions(WhiskAuth whiskAuth) throws IOException {
@@ -59,7 +59,10 @@ public class WhiskActionService {
         return JsonParserUtils.parseWhiskActions(result);
     }
 
-    public Optional<ExecutableWhiskAction> getWhiskAction(WhiskAuth whiskAuth, Optional<String> namespaceName, Optional<String> pkgName, String actionName) throws IOException {
+    public Optional<ExecutableWhiskAction> getWhiskAction(WhiskAuth whiskAuth,
+                                                          Optional<String> namespaceName,
+                                                          Optional<String> pkgName,
+                                                          String actionName) throws IOException {
         String namespace = namespaceName.orElse("_");
         String name = pkgName.map(p -> p + "/" + actionName).orElse(actionName);
         String endpoint = whiskAuth.getApihost() + "/api/v1/namespaces/" + namespace + "/actions/" + name + "?code=true";
@@ -73,7 +76,11 @@ public class WhiskActionService {
         return JsonParserUtils.parseWhiskAction(result);
     }
 
-    public String invokeWhiskAction(WhiskAuth whiskAuth, Optional<String> namespaceName, Optional<String> pkgName, String actionName, String params) throws IOException {
+    public String invokeWhiskAction(WhiskAuth whiskAuth,
+                                    Optional<String> namespaceName,
+                                    Optional<String> pkgName,
+                                    String actionName,
+                                    String params) throws IOException {
         String namespace = namespaceName.orElse("_");
         String name = pkgName.map(p -> p + "/" + actionName).orElse(actionName);
         String endpoint = whiskAuth.getApihost() + "/api/v1/namespaces/" + namespace + "/actions/" + name + "?blocking=true&result=true";
@@ -87,7 +94,9 @@ public class WhiskActionService {
         return JsonParserUtils.beautifyJson(result);
     }
 
-    public Optional<ExecutableWhiskAction> updateWhiskAction(WhiskAuth whiskAuth, ExecutableWhiskAction updatedAction, Map<String, Object> payload) throws IOException {
+    public Optional<ExecutableWhiskAction> updateWhiskAction(WhiskAuth whiskAuth,
+                                                             ExecutableWhiskAction updatedAction,
+                                                             Map<String, Object> payload) throws IOException {
         String namespace = updatedAction.getNamespacePath();
         String name = updatedAction.getWhiskPackage().map(p -> p + "/" + updatedAction.getName()).orElse(updatedAction.getName());
         String endpoint = whiskAuth.getApihost() + "/api/v1/namespaces/" + namespace + "/actions/" + name + "?overwrite=true";

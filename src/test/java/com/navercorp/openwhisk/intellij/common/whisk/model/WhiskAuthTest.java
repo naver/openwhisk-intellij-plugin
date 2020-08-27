@@ -25,7 +25,7 @@ import static org.junit.Assert.assertEquals;
 public class WhiskAuthTest {
 
     @Test
-    public void testWhiskAuth_getAuth() {
+    public void testGetAuth() {
         String apiKey = "test-auth";
         WhiskAuth auth = new WhiskAuth(apiKey, "test-host");
 
@@ -34,7 +34,7 @@ public class WhiskAuthTest {
     }
 
     @Test
-    public void testWhiskAuth_getApihost() {
+    public void testGetApihost() {
         String expected1 = "https://test-host";
         String expected2 = "http://test-host";
         WhiskAuth auth1 = new WhiskAuth("test-auth", "test-host");
