@@ -33,8 +33,8 @@ import org.jetbrains.annotations.Nullable;
 public class WskDeployService implements PersistentStateComponent<WskDeployService> {
     private static final Logger LOG = Logger.getInstance(WskDeployService.class);
 
-    public String wskdeployPath;
-    public String wskdeployName;
+    private String wskdeployPath;
+    private String wskdeployName;
 
     @Nullable
     @Override
@@ -46,5 +46,21 @@ public class WskDeployService implements PersistentStateComponent<WskDeployServi
     public void loadState(@NotNull WskDeployService state) {
         LOG.info("Save wskdeploy");
         XmlSerializerUtil.copyBean(state, this);
+    }
+
+    public String getWskdeployPath() {
+        return wskdeployPath;
+    }
+
+    public void setWskdeployPath(String wskdeployPath) {
+        this.wskdeployPath = wskdeployPath;
+    }
+
+    public String getWskdeployName() {
+        return wskdeployName;
+    }
+
+    public void setWskdeployName(String wskdeployName) {
+        this.wskdeployName = wskdeployName;
     }
 }

@@ -64,7 +64,7 @@ public class DeleteNamespaceAction extends AnAction {
                 WhiskService whiskService = ServiceManager.getService(project, WhiskService.class);
                 List<WhiskEndpoint> endpoints = new ArrayList<>();
                 try {
-                    endpoints = new ArrayList<>(JsonParserUtils.parseWhiskEndpoints(whiskService.endpoints)); // make mutable
+                    endpoints = new ArrayList<>(JsonParserUtils.parseWhiskEndpoints(whiskService.getEndpoints())); // make mutable
                 } catch (IOException ex) {
                     LOG.error("Endpoint parsing failed", ex);
                 }
@@ -95,7 +95,7 @@ public class DeleteNamespaceAction extends AnAction {
     private void saveEndpoints(WhiskService whiskService, List<WhiskEndpoint> newEndpoints) {
         try {
             String eps = JsonParserUtils.writeEndpointsToJson(newEndpoints);
-            whiskService.endpoints = eps;
+            whiskService.setEndpoints(eps);
             whiskService.loadState(whiskService);
         } catch (JsonProcessingException e) {
             LOG.error("Endpoint parsing failed", e);

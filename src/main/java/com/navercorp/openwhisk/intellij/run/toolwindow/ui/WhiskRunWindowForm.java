@@ -49,8 +49,8 @@ public class WhiskRunWindowForm {
     private static final Logger LOG = Logger.getInstance(WhiskRunWindowForm.class);
     private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
-    public static String ENTITY_ACTION = "Action";
-    public static String ENTITY_TRIGGER = "Trigger";
+    public static final String ENTITY_ACTION = "Action";
+    public static final String ENTITY_TRIGGER = "Trigger";
 
     /**
      * Main Panel.

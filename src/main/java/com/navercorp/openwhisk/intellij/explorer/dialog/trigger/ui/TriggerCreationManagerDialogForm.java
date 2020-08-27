@@ -92,7 +92,7 @@ public class TriggerCreationManagerDialogForm {
         EventUtils.publish(project, RefreshWhiskTreeListener.TOPIC, RefreshWhiskTreeListener::refreshWhiskTree);
         WhiskService service = ServiceManager.getService(project, WhiskService.class);
         try {
-            List<WhiskEndpoint> endpoints = JsonParserUtils.parseWhiskEndpoints(service.endpoints);
+            List<WhiskEndpoint> endpoints = JsonParserUtils.parseWhiskEndpoints(service.getEndpoints());
             if (!endpoints.isEmpty()) {
                 EventUtils.publish(project, RefreshWhiskTreeListener.TOPIC, RefreshWhiskTreeListener::refreshWhiskTree);
             } else {

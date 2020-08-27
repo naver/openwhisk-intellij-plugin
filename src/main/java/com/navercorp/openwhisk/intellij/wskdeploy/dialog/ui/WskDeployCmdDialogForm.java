@@ -58,7 +58,7 @@ public class WskDeployCmdDialogForm {
 
         try {
             WhiskService whiskService = ServiceManager.getService(project, WhiskService.class);
-            List<WhiskEndpoint> endpoints = new ArrayList<>(JsonParserUtils.parseWhiskEndpoints(whiskService.endpoints)); // make mutable
+            List<WhiskEndpoint> endpoints = new ArrayList<>(JsonParserUtils.parseWhiskEndpoints(whiskService.getEndpoints())); // make mutable
 
             namespaceJList.setListData(endpoints.stream().flatMap(ep ->
                     ep.getNamespaces().stream().map(ns ->

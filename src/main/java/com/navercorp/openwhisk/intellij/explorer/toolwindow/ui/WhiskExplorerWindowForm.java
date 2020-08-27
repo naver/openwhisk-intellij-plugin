@@ -76,7 +76,7 @@ public class WhiskExplorerWindowForm {
     private FileEditorManager fileEditorManager;
     private Project project;
 
-    List<WhiskEndpoint> endpoints = new ArrayList<>();
+    private List<WhiskEndpoint> endpoints = new ArrayList<>();
 
     public WhiskExplorerWindowForm(Project project, ToolWindow toolWindow) {
         this.project = project;
@@ -103,11 +103,11 @@ public class WhiskExplorerWindowForm {
                               WhiskPackageService whiskPackageService,
                               WhiskTriggerService whiskTriggerService) {
 
-        if (StringUtils.isNotEmpty(service.endpoints)) {
+        if (StringUtils.isNotEmpty(service.getEndpoints())) {
             try {
-                endpoints = getEntities(whiskPackageService, whiskActionService, whiskTriggerService, JsonParserUtils.parseWhiskEndpoints(service.endpoints));
+                endpoints = getEntities(whiskPackageService, whiskActionService, whiskTriggerService, JsonParserUtils.parseWhiskEndpoints(service.getEndpoints()));
             } catch (IOException e) {
-                final String msg = "Failed to parsing endpoints: " + service.endpoints;
+                final String msg = "Failed to parsing endpoints: " + service.getEndpoints();
                 LOG.error(msg, e);
                 NOTIFIER.notify(project, msg, NotificationType.ERROR);
             }
@@ -330,7 +330,7 @@ public class WhiskExplorerWindowForm {
         EventUtils.subscribe(project, project, RefreshWhiskTreeListener.TOPIC, () -> {
             if (whiskJTree != null) {
                 try {
-                    List<WhiskEndpoint> whiskEndpoints = JsonParserUtils.parseWhiskEndpoints(service.endpoints);
+                    List<WhiskEndpoint> whiskEndpoints = JsonParserUtils.parseWhiskEndpoints(service.getEndpoints());
                     endpoints = getEntities(whiskPackageService, whiskActionService, whiskTriggerService, whiskEndpoints);
                     whiskJTree.setModel(new WhiskTree(endpoints, whiskPackageService));
                     expandToNamespace(whiskJTree);
@@ -341,7 +341,7 @@ public class WhiskExplorerWindowForm {
                         NOTIFIER.notify(project, msg, NotificationType.INFORMATION);
                     }
                 } catch (IOException e) {
-                    final String msg = "Failed to parsing endpoints: " + service.endpoints;
+                    final String msg = "Failed to parsing endpoints: " + service.getEndpoints();
                     LOG.error(msg, e);
                     NOTIFIER.notify(project, msg, NotificationType.ERROR);
                 }

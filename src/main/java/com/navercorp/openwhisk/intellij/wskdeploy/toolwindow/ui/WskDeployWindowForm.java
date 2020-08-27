@@ -139,8 +139,8 @@ public class WskDeployWindowForm {
 
         EventUtils.subscribe(project, project, ChooseWskDeployBinaryListener.TOPIC, (chosenWskDeployFile) -> {
             WskDeployBinary wskDeployBinary = new WskDeployBinary(chosenWskDeployFile.getPath(), chosenWskDeployFile.getName());
-            wskDeployService.wskdeployName = wskDeployBinary.getName();
-            wskDeployService.wskdeployPath = wskDeployBinary.getFullPath();
+            wskDeployService.setWskdeployName(wskDeployBinary.getName());
+            wskDeployService.setWskdeployPath(wskDeployBinary.getFullPath());
             wskDeployService.loadState(wskDeployService);
 
             wskdeployJTree.setModel(new WskDeployTreeModel(wskDeployBinary, loadWskDeployManifest(project)));
@@ -150,8 +150,8 @@ public class WskDeployWindowForm {
 
 
     private Optional<WskDeployFile> loadRegisteredWskDeploy() {
-        if (wskDeployService.wskdeployPath != null && wskDeployService.wskdeployName != null) {
-            VirtualFile file = LocalFileSystem.getInstance().findFileByPath(wskDeployService.wskdeployPath);
+        if (wskDeployService.getWskdeployPath() != null && wskDeployService.getWskdeployName() != null) {
+            VirtualFile file = LocalFileSystem.getInstance().findFileByPath(wskDeployService.getWskdeployPath());
             return ValidationUtils.validateWskDeploy(Optional.ofNullable(file))
                     .map(validWskDeploy -> new WskDeployBinary(validWskDeploy.getPath(), validWskDeploy.getName()));
         } else {

@@ -56,7 +56,7 @@ public class EditEndpointDialogForm {
          */
         this.whiskService = ServiceManager.getService(project, WhiskService.class);
         try {
-            endpoints = new ArrayList<>(JsonParserUtils.parseWhiskEndpoints(whiskService.endpoints)); // make mutable
+            endpoints = new ArrayList<>(JsonParserUtils.parseWhiskEndpoints(whiskService.getEndpoints())); // make mutable
         } catch (IOException e) {
             LOG.error("Endpoint parsing failed", e);
         }
@@ -101,7 +101,7 @@ public class EditEndpointDialogForm {
     private void saveEndpoints(List<WhiskEndpoint> newEndpoints) {
         try {
             String eps = JsonParserUtils.writeEndpointsToJson(newEndpoints);
-            whiskService.endpoints = eps;
+            whiskService.setEndpoints(eps);
             whiskService.loadState(whiskService);
         } catch (JsonProcessingException e) {
             LOG.error("Endpoint parsing failed", e);
