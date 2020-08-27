@@ -58,12 +58,10 @@ public class WhiskRunWindowFactory implements ToolWindowFactory {
     private WhiskActivationService whiskActivationService = WhiskActivationService.getInstance();
     private WhiskTriggerService whiskTriggerService = WhiskTriggerService.getInstance();
 
-    private Project project;
     private WhiskRunWindowForm whiskRunWindowForm;
 
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
-        this.project = project;
         this.whiskRunWindowForm = new WhiskRunWindowForm(project, toolWindow);
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
         Content content = contentFactory.createContent(whiskRunWindowForm.getContent(), null, false);

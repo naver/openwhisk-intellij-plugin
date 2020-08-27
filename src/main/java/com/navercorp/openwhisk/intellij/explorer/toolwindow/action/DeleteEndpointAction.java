@@ -79,9 +79,9 @@ public class DeleteEndpointAction extends AnAction {
     }
 
 
-    private List<WhiskEndpoint> removeEndpoint(List<WhiskEndpoint> endpoints, WhiskEndpoint whiskEndpoint) {
+    private List<WhiskEndpoint> removeEndpoint(List<WhiskEndpoint> endpoints, WhiskEndpoint endpoint) {
         return endpoints.stream()
-                .filter(ep -> !ep.getAlias().equals(whiskEndpoint.getAlias())) // remove endpoint
+                .filter(ep -> !ep.getAlias().equals(endpoint.getAlias())) // remove endpoint
                 .collect(Collectors.toList());
     }
 

@@ -124,7 +124,7 @@ public class TriggerManagerDialogForm {
         for (Map.Entry<String, SimplifiedWhiskRule> set : trigger.getRules().entrySet()) {
             String ruleName = set.getKey().replace(namespace + "/", "");
             String actionName = set.getValue().getAction().getPkgActionName();
-            addLinkedAction(project, actionName, ruleName);
+            addLinkedAction(actionName, ruleName);
         }
 
         addJButton.setIcon(Add);
@@ -143,7 +143,7 @@ public class TriggerManagerDialogForm {
 
                 WhiskActionMetaData action = (WhiskActionMetaData) selectActionJComboBox.getSelectedItem();
                 String actionName = action.getWhiskPackage().map(pkg -> pkg + "/" + action.getName()).orElse(action.getName());
-                addLinkedAction(project, actionName, ruleName);
+                addLinkedAction(actionName, ruleName);
             }
         });
     }
@@ -202,7 +202,7 @@ public class TriggerManagerDialogForm {
     /**
      * Helper functions
      */
-    private void addLinkedAction(Project project, String actionName, String ruleName) {
+    private void addLinkedAction(String actionName, String ruleName) {
         LinkedActionsForm linkedActionsForm = new LinkedActionsForm(project, actionName, ruleName, this::removeLinkedAction);
         linkedActionsJPanel.setLayout(new BoxLayout(linkedActionsJPanel, BoxLayout.Y_AXIS));
         linkedActionsJPanel.add(linkedActionsForm.getContent());

@@ -80,12 +80,12 @@ public class DeleteNamespaceAction extends AnAction {
     }
 
 
-    private List<WhiskEndpoint> removeNamespace(List<WhiskEndpoint> endpoints, WhiskNamespace whiskNamespace) {
+    private List<WhiskEndpoint> removeNamespace(List<WhiskEndpoint> endpoints, WhiskNamespace namespace) {
         return endpoints.stream()
                 .peek(ep -> {
                     List<WhiskNamespace> namespaces = ep.getNamespaces()
                             .stream()
-                            .filter(ns -> !ns.getPath().equals(whiskNamespace.getPath()) && !ns.getAuth().equals(whiskNamespace.getAuth()))  // remove namespace
+                            .filter(ns -> !ns.getPath().equals(namespace.getPath()) && !ns.getAuth().equals(namespace.getAuth()))  // remove namespace
                             .collect(Collectors.toList());
                     ep.setNamespaces(namespaces);
                 })

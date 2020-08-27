@@ -95,11 +95,10 @@ public class WhiskExplorerWindowForm {
         WhiskPackageService whiskPackageService = WhiskPackageService.getInstance();
         WhiskTriggerService whiskTriggerService = WhiskTriggerService.getInstance();
 
-        setWhiskTree(project, service, whiskActionService, whiskPackageService, whiskTriggerService);
+        setWhiskTree(service, whiskActionService, whiskPackageService, whiskTriggerService);
     }
 
-    private void setWhiskTree(Project project,
-                              WhiskService service,
+    private void setWhiskTree(WhiskService service,
                               WhiskActionService whiskActionService,
                               WhiskPackageService whiskPackageService,
                               WhiskTriggerService whiskTriggerService) {
@@ -162,7 +161,7 @@ public class WhiskExplorerWindowForm {
                                 whiskActionService.getWhiskAction(auth,
                                         Optional.ofNullable(namespace.getPath()),
                                         Optional.ofNullable(pkg.getName()), whiskAction.getName())
-                                        .ifPresent(executableWhiskAction -> openEditorAndWhiskRunWindow(project, auth, executableWhiskAction));
+                                        .ifPresent(executableWhiskAction -> openEditorAndWhiskRunWindow(auth, executableWhiskAction));
                             } catch (IOException e1) {
                                 final String msg1 = "The action cannot be opened.";
                                 LOG.error(msg1, e1);
@@ -178,7 +177,7 @@ public class WhiskExplorerWindowForm {
 
                             try {
                                 whiskActionService.getWhiskAction(auth, Optional.ofNullable(namespace.getPath()), Optional.empty(), whiskAction.getName())
-                                        .ifPresent(executableWhiskAction -> openEditorAndWhiskRunWindow(project, auth, executableWhiskAction));
+                                        .ifPresent(executableWhiskAction -> openEditorAndWhiskRunWindow(auth, executableWhiskAction));
                             } catch (IOException e1) {
                                 final String msg1 = "The action cannot be opened.";
                                 LOG.error(msg1, e1);
@@ -210,7 +209,7 @@ public class WhiskExplorerWindowForm {
                                     whiskActionService.getWhiskAction(auth,
                                             Optional.ofNullable(p.getNamespace()),
                                             Optional.ofNullable(p.getName()), action.getName())
-                                            .ifPresent(executableWhiskAction -> openEditorAndWhiskRunWindow(project, auth, executableWhiskAction));
+                                            .ifPresent(executableWhiskAction -> openEditorAndWhiskRunWindow(auth, executableWhiskAction));
                                 } catch (IOException e1) {
                                     final String msg1 = "The action cannot be opened.";
                                     LOG.error(msg1, e1);
@@ -378,7 +377,7 @@ public class WhiskExplorerWindowForm {
         }
     }
 
-    private void openEditorAndWhiskRunWindow(Project project, WhiskAuth auth, ExecutableWhiskAction executableWhiskAction) {
+    private void openEditorAndWhiskRunWindow(WhiskAuth auth, ExecutableWhiskAction executableWhiskAction) {
         try {
             final String tmpFilePath = project.getBasePath() + "/.idea/openwhisk";
 
@@ -426,9 +425,9 @@ public class WhiskExplorerWindowForm {
     }
 
     private List<WhiskEndpoint> getEntities(WhiskPackageService whiskPackageService, WhiskActionService
-            whiskActionService, WhiskTriggerService whiskTriggerService, List<WhiskEndpoint> endpoints) {
-        List<WhiskEndpoint> whiskEndpoints = new ArrayList<>();
-        for (WhiskEndpoint ep : endpoints) {
+            whiskActionService, WhiskTriggerService whiskTriggerService, List<WhiskEndpoint> whiskEndpoints) {
+        List<WhiskEndpoint> newWhiskEndpoints = new ArrayList<>();
+        for (WhiskEndpoint ep : whiskEndpoints) {
             List<WhiskNamespace> newNamespaces = new ArrayList<>();
             for (WhiskNamespace ns : ep.getNamespaces()) {
                 try {
@@ -446,9 +445,9 @@ public class WhiskExplorerWindowForm {
                 }
             }
             ep.setNamespaces(newNamespaces);
-            whiskEndpoints.add(ep);
+            newWhiskEndpoints.add(ep);
         }
-        return whiskEndpoints;
+        return newWhiskEndpoints;
     }
 
     public JPanel getContent() {

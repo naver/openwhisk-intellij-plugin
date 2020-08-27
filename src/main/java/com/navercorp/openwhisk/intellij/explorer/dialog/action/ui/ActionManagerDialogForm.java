@@ -303,8 +303,8 @@ public class ActionManagerDialogForm {
         return ParameterUtils.validateParams(defaultParameterForm.getDefaultParameter());
     }
 
-    private CodeExec createExec(ExecutableWhiskAction action, Runtime runtime) {
-        CodeExec codeExec = action.getExec();
+    private CodeExec createExec(ExecutableWhiskAction executableWhiskAction, Runtime runtime) {
+        CodeExec codeExec = executableWhiskAction.getExec();
         codeExec.setKind(runtime.toString());
 
         if (dockerImageForm != null) {
@@ -318,12 +318,12 @@ public class ActionManagerDialogForm {
         return codeExec;
     }
 
-    private List<Map<String, Object>> annotationToCollection(ExecutableWhiskAction action,
+    private List<Map<String, Object>> annotationToCollection(ExecutableWhiskAction executableWhiskAction,
                                                              boolean web,
                                                              boolean rawHttp,
                                                              boolean customOption,
                                                              boolean finalDefaultParameter) {
-        Map<String, Object> annotations = ParameterUtils.listMapToMap(action.getAnnotations());
+        Map<String, Object> annotations = ParameterUtils.listMapToMap(executableWhiskAction.getAnnotations());
         annotations.put("web-export", web);
         annotations.put("raw-http", rawHttp);
         annotations.put("web-custom-options", customOption);
