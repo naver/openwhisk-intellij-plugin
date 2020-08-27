@@ -52,7 +52,7 @@ public class ActivationViewEditorForm {
     private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
     private DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
-    private final int ACTIVATION_ID_COLUMN = 1;
+    private static final int ACTIVATION_ID_COLUMN = 1;
 
     private JPanel mainJPanel;
     private JPanel actionsToobarJPanel;

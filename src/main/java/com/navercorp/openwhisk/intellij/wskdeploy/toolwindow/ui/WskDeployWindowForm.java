@@ -59,7 +59,7 @@ public class WskDeployWindowForm {
     private static final Logger LOG = Logger.getInstance(WskDeployWindowForm.class);
     private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
-    private String WSKDEPLOY_URL = "https://github.com/apache/openwhisk-wskdeploy/releases";
+    private static final String WSKDEPLOY_URL = "https://github.com/apache/openwhisk-wskdeploy/releases";
 
     private JPanel mainJPanel;
     private JPanel actionsJPanel;

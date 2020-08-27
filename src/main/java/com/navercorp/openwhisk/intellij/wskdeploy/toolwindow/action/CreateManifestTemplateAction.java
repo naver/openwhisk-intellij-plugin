@@ -42,8 +42,8 @@ public class CreateManifestTemplateAction extends AnAction {
     private static final Logger LOG = Logger.getInstance(CreateManifestTemplateAction.class);
     private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
-    private final String[] META_FILES = new String[]{"manifest.yaml", "HOW-TO-DEPLOY.md"};
-    private final String[] SOURCE_FILES = new String[]{"index.js", "index.test.js", "package.json"};
+    private static final String[] META_FILES = new String[]{"manifest.yaml", "HOW-TO-DEPLOY.md"};
+    private static final String[] SOURCE_FILES = new String[]{"index.js", "index.test.js", "package.json"};
 
     CreateManifestTemplateAction() {
         super(AllIcons.Actions.Menu_paste);

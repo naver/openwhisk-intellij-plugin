@@ -46,6 +46,8 @@ public class TriggerManagerDialogForm {
     private static final Logger LOG = Logger.getInstance(TriggerManagerDialogForm.class);
     private static final SimpleNotifier NOTIFIER = SimpleNotifier.getInstance();
 
+    private static final String DEFAULT_RULE_TEXTAREA_MSG = "If not entered, it is automatically generated.";
+
     private JPanel mainJPanel;
     private JPanel tirggerNameJPanel;
     private JPanel triggerActionsJPanel;
@@ -58,8 +60,6 @@ public class TriggerManagerDialogForm {
     private JPanel linkedActionsJPanel;
     private JPanel triggerDefaultParameterJPanel;
     private JTextArea defaultParameterJTextArea;
-
-    private String DEFAULT_RULE_TEXTAREA_MSG = "If not entered, it is automatically generated.";
 
     private Project project;
     private Map<String, LinkedActionsForm> cachedRules = new HashMap<>();
