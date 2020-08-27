@@ -27,6 +27,10 @@ import java.util.Optional;
 public class WhiskUtils {
     private static final Logger LOG = Logger.getInstance(WhiskUtils.class);
 
+    protected WhiskUtils() {
+        throw new UnsupportedOperationException("Utility classes should not have a public or default constructor.");
+    }
+
     public static Optional<WhiskAuth> findWhiskAuth(List<WhiskEndpoint> endpoints, WhiskNamespace namespace) {
         for (WhiskEndpoint ep: endpoints) {
             for (WhiskNamespace np: ep.getNamespaces()) {

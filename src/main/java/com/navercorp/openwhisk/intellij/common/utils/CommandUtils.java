@@ -27,6 +27,10 @@ public class CommandUtils {
 
     private static final Logger LOG = Logger.getInstance(CommandUtils.class);
 
+    protected CommandUtils() {
+        throw new UnsupportedOperationException("Utility classes should not have a public or default constructor.");
+    }
+
     public static WskDeployCmdResponse runCommand(String[] command)
             throws IOException, InterruptedException {
         ProcessBuilder builder = new ProcessBuilder(command);

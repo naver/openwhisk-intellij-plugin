@@ -41,6 +41,10 @@ public class JsonParserUtils {
     private static ObjectMapper mapper = new ObjectMapper();
     private static SimpleModule simpleModule = new SimpleModule();
 
+    protected JsonParserUtils() {
+        throw new UnsupportedOperationException("Utility classes should not have a public or default constructor.");
+    }
+
     static {
         simpleModule.addSerializer(CodeExec.class, new CodeExecSerializer());
         mapper.registerModule(simpleModule);

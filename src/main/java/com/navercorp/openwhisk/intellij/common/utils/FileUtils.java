@@ -32,6 +32,10 @@ public class FileUtils {
 
     private static final Logger LOG = Logger.getInstance(FileUtils.class);
 
+    protected FileUtils() {
+        throw new UnsupportedOperationException("Utility classes should not have a public or default constructor.");
+    }
+
     /**
      * It accumulates in the .gradle/caches subfolder and files are not automatically cleared unless you delete the cache directory.
      * TODO Delete the cache file globally.

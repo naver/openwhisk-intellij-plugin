@@ -28,6 +28,10 @@ import static com.navercorp.openwhisk.intellij.common.utils.CommandUtils.runComm
 public class ValidationUtils {
     private static final Logger LOG = Logger.getInstance(ValidationUtils.class);
 
+    protected ValidationUtils() {
+        throw new UnsupportedOperationException("Utility classes should not have a public or default constructor.");
+    }
+
     public static Optional<VirtualFile> validateWskDeploy(Optional<VirtualFile> wskdeploy) {
         return wskdeploy.flatMap(wskdeployFile -> {
             String[] cmd = new String[]{wskdeployFile.getPath(), "version"};
