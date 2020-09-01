@@ -83,6 +83,15 @@ public abstract class WhiskAction<E extends Exec> {
         return "";
     }
 
+    public String getCodeType() {
+        for (Map<String, Object> a : this.annotations) {
+            if ("code-type".equals(a.get("key"))) {
+                return (String) a.get("value");
+            }
+        }
+        return "";
+    }
+
     public String getKindExtension() {
         String kind = getKind();
         if (kind.contains("java")) {
@@ -99,9 +108,25 @@ public abstract class WhiskAction<E extends Exec> {
             return ".go";
         } else if (kind.contains("ruby")) {
             return ".rb";
-        } else {
-            return "";
+        } else if (kind.contains("blackbox")) {
+            String codeType = getCodeType();
+            if (codeType.contains("java")) {
+                return ".java";
+            } else if (codeType.contains("nodejs")) {
+                return ".js";
+            } else if (codeType.contains("python")) {
+                return ".py";
+            } else if (codeType.contains("swift")) {
+                return ".swift";
+            } else if (codeType.contains("php")) {
+                return ".php";
+            } else if (codeType.contains("go")) {
+                return ".go";
+            } else if (codeType.contains("ruby")) {
+                return ".rb";
+            }
         }
+        return "";
     }
 
     public Icon getKindIcon() {

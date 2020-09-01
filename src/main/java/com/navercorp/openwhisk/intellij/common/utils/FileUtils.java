@@ -25,6 +25,7 @@ import com.navercorp.openwhisk.intellij.common.whisk.model.activation.WhiskActiv
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Optional;
 
 import static com.navercorp.openwhisk.intellij.common.utils.JsonParserUtils.writeWhiskActivationToJson;
 
@@ -56,7 +57,8 @@ public class FileUtils {
         if (action.getExec().isBinary()) {
             fw.write("This action was created as a zip file, and you can't see the code here.");
         } else {
-            fw.write(action.getExec().getCode());
+            String code = Optional.ofNullable(action.getExec().getCode()).orElse("This action is empty");
+            fw.write(code);
         }
         fw.close();
 
