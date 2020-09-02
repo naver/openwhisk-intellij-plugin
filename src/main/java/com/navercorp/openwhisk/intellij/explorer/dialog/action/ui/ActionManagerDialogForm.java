@@ -19,6 +19,7 @@ package com.navercorp.openwhisk.intellij.explorer.dialog.action.ui;
 import com.intellij.notification.NotificationType;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
+import com.intellij.uiDesigner.core.GridConstraints;
 import com.navercorp.openwhisk.intellij.common.notification.SimpleNotifier;
 import com.navercorp.openwhisk.intellij.common.utils.EventUtils;
 import com.navercorp.openwhisk.intellij.common.utils.JsonParserUtils;
@@ -31,16 +32,18 @@ import com.navercorp.openwhisk.intellij.common.whisk.model.action.WhiskActionMet
 import com.navercorp.openwhisk.intellij.common.whisk.model.exec.CodeExec;
 import com.navercorp.openwhisk.intellij.common.whisk.service.WhiskActionService;
 import com.navercorp.openwhisk.intellij.run.toolwindow.listener.RefreshActionOrTriggerListener;
-import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.event.ListDataListener;
 import java.awt.*;
+import java.awt.event.ItemEvent;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import static com.intellij.uiDesigner.core.GridConstraints.*;
 
 public class ActionManagerDialogForm {
     private static final Logger LOG = Logger.getInstance(ActionManagerDialogForm.class);
@@ -61,13 +64,8 @@ public class ActionManagerDialogForm {
     private JPanel linkedActionsJPanel;
     private JSeparator linkedActionsJSeparator;
 
-    @Nullable
     private DefaultParameterForm defaultParameterForm;
-
-    @Nullable
     private DockerImageForm dockerImageForm;
-
-    @Nullable
     private LinkedActionsForm linkedActionsForm;
 
     private Project project;
@@ -81,12 +79,20 @@ public class ActionManagerDialogForm {
         this.whiskAuth = auth;
         this.action = action;
 
+        // add linked actions panel
+        linkedActionsForm = new LinkedActionsForm(project, action.getNamespace().split("/")[0], actions, action.getExec().getComponents());
+        linkedActionsJPanel.add(linkedActionsForm.getContent(), BorderLayout.CENTER);
+
+        // add docker image panel
+        dockerImageForm = new DockerImageForm();
+        dockerImageJPanel.add(dockerImageForm.getContent(), BorderLayout.CENTER);
+
+        // add default parameter panel
+        defaultParameterForm = new DefaultParameterForm();
+        defaultParameterJPanel.add(defaultParameterForm.getContent(), BorderLayout.CENTER);
+
         switch (action.getKind()) {
             case "sequence":
-                // add linked actions panel
-                linkedActionsForm = new LinkedActionsForm(project, action.getNamespace().split("/")[0], actions, action.getExec().getComponents());
-                linkedActionsJPanel.add(linkedActionsForm.getContent(), BorderLayout.CENTER);
-
                 // remove docker image panel
                 mainJPanel.remove(dockerImageJPanel);
                 mainJPanel.remove(dockerImageJSeparator);
@@ -99,14 +105,6 @@ public class ActionManagerDialogForm {
                 // remove linked actions panel
                 mainJPanel.remove(linkedActionsJPanel);
                 mainJPanel.remove(linkedActionsJSeparator);
-
-                // add docker image panel
-                dockerImageForm = new DockerImageForm();
-                dockerImageJPanel.add(dockerImageForm.getContent(), BorderLayout.CENTER);
-
-                // add default parameter panel
-                defaultParameterForm = new DefaultParameterForm();
-                defaultParameterJPanel.add(defaultParameterForm.getContent(), BorderLayout.CENTER);
                 break;
             default: // normal
                 // remove linked actions panel
@@ -116,10 +114,6 @@ public class ActionManagerDialogForm {
                 // remove docker image panel
                 mainJPanel.remove(dockerImageJPanel);
                 mainJPanel.remove(dockerImageJSeparator);
-
-                // add default parameter panel
-                defaultParameterForm = new DefaultParameterForm();
-                defaultParameterJPanel.add(defaultParameterForm.getContent(), BorderLayout.CENTER);
         }
 
         runtimeJComboBox.setModel(new ComboBoxModel<Runtime>() {
@@ -236,18 +230,82 @@ public class ActionManagerDialogForm {
         // final option
         finalOptionJCheckBox.setSelected(action.isFinalDefaultParameter());
 
-        if (defaultParameterForm != null) {
-            try {
-                // default parameter
-                defaultParameterForm.setDefaultParameter(JsonParserUtils.writeParameterToJson(action.getParameters()));
-            } catch (IOException e) {
-                LOG.error("Failed to parse json: " + action.getFullyQualifiedName(), e);
-            }
+        try {
+            // default parameter
+            defaultParameterForm.setDefaultParameter(JsonParserUtils.writeParameterToJson(action.getParameters()));
+        } catch (IOException e) {
+            LOG.error("Failed to parse json: " + action.getFullyQualifiedName(), e);
         }
 
-        if (dockerImageForm != null) {
-            dockerImageForm.setDockerImage(action.getExec().getImage());
-        }
+        dockerImageForm.setDockerImage(action.getExec().getImage());
+
+        /**
+         * Set runtime event
+         */
+        runtimeJComboBox.addItemListener(e -> {
+            if (e.getStateChange() != ItemEvent.SELECTED) {
+                return;
+            }
+
+            switch ((Runtime) e.getItem()) {
+                case SEQUENCE:
+                    removeAllPanel();
+
+                    mainJPanel.add(linkedActionsJPanel, new GridConstraints(7, 0, 1, 1,
+                            SIZEPOLICY_FIXED, SIZEPOLICY_CAN_GROW | SIZEPOLICY_CAN_SHRINK, FILL_NONE, ANCHOR_CENTER,
+                            new Dimension(-1, -1), new Dimension(-1, 150), new Dimension(-1, -1), 0));
+                    mainJPanel.add(linkedActionsJSeparator, new GridConstraints(8, 0, 1, 1,
+                            SIZEPOLICY_FIXED, SIZEPOLICY_CAN_GROW | SIZEPOLICY_CAN_SHRINK, FILL_NONE, ANCHOR_CENTER,
+                            new Dimension(-1, -1), new Dimension(-1, -1), new Dimension(-1, 5), 0));
+
+                    mainJPanel.updateUI();
+                    break;
+                case DOCKER:
+                    removeAllPanel();
+
+                    mainJPanel.add(dockerImageJPanel, new GridConstraints(7, 0, 1, 1,
+                            SIZEPOLICY_FIXED, SIZEPOLICY_CAN_GROW | SIZEPOLICY_CAN_SHRINK, FILL_NONE, ANCHOR_CENTER,
+                            new Dimension(-1, -1), new Dimension(-1, -1), new Dimension(-1, -1), 0));
+                    mainJPanel.add(dockerImageJSeparator, new GridConstraints(8, 0, 1, 1,
+                            SIZEPOLICY_FIXED, SIZEPOLICY_CAN_GROW | SIZEPOLICY_CAN_SHRINK, FILL_NONE, ANCHOR_CENTER,
+                            new Dimension(-1, -1), new Dimension(-1, -1), new Dimension(-1, 5), 0));
+
+                    mainJPanel.add(defaultParameterJPanel, new GridConstraints(9, 0, 1, 1,
+                            SIZEPOLICY_FIXED, SIZEPOLICY_CAN_GROW | SIZEPOLICY_CAN_SHRINK, FILL_NONE, ANCHOR_CENTER,
+                            new Dimension(-1, -1), new Dimension(-1, -1), new Dimension(-1, -1), 0));
+                    mainJPanel.add(defaultParameterJSeparator, new GridConstraints(10, 0, 1, 1,
+                            SIZEPOLICY_FIXED, SIZEPOLICY_CAN_GROW | SIZEPOLICY_CAN_SHRINK, FILL_NONE, ANCHOR_CENTER,
+                            new Dimension(-1, -1), new Dimension(-1, -1), new Dimension(-1, 5), 0));
+
+                    mainJPanel.updateUI();
+                    break;
+                default: // normal
+                    removeAllPanel();
+
+                    mainJPanel.add(defaultParameterJPanel, new GridConstraints(7, 0, 1, 1,
+                            SIZEPOLICY_FIXED, SIZEPOLICY_CAN_GROW | SIZEPOLICY_CAN_SHRINK, FILL_NONE, ANCHOR_CENTER,
+                            new Dimension(-1, -1), new Dimension(-1, -1), new Dimension(-1, -1), 0));
+                    mainJPanel.add(defaultParameterJSeparator, new GridConstraints(8, 0, 1, 1,
+                            SIZEPOLICY_FIXED, SIZEPOLICY_CAN_GROW | SIZEPOLICY_CAN_SHRINK, FILL_NONE, ANCHOR_CENTER,
+                            new Dimension(-1, -1), new Dimension(-1, -1), new Dimension(-1, 5), 0));
+
+                    mainJPanel.updateUI();
+            }
+        });
+    }
+
+    private void removeAllPanel() {
+        // remove linked actions panel
+        mainJPanel.remove(linkedActionsJPanel);
+        mainJPanel.remove(linkedActionsJSeparator);
+
+        // remove docker image panel
+        mainJPanel.remove(dockerImageJPanel);
+        mainJPanel.remove(dockerImageJSeparator);
+
+        // remove default parameter panel
+        mainJPanel.remove(defaultParameterJPanel);
+        mainJPanel.remove(defaultParameterJSeparator);
     }
 
     public void updateAction() {
@@ -307,12 +365,14 @@ public class ActionManagerDialogForm {
         CodeExec codeExec = executableWhiskAction.getExec();
         codeExec.setKind(runtime.toString());
 
-        if (dockerImageForm != null) {
-            codeExec.setImage(dockerImageForm.getDockerImage());
-        }
-
-        if (linkedActionsForm != null) {
-            codeExec.setComponents(linkedActionsForm.getComponents());
+        switch (runtime) {
+            case SEQUENCE:
+                codeExec.setComponents(linkedActionsForm.getComponents());
+                break;
+            case DOCKER:
+                codeExec.setImage(dockerImageForm.getDockerImage());
+                break;
+            default: // normal
         }
 
         return codeExec;
