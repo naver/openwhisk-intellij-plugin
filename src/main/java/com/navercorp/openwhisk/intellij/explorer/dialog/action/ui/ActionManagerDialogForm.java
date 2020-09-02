@@ -63,9 +63,12 @@ public class ActionManagerDialogForm {
     private JSeparator dockerImageJSeparator;
     private JPanel linkedActionsJPanel;
     private JSeparator linkedActionsJSeparator;
+    private JSeparator codeTypeJSeparator;
+    private JPanel codeTypeJPanel;
 
     private DefaultParameterForm defaultParameterForm;
     private DockerImageForm dockerImageForm;
+    private CodeTypeForm codeTypeForm;
     private LinkedActionsForm linkedActionsForm;
 
     private Project project;
@@ -87,6 +90,10 @@ public class ActionManagerDialogForm {
         dockerImageForm = new DockerImageForm();
         dockerImageJPanel.add(dockerImageForm.getContent(), BorderLayout.CENTER);
 
+        // add code type panel
+        codeTypeForm = new CodeTypeForm();
+        codeTypeJPanel.add(codeTypeForm.getContent(), BorderLayout.CENTER);
+
         // add default parameter panel
         defaultParameterForm = new DefaultParameterForm();
         defaultParameterJPanel.add(defaultParameterForm.getContent(), BorderLayout.CENTER);
@@ -96,6 +103,10 @@ public class ActionManagerDialogForm {
                 // remove docker image panel
                 mainJPanel.remove(dockerImageJPanel);
                 mainJPanel.remove(dockerImageJSeparator);
+
+                // remove code type panel
+                mainJPanel.remove(codeTypeJPanel);
+                mainJPanel.remove(codeTypeJSeparator);
 
                 // remove default parameter panel
                 mainJPanel.remove(defaultParameterJPanel);
@@ -114,6 +125,10 @@ public class ActionManagerDialogForm {
                 // remove docker image panel
                 mainJPanel.remove(dockerImageJPanel);
                 mainJPanel.remove(dockerImageJSeparator);
+
+                // remove code type panel
+                mainJPanel.remove(codeTypeJPanel);
+                mainJPanel.remove(codeTypeJSeparator);
         }
 
         runtimeJComboBox.setModel(new ComboBoxModel<Runtime>() {
@@ -236,8 +251,10 @@ public class ActionManagerDialogForm {
         } catch (IOException e) {
             LOG.error("Failed to parse json: " + action.getFullyQualifiedName(), e);
         }
-
+        // docker image url
         dockerImageForm.setDockerImage(action.getExec().getImage());
+        // code type
+        action.getCodeType().ifPresent(codeType -> codeTypeForm.setCodeType(codeType));
 
         /**
          * Set runtime event
@@ -270,10 +287,17 @@ public class ActionManagerDialogForm {
                             SIZEPOLICY_FIXED, SIZEPOLICY_CAN_GROW | SIZEPOLICY_CAN_SHRINK, FILL_NONE, ANCHOR_CENTER,
                             new Dimension(-1, -1), new Dimension(-1, -1), new Dimension(-1, 5), 0));
 
-                    mainJPanel.add(defaultParameterJPanel, new GridConstraints(9, 0, 1, 1,
+                    mainJPanel.add(codeTypeJPanel, new GridConstraints(9, 0, 1, 1,
                             SIZEPOLICY_FIXED, SIZEPOLICY_CAN_GROW | SIZEPOLICY_CAN_SHRINK, FILL_NONE, ANCHOR_CENTER,
                             new Dimension(-1, -1), new Dimension(-1, -1), new Dimension(-1, -1), 0));
-                    mainJPanel.add(defaultParameterJSeparator, new GridConstraints(10, 0, 1, 1,
+                    mainJPanel.add(codeTypeJSeparator, new GridConstraints(10, 0, 1, 1,
+                            SIZEPOLICY_FIXED, SIZEPOLICY_CAN_GROW | SIZEPOLICY_CAN_SHRINK, FILL_NONE, ANCHOR_CENTER,
+                            new Dimension(-1, -1), new Dimension(-1, -1), new Dimension(-1, 5), 0));
+
+                    mainJPanel.add(defaultParameterJPanel, new GridConstraints(11, 0, 1, 1,
+                            SIZEPOLICY_FIXED, SIZEPOLICY_CAN_GROW | SIZEPOLICY_CAN_SHRINK, FILL_NONE, ANCHOR_CENTER,
+                            new Dimension(-1, -1), new Dimension(-1, -1), new Dimension(-1, -1), 0));
+                    mainJPanel.add(defaultParameterJSeparator, new GridConstraints(12, 0, 1, 1,
                             SIZEPOLICY_FIXED, SIZEPOLICY_CAN_GROW | SIZEPOLICY_CAN_SHRINK, FILL_NONE, ANCHOR_CENTER,
                             new Dimension(-1, -1), new Dimension(-1, -1), new Dimension(-1, 5), 0));
 
@@ -302,6 +326,10 @@ public class ActionManagerDialogForm {
         // remove docker image panel
         mainJPanel.remove(dockerImageJPanel);
         mainJPanel.remove(dockerImageJSeparator);
+
+        // remove code type panel
+        mainJPanel.remove(codeTypeJPanel);
+        mainJPanel.remove(codeTypeJSeparator);
 
         // remove default parameter panel
         mainJPanel.remove(defaultParameterJPanel);
@@ -332,8 +360,10 @@ public class ActionManagerDialogForm {
             boolean rawHttp = rawHttpJCheckBox.isSelected();
             boolean customOption = customOptionHeaderJCheckBox.isSelected();
             boolean finalDefaultParameter = finalOptionJCheckBox.isSelected();
+            // code type
+            Optional<String> codeType = getCodeType(runtime);
             // annotations
-            List<Map<String, Object>> annotations = annotationToCollection(action, web, rawHttp, customOption, finalDefaultParameter);
+            List<Map<String, Object>> annotations = annotationToCollection(action, web, rawHttp, customOption, finalDefaultParameter, codeType);
 
             // payload
             Map<String, Object> payload = new LinkedHashMap<>();
@@ -351,6 +381,16 @@ public class ActionManagerDialogForm {
             String msg = "Failed to update action: " + action.getFullyQualifiedName();
             LOG.error(msg, e);
             NOTIFIER.notify(project, msg, NotificationType.ERROR);
+        }
+    }
+
+    private Optional<String> getCodeType(Runtime runtime) {
+        switch (runtime) {
+            case DOCKER:
+                Runtime codeType = codeTypeForm.getSelectedCodeType();
+                return Optional.ofNullable(codeType.toString());
+            default:
+                return Optional.empty();
         }
     }
 
@@ -382,12 +422,14 @@ public class ActionManagerDialogForm {
                                                              boolean web,
                                                              boolean rawHttp,
                                                              boolean customOption,
-                                                             boolean finalDefaultParameter) {
+                                                             boolean finalDefaultParameter,
+                                                             Optional<String> codeType) {
         Map<String, Object> annotations = ParameterUtils.listMapToMap(executableWhiskAction.getAnnotations());
         annotations.put("web-export", web);
         annotations.put("raw-http", rawHttp);
         annotations.put("web-custom-options", customOption);
         annotations.put("final", finalDefaultParameter);
+        codeType.map(ct -> annotations.put("code-type", ct));
         return ParameterUtils.mapToListMap(annotations);
     }
 

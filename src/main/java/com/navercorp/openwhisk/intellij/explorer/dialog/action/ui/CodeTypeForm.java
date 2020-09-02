@@ -88,11 +88,18 @@ public class CodeTypeForm {
         });
     }
 
-    public void setRuntime(Runtime runtime) {
-        codeTypeJComboBox.setSelectedItem(runtime);
+    public void setCodeType(String codeType) {
+        Runtime runtime = Runtime.toRuntime(codeType);
+        switch (runtime) {
+            case SEQUENCE:
+            case DOCKER:
+                break;
+            default: // normal
+                codeTypeJComboBox.setSelectedItem(runtime);
+        }
     }
 
-    public Runtime getSelectedRuntime() {
+    public Runtime getSelectedCodeType() {
         return (Runtime) codeTypeJComboBox.getSelectedItem();
     }
 
