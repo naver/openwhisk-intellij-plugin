@@ -31,6 +31,7 @@ import com.navercorp.openwhisk.intellij.common.whisk.model.action.ExecutableWhis
 import com.navercorp.openwhisk.intellij.common.whisk.model.action.WhiskActionMetaData;
 import com.navercorp.openwhisk.intellij.common.whisk.model.exec.CodeExec;
 import com.navercorp.openwhisk.intellij.common.whisk.service.WhiskActionService;
+import com.navercorp.openwhisk.intellij.explorer.toolwindow.listener.RefreshWhiskTreeListener;
 import com.navercorp.openwhisk.intellij.run.toolwindow.listener.RefreshActionOrTriggerListener;
 
 import javax.swing.*;
@@ -376,6 +377,7 @@ public class ActionManagerDialogForm {
             whiskActionService.updateWhiskAction(whiskAuth, action, payload).ifPresent(updated -> {
                 NOTIFIER.notify(project, "Action update succeeded: " + updated.getFullyQualifiedName(), NotificationType.INFORMATION);
                 EventUtils.publish(project, RefreshActionOrTriggerListener.TOPIC, RefreshActionOrTriggerListener::fetchActionMetadata);
+                EventUtils.publish(project, RefreshWhiskTreeListener.TOPIC, RefreshWhiskTreeListener::refreshWhiskTree);
             });
         } catch (IOException e) {
             String msg = "Failed to update action: " + action.getFullyQualifiedName();
