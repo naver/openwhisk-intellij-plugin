@@ -48,32 +48,7 @@ public class CodeTypeForm {
 
             @Override
             public Runtime getElementAt(int index) {
-                switch (index) {
-                    case 0:
-                        return Runtime.NODE_6;
-                    case 1:
-                        return Runtime.NODE_8;
-                    case 2:
-                        return Runtime.NODE_10;
-                    case 3:
-                        return Runtime.NODE_12;
-                    case 4:
-                        return Runtime.PYTHON_2;
-                    case 5:
-                        return Runtime.PYTHON_3;
-                    case 6:
-                        return Runtime.JAVA;
-                    case 7:
-                        return Runtime.SWIFT_3_1_1;
-                    case 8:
-                        return Runtime.SWIFT_4_2;
-                    case 9:
-                        return Runtime.PHP_7_2;
-                    case 10:
-                        return Runtime.GO_1_11;
-                    default:
-                        return Runtime.RUBY_2_5;
-                }
+                return Runtime.toCodeType(index);
             }
 
             @Override
