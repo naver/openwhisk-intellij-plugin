@@ -36,6 +36,13 @@ public class SimpleNotifier {
         return LazyHolder.INSTANCE;
     }
 
+    /**
+     * From 2020.3 version, 'NotificationGroupManager.getInstance()' is used.
+     * Deprecated method is maintained for backward compatibility support.
+     * If we find a way to support backwards compatibility in the future, follow the guide below to replace the API.
+     *
+     * https://jetbrains.org/intellij/sdk/docs/user_interface_components/notifications.html#top-level-notifications
+     */
     private static final NotificationGroup NOTIFICATION_GROUP =
             new NotificationGroup("Simple Notification Group", NotificationDisplayType.STICKY_BALLOON, true);
 
