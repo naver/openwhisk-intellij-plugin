@@ -22,7 +22,6 @@ import gnu.trove.THashMap;
 
 import javax.swing.*;
 import java.util.Map;
-import java.util.Objects;
 
 public class Icons {
 
@@ -56,7 +55,11 @@ public class Icons {
     private static Icon load(String path) {
         try {
             Icon icon = IconLoader.findIcon(path);
-            return Objects.requireNonNullElse(icon, AllIcons.General.Warning);
+            if (icon != null) {
+                return icon;
+            } else {
+                return AllIcons.General.Warning;
+            }
         } catch (Throwable t) {
             return AllIcons.General.Warning;
         }
