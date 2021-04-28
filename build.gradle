@@ -35,12 +35,12 @@ dependencies {
 }
 
 intellij {
-    version '2020.3'
+    version '2021.1'
 }
 
 patchPluginXml {
     sinceBuild '181.*'
-    untilBuild '203.*'
+    untilBuild '211.*'
 }
 
 publishPlugin {
