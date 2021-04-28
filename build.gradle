@@ -21,7 +21,7 @@ plugins {
 }
 
 group 'com.navercorp.openwhisk.intellij'
-version '1.1.4'
+version '1.1.5'
 
 sourceCompatibility = 11
 

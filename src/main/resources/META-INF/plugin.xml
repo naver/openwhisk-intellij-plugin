@@ -2,8 +2,8 @@
     <id>com.navercorp.openwhisk.intellij</id>
     <name>DevTools for Apache Openwhisk</name>
     <vendor email="dl_lambda_op@navercorp.com" url="https://github.com/naver">NAVER</vendor>
-    <version>1.1.4</version>
-    <idea-version since-build="181.*" until-build="203.*"/>
+    <version>1.1.5</version>
+    <idea-version since-build="181.*" until-build="211.*"/>
 
     <description><![CDATA[
 <p>
@@ -45,7 +45,7 @@
 
     <change-notes><![CDATA[
 <ul>
-    <li>Support IDEA 203.* version: https://github.com/naver/openwhisk-intellij-plugin/pull/31</li>
+    <li>Support IDEA 211.* version: https://github.com/naver/openwhisk-intellij-plugin/pull/35</li>
 </ul>
     ]]></change-notes>
 
