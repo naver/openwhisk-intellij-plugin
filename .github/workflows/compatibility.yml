@@ -6,7 +6,7 @@ on:
 
 jobs:
   compatibility:
-    name: Ensure plugin compatibility against 2018.1 ~ 2020.3 for IDEA Community, IDEA Ultimate
+    name: Ensure plugin compatibility against 2019.1 ~ 2021.1 for IDEA Community, IDEA Ultimate
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -25,22 +25,18 @@ jobs:
         uses: ChrisCarini/intellij-platform-plugin-verifier-action@latest
         with:
           ide-versions: |
-            ideaIC:2018.1
-            ideaIC:2018.2
-            ideaIC:2018.3.6
             ideaIC:2019.1.4
             ideaIC:2019.3
             ideaIC:2020.1
             ideaIC:2020.2
             ideaIC:2020.3
-            ideaIU:2018.1
-            ideaIU:2018.2
-            ideaIU:2018.3.6
+            ideaIC:2021.1
             ideaIU:2019.1.4
             ideaIU:2019.3
             ideaIU:2020.1
             ideaIU:2020.2
             ideaIU:2020.3
+            ideaIU:2021.1
 
       - name: Get log file path and print contents
         run: |
