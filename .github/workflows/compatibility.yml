@@ -6,7 +6,7 @@ on:
 
 jobs:
   compatibility:
-    name: Ensure plugin compatibility against 2018.1 ~ 2020.2 for IDEA Community, IDEA Ultimate
+    name: Ensure plugin compatibility against 2018.1 ~ 2020.3 for IDEA Community, IDEA Ultimate
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -32,6 +32,7 @@ jobs:
             ideaIC:2019.3
             ideaIC:2020.1
             ideaIC:2020.2
+            ideaIC:2020.3
             ideaIU:2018.1
             ideaIU:2018.2
             ideaIU:2018.3.6
@@ -39,6 +40,7 @@ jobs:
             ideaIU:2019.3
             ideaIU:2020.1
             ideaIU:2020.2
+            ideaIU:2020.3
 
       - name: Get log file path and print contents
         run: |

@@ -40,6 +40,7 @@ public class Icons {
     public static final Icon OPEN_DISK_HOVER = load("/icons/openDiskHover.svg");
     public static final Icon RUN_ANYTHING = load("/icons/run_anything.svg");
     public static final Icon YAML = load("/icons/yaml.svg");
+    public static final Icon MENU_PASTE = load("/icons/menu-paste.svg");
 
     public static final Icon KIND_JAVA = load("/icons/language/java/java.svg");
     public static final Icon KIND_JS = load("/icons/language/javascript/javascript.svg");
@@ -53,7 +54,12 @@ public class Icons {
 
     private static Icon load(String path) {
         try {
-            return IconLoader.getIcon(path);
+            Icon icon = IconLoader.findIcon(path);
+            if (icon != null) {
+                return icon;
+            } else {
+                return AllIcons.General.Warning;
+            }
         } catch (Throwable t) {
             return AllIcons.General.Warning;
         }
